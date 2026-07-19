@@ -1,0 +1,107 @@
+/*C++ provides three access specifiers to control the accessibility of class members (attributes and methods).
+
+These are:
+
+Public
+Private
+Protected
+
+Until now, we have mainly used:
+
+Public → Members of a class can be accessed from inside the class as well as outside the class using an object. */
+#include <iostream>
+using namespace std;
+
+class Student1
+{
+public:
+    string nm;
+    int rl;
+
+    void setN()
+    {
+        nm = "Adil";
+    }
+    
+    void display() // Access inside the class
+    {
+        cout << "Name = " << nm << endl;
+        cout << "Roll : " << rl << endl;
+    }
+};
+
+int main()
+{
+    Student1 s1;
+
+    s1.setN();
+    s1.rl = 101;
+    s1.display();
+    return 0;
+}
+
+/* Private → Members of a class can be accessed only inside the same class. They cannot be accessed directly from outside the class.*/
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+private:
+    string name;
+    int roll;
+
+public:
+    void setName(string n)
+    {
+        name = n;
+    }
+    void setr(int r)
+    {
+        roll = r;
+    }
+
+    void display()
+    {
+        cout << "Name = " << name << endl;
+        cout << "Roll : " << roll << endl;
+    }
+};
+
+int main()
+{
+    Student s;
+
+    s.setName("dil");
+    s.setr(107);
+    s.display();
+    return 0;
+}
+/* Protected →  Protected, is similar to Private, but it has one important difference:
+Protected members cannot be accessed directly outside the class, but they can be accessed inside the classes that inherit (Derived Classes) from the Base Class.*/
+
+#include <iostream>
+using namespace std;
+
+class Parent
+{
+protected:
+    int age = 45;
+};
+
+class Child : public Parent
+{
+public:
+    void display()
+    {
+        cout << age;
+    }
+};
+
+int main()
+{
+    Child c;
+    c.display();
+
+    return 0;
+}
