@@ -1,0 +1,115 @@
+Abstraction 
+Abstraction is one of the fundamental principles of Object-Oriented Programming (OOP) that exposes only the essential features of an object while hiding its internal implementation details. It allows users to interact with an object without knowing how its functionality is implemented internally.
+
+Abstraction, Object-Oriented Programming (OOP) के मूलभूत (Fundamental) सिद्धांतों (Principles) में से एक है। इसमें किसी Object की केवल आवश्यक (Essential) विशेषताओं (Features) को User के सामने दिखाया जाता है, जबकि उसकी आंतरिक कार्यप्रणाली (Internal Implementation Details) को छिपा दिया जाता है।
+यह User को किसी Object के साथ Interact (उपयोग) करने की सुविधा देता है, बिना यह जाने कि उसके अंदर वह Functionality कैसे Implement (लागू) की गई है।
+
+•	Hides unnecessary implementation details from the user.
+Abstraction User से उन Implementation Details (अंदरूनी कार्यप्रणाली) को छिपा देता है जिनकी User को आवश्यकता नहीं होती। User केवल Function का उपयोग करता है, लेकिन उसके अंदर वह कैसे काम करता है, यह जानकारी उसे दिखाई नहीं देती।
+
+•	Simplifies complex systems by exposing only the required functionality.
+Abstraction जटिल (Complex) Systems को सरल (Simple) बना देता है क्योंकि यह केवल आवश्यक (Required) Functionality को ही User के सामने प्रस्तुत (Expose) करता है और बाकी जटिल प्रक्रिया (Complex Process) को छिपा देता है।
+
+•	Makes programs easier to maintain since implementation changes do not affect user code.
+Abstraction Program को Maintain (रखरखाव) करना आसान बनाता है क्योंकि यदि Program के अंदर की Implementation (कार्य करने का तरीका) बदल भी जाए, तब भी User के Code पर उसका कोई प्रभाव (Effect) नहीं पड़ता। User पहले की तरह उसी Function का उपयोग करता रहता है।
+
+Achieving Abstraction in C++ 
+
+Abstraction in C++ is primarily achieved using Abstract Classes and Pure Virtual Functions. They define a common interface while allowing Derived Classes to provide their own implementations.
+
+C++ में Abstraction मुख्य रूप से Abstract Class और Pure Virtual Function की सहायता से प्राप्त (Achieve) की जाती है। ये एक Common Interface (सामान्य ढांचा) प्रदान करते हैं, जबकि Derived Classes अपनी आवश्यकता के अनुसार Function की अपनी Implementation (कार्यप्रणाली) लिखती हैं।
+
+•	Abstract classes define common behavior shared by multiple classes.
+Abstract Class कई Classes के लिए एक समान (Common) व्यवहार (Behavior) और Interface को Define करती है, ताकि सभी Derived Classes उसी Structure का पालन करें।
+
+Example:
+Shape Class सभी Shapes के लिए draw() Function Define करती है।
+
+•	Pure virtual functions specify functions that derived classes must implement.
+
+Pure Virtual Function यह निर्धारित (Specify) करता है कि Derived Class को उस Function की Implementation (Definition) अवश्य (Must) करनी होगी।
+यदि Derived Class Function को Implement नहीं करती, तो उसका Object नहीं बनाया जा सकता।
+
+Example:
+virtual void draw() = 0;
+
+•	Runtime polymorphism enables the appropriate implementation to be selected during execution.
+
+Runtime Polymorphism Program के चलने (Execution Time) के दौरान सही Function की Implementation को चुनने (Select) की सुविधा देता है।
+यदि Base Class का Pointer Derived Class के Object को Point करता है, तो उसी Derived Class का Function Call होता है।
+
+Abstract Classes
+
+An Abstract Class is a class that contains at least one Pure Virtual Function. It serves as a Base Class that defines a common interface while leaving the implementation of specific operations to Derived Classes.
+
+Abstract Class वह Class होती है जिसमें कम से कम एक Pure Virtual Function होता है। यह Base Class के रूप में कार्य करती है और एक Common Interface प्रदान करती है, जबकि विशेष कार्यों (Specific Operations) की Implementation Derived Classes पर छोड़ देती है।
+
+•	An abstract class contains at least one pure virtual function.
+Hindi
+एक Abstract Class में कम से कम एक Pure Virtual Function अवश्य होता है।
+
+•	Objects of an abstract class cannot be instantiated.
+Abstract Class का Object नहीं बनाया जा सकता (Cannot be Instantiated) क्योंकि इसमें कम से कम एक Function अधूरा (Pure Virtual Function) होता है।
+
+❌ Example:
+Shape s;   // Error
+
+•	Derived classes must implement the pure virtual functions.
+Derived Class को Pure Virtual Function की Implementation (Definition) देना अनिवार्य (Mandatory) होता है।
+यदि ऐसा नहीं किया जाता, तो Derived Class भी Abstract Class बन जाती है।
+
+•	It provides a common interface to achieve abstraction.
+Abstract Class एक Common Interface प्रदान करती है, जिससे सभी Derived Classes एक समान नियम (Same Rules) का पालन करती हैं और इसी के माध्यम से Abstraction प्राप्त (Achieve) होती है।
+
+Complete Abstraction Using Pure Abstract Classes 
+
+A Pure Abstract Class is a class that contains only Pure Virtual Functions. It is used to achieve Complete Abstraction because it defines only the required operations and does not provide any implementation.
+
+Pure Abstract Class वह Class होती है जिसमें केवल (Only) Pure Virtual Functions होते हैं। इसका उपयोग Complete Abstraction (पूर्ण अमूर्तन) प्राप्त करने के लिए किया जाता है, क्योंकि यह सिर्फ आवश्यक कार्यों (Required Operations) को Define करती है और उनकी कोई Implementation (Function Body) नहीं देती।
+
+•	Contains only pure virtual functions.
+Pure Abstract Class में केवल Pure Virtual Functions होते हैं। इसमें सामान्य (Normal) Member Functions की आवश्यकता नहीं होती।
+
+Example:
+virtual void draw() = 0;
+virtual void area() = 0;
+
+•	Cannot be instantiated directly.
+Pure Abstract Class का Object सीधे (Directly) नहीं बनाया जा सकता, क्योंकि इसमें सभी Functions अधूरे (Pure Virtual) होते हैं।
+
+Example:
+Shape s;   // Error
+
+•	Every derived class must implement all inherited functions.
+हर Derived Class को Base Class से प्राप्त (Inherited) सभी Pure Virtual Functions की Implementation (Definition) देना अनिवार्य (Must) होता है।
+यदि Derived Class किसी एक भी Pure Virtual Function को Implement नहीं करती, तो वह भी Abstract Class बनी रहती है और उसका Object नहीं बनाया जा सकता।
+
+•	Enables different classes to expose the same interface while providing different implementations.
+यह विभिन्न (Different) Classes को एक ही Interface (Same Interface) प्रदान करने की सुविधा देता है, जबकि हर Class उस Function की अपनी अलग Implementation (Different Implementation) लिख सकती है।
+
+Example:
+•	Circle → draw() से Circle बनाता है। 
+•	Square → draw() से Square बनाता है। 
+दोनों में Function का नाम draw() है, लेकिन कार्य (Implementation) अलग-अलग है।
+Easy Example
+           Shape
+      (Pure Abstract Class)
+     draw() = 0
+     area() = 0
+            │
+     ┌──────┴──────┐
+     ▼             ▼
+  Circle        Square
+ draw()         draw()
+ area()         area()
+•	Shape केवल नियम (Interface) बनाती है। 
+•	Circle और Square उन नियमों का पालन करते हुए अपनी-अपनी Implementation लिखते हैं।
+
+| English                                     | Hindi                                                                |
+| ------------------------------------------- | -------------------------------------------------------------------- |
+| Contains only Pure Virtual Functions.       | इसमें केवल Pure Virtual Functions होते हैं।                          |
+| Provides Complete Abstraction.              | यह Complete Abstraction प्रदान करती है।                              |
+| Object cannot be created.                   | इसका Object नहीं बनाया जा सकता।                                      |
+| Derived Class must implement all functions. | Derived Class को सभी Pure Virtual Functions Implement करने होते हैं। |
+| Same Interface, Different Implementations.  | एक ही Interface, लेकिन अलग-अलग Implementations।                      |
+

@@ -1,0 +1,84 @@
+/*
+1. Virtual Function and Pure Virtual in C++ 
+
+A Virtual Function is a member function of a base class that is declared using the virtual keyword. It allows the derived class to override (redefine) the function so that the correct version of the function is called at runtime.
+
+Hindi ->
+Virtual Function C++ का एक Member Function होता है जिसे virtual keyword की सहायता से Base Class में Declare किया जाता है। यह Derived Class को उसी Function को Override (दोबारा Define) करने की अनुमति देता है, जिससे Runtime पर सही Function Call होता है।
+
+
+short English ->
+
+A Virtual Function is a function that can be redefined (overridden) in the Derived Class.
+Virtual Function वह Function है जिसे Derived Class अपनी आवश्यकता के अनुसार दोबारा Define (Override) कर सकती है। */
+
+/* #include<iostream>
+using namespace std;
+
+class Animal
+{
+public:
+    virtual void sound()
+    {
+        cout << "Animal makes sound" << endl;  
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    void sound()
+    {
+        cout << "Dog barks" << endl;
+    }
+};
+
+int main()
+{
+    Dog d;
+
+    d.sound();
+
+    return 0;
+}*/
+
+/*
+2. Pure Virtual Function 
+
+A Pure Virtual Function is a virtual function that has no implementation (no function body) in the base class and is declared by assigning = 0.
+Pure Virtual Function वह Virtual Function होता है जिसकी Base Class में कोई Implementation (Function Body) नहीं होती और जिसे = 0 लिखकर Declare किया जाता है।
+
+It forces every derived class to provide its own implementation of that function.
+यह Derived Class को मजबूर (Force) करता है कि वह उस Function की अपनी Implementation लिखे।
+
+
+short English ->
+
+A Pure Virtual Function is a function that has no body in the Base Class and must be overridden in the Derived Class.
+Pure Virtual Function वह Function है जिसकी Base Class में कोई Body नहीं होती और जिसे Derived Class में अवश्य (Must) Define करना पड़ता है।
+
+Syntax
+virtual returnType functionName() = 0;
+
+Example
+virtual void display() = 0;
+
+| Keyword          | Work                                                |
+| ---------------- | --------------------------------------------------- |
+| `private`        | Hide Data                                           |
+| `protected`      | Hide Data from Outside but allow Derived Class      |
+| `public`         | Show Required Functions                             |
+| `virtual`        | Create Virtual Function                             |
+| `= 0`            | Make a Pure Virtual Function                        |
+| `abstract class` | Class containing at least one Pure Virtual Function |
+
+
+
+
+Difference: 
+Virtual Function               vs             Pure Virtual Function
+
+1. Has a function body	                      Has no function body
+2. Override is optional	                      Override is compulsory
+3. Object of base class can be created	      Abstract class object cannot be created
+4. Syntax: virtual void show(){}	          Syntax: virtual void show() = 0; */
