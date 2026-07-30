@@ -115,3 +115,16 @@ int main()
 
     return 0;
 }
+
+/*Getter and Setter in C++
+What is Getter?
+
+A Getter is a public member function used to read or return the value of a private data member.
+
+Getter एक Public Member Function होता है, जिसका उपयोग Private Data Member की Value को प्राप्त (Get) या Return करने के लिए किया जाता है।
+
+What is Setter? (Setter क्या है?)
+
+A Setter is a public member function used to set or update the value of a private data member.
+
+Setter एक Public Member Function होता है, जिसका उपयोग Private Data Member की Value को Set (Store) या Update (बदलने) के लिए किया जाता है।*/
