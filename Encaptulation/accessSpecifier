@@ -72,24 +72,23 @@ int main()
 {
     Student s;
 
-    s.setName("dil");
+    s.setName("APCS");
     s.setr(107);
     s.display();
     return 0;
 }
-/* Protected →  Protected, is similar to Private, but it has one important difference:
+/* Protected → Protected, is similar to Private, but it has one important difference:
 Protected members cannot be accessed directly outside the class, but they can be accessed inside the classes that inherit (Derived Classes) from the Base Class.*/
 
-#include <iostream>
-using namespace std;
-
-class Parent
+#include <iostream> //header file
+using namespace std; //standard file std;
+class Parent //base class paarent class
 {
-protected:
+protected: //variable private
     int age = 45;
 };
 
-class Child : public Parent
+class Child : public Parent //public keyword 
 {
 public:
     void display()
@@ -97,11 +96,9 @@ public:
         cout << age;
     }
 };
-
 int main()
 {
     Child c;
     c.display();
-
     return 0;
 }
