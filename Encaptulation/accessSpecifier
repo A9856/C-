@@ -17,12 +17,10 @@ class Student1
 public:
     string nm;
     int rl;
-
     void setN()
     {
         nm = "Adil";
     }
-    
     void display() // Access inside the class
     {
         cout << "Name = " << nm << endl;

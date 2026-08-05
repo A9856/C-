@@ -3,8 +3,22 @@ The meaning of Encapsulation, is to make sure that "sensitive" data is hidden fr
 
 To achieve this, you must declare class variables/attributes as private (cannot be accessed from outside the class).
 
-If you want others to read or modify the value of a private member, you can provide public get and set methods.
-Real-Life Example
+Note:-> If you want others to read or modify the value of a private member, you can provide public get and set methods.
+
+/*Getter and Setter in C++
+What is Getter?
+
+A Getter is a public member function used to read or return the value of a private data member.
+
+Getter एक Public Member Function होता है, जिसका उपयोग Private Data Member की Value को प्राप्त (Get) या Return करने के लिए किया जाता है।
+
+What is Setter? (Setter क्या है?)
+
+A Setter is a public member function used to set or update the value of a private data member.
+
+Setter एक Public Member Function होता है, जिसका उपयोग Private Data Member की Value को Set (Store) या Update (बदलने) के लिए किया जाता है।*/
+
+/*Real-Life Example
 Think of an employee's salary:
 
 The salary is private - the employee can't change it directly
@@ -42,10 +56,11 @@ Encapsulation works the same way. The data is hidden, and only trusted methods c
 //     return 0;
 // }
 
+/* Parameter is a variable that is written inside the parentheses () of a function . it receives data when the function is called. */
+
 //  2. Parameter private variable value change
 // #include<iostream>
 // using namespace std;
-
 // class Employee
 // {
 // private:
@@ -62,14 +77,11 @@ Encapsulation works the same way. The data is hidden, and only trusted methods c
 //         cout << "Salary = " << salary <<endl;
 //     }
 // };
-
 // int main()
 // {
 //     Employee emp;
-
 //     emp.Salary(5000);   // Private variable changed
 //     emp.display();          // Print salary
-
 //     return 0;
 // }
 
@@ -116,15 +128,3 @@ int main()
     return 0;
 }
 
-/*Getter and Setter in C++
-What is Getter?
-
-A Getter is a public member function used to read or return the value of a private data member.
-
-Getter एक Public Member Function होता है, जिसका उपयोग Private Data Member की Value को प्राप्त (Get) या Return करने के लिए किया जाता है।
-
-What is Setter? (Setter क्या है?)
-
-A Setter is a public member function used to set or update the value of a private data member.
-
-Setter एक Public Member Function होता है, जिसका उपयोग Private Data Member की Value को Set (Store) या Update (बदलने) के लिए किया जाता है।*/
