@@ -1,0 +1,789 @@
+// Unit - 2(Objects &Classes)Notes
+
+// 1. Class(English)
+
+// A Class is a user defined data type that groups data members(variables) and
+// member functions(methods)into a single unit.
+
+// Class एक User - Defined Data Type है, जो Data Members(Variables)
+// और Member Functions(Functions)
+// को एक ही Unit में रखती है।
+// Syntax
+//  class ClassName
+// {
+// private:
+//     // Data Members
+
+// public:
+//     //variable declare then call public data member
+//     // Member Functions
+// };
+// Example
+
+    // #include<iostream>
+    // using namespace std;
+
+    // class Student
+    // {
+    // public:
+    //     string name; //public data member ;
+
+    //     void display()
+    //     {
+    //         cout<<"Name = "<<name;
+    //     }
+    // };
+
+    // int main()
+    // {
+    //     Student s;
+    //     s.name="Adil";
+    //     s.display();
+    // }
+
+/*  2 .Defination:
+  Data members are variables declared inside a class. 
+ They store the object's data and can be of fundamental types, pointers, references, arrays, 
+ or user-defined types. Array members must have all dimensions specified.
+  A class cannot contain an object of its own type, but it can contain pointers, references, or static objects of that type. */
+  
+ // class can't create own type object 
+
+ /* #include<iostream>
+using namespace std;
+
+class Student
+{
+public:
+    Student s;   // Error
+};
+
+int main()
+{
+    Student obj;
+} */
+
+// Note:
+// अगर Student के अंदर Student s; होगा, तो s के अंदर फिर एक Student होगा, 
+// उसके अंदर फिर एक Student... यह कभी खत्म नहीं होगा। इसलिए Compiler इसकी size नहीं निकाल सकता।
+  
+/* 1. Example Pointer Member (Allowed)----->
+
+A pointer member is a data member declared using the pointer (*) operator.
+It stores the memory address of another object or variable instead of storing the actual data.
+
+
+Pointer Member वह data member होता है जो pointer (*) के रूप में घोषित किया जाता है। 
+यह किसी variable या object का memory address store करता है, उसकी पूरी value नहीं।
+
+*/
+
+/*  #include<iostream>
+using namespace std;
+
+class Student
+{
+public:
+    Student *next;   // Pointer
+};
+
+int main()
+{
+    Student s1, s2;
+
+    s1.next = &s2;
+
+    cout << &s2 << endl;
+    cout << s1.next << endl;
+} */
+
+// 2.Example 
+
+/* #include<iostream>
+using namespace std;
+
+class Student
+{
+public:
+    int data;
+    Student *next;
+};
+
+int main()
+{
+    Student s1, s2;
+
+    s2.data = 100;   // s2 में value store
+
+    s1.next = &s2;   // s1 का pointer s2 को point करेगा
+
+    cout << "Address of s2 = " << &s2 << endl;
+    cout << "Address stored in s1.next = " << s1.next << endl;
+
+    cout << "Value of s2 = " << s2.data << endl;
+
+    // Pointer के माध्यम से s2 की value print
+    cout << "Value using pointer = " << s1.next->data << endl;
+
+    return 0;
+}
+*/
+
+// 3. Example 
+
+/*    #include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    int *ptr;
+
+    Student(int *p)
+    {
+        ptr = p;
+    }
+
+    void display()
+    {
+        cout << "Address = " << ptr << endl;
+        cout << "Value = " << *ptr << endl;
+    }
+};
+
+int main()
+{
+    int a = 100;
+
+    Student s(&a);  //a address 
+
+    s.display();
+
+    return 0;
+} */
+
+/* Refrence Member Allowed 
+
+A reference member is a data member declared with the reference (&) operator.
+It acts as an alias (another name) for an existing variable and
+must be initialized using the constructor's member initializer list.
+
+
+Reference Member वह data member होता है जो reference (&) के रूप में घोषित किया जाता है।
+यह किसी पहले से मौजूद variable का दूसरा नाम (Alias) होता है और
+इसे constructor की member initializer list द्वारा initialize करना आवश्यक होता है।
+
+*/
+
+/*   #include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    int &ref;
+
+    Student(int &x) : ref(x)
+    {                                // x ek reference parameter hai.
+                                     ref(x)  ka mtlb hai ref ko x se bind krna hai..।
+    }
+
+    void display()
+    {
+        cout << "Reference Value = " << ref << endl;
+    }
+};
+
+int main()
+{
+    int a = 100;
+
+    Student s(a);  // a constructor me x bnkr jata hai. ref ab a ka refrence bn jata hai.
+
+    s.display();
+
+    s.ref = 200;
+
+    cout << "Value of a = " << a << endl;
+
+    return 0;
+}
+*/
+
+/* Static member Object -->
+
+A static member is a data member declared with the static keyword. It belongs to the class, not to individual objects. Only one copy of the static member exists, which is shared by all objects of the class.
+
+Static Member वह data member होता है जिसे static keyword के साथ घोषित किया जाता है। यह किसी object का नहीं बल्कि पूरी class का member होता है। इसकी केवल एक ही copy बनती है, जिसे class के सभी objects साझा (share) करते हैं।
+
+*/
+
+// 1.example
+
+/* #include<iostream>
+using namespace std;
+
+class Student
+{
+public:
+    static Student obj; //static obj har object ke andr nhi bnta hai isliye infinite recursion nhi huta 
+
+                         yah class ke bahr memory me sirf ek bar bnta hai 
+};
+
+Student Student::obj;
+
+int main()
+{
+    cout << "Static object created";
+}*/
+
+// 2. Example
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    static int count;
+
+    Student()
+    {
+        count++;
+    }
+
+    void display()
+    {
+        cout << "Count = " << count << endl;
+    }
+};
+
+int Student::count = 0;
+
+int main()
+{
+    Student s1;
+    Student s2;
+    Student s3;
+
+    s1.display();
+    s2.display();
+    s3.display();  //ek copy pori clss ke liye bnti hai.ek class pore object ko ek data share krta hai
+
+    return 0;
+}
+
+/* Note:
+Object Copy (A a2 = a1) → Value copy, Address different
+Pointer (A *p) → sirf Address store । not value
+Reference (A &r) → new copy nhi bnti vhi object refer hu jata hai.
+Student s; class ke andr → Infinite recursion hoti hai kuki object ke andr fir object bnta rhtaa hai.
+
+Object = पूरी copy बनाता है  only value , not address
+#include<iostream>
+using namespace std;
+
+class Student
+{
+public:
+    int age;
+};
+
+int main()
+{
+    Student s1;
+    s1.age = 20;
+
+    Student s2 = s1;   // Object Copy
+
+    cout << s1.age << endl;
+    cout << s2.age << endl;
+
+    cout << &s1 << endl;
+    cout << &s2 << endl;
+}
+Pointer (*) = सिर्फ address store करता है 
+Reference (&) = सिर्फ existing object का दूसरा नाम होता है 
+Static Object = class के हर object के अंदर नहीं बनता, केवल एक बार अलग memory में बनता है 
+*/
+
+    /*  2. Object
+
+
+    An Object is an instance of a class. It is used to access the data members and member functions of the class.
+    Object, Class का एक वास्तविक (Real) Instance होता है, जिसके द्वारा Class के Variables और Functions का उपयोग किया जाता है। */
+
+    // Syntax
+    // ClassName objectName;
+
+    // Example
+    // Student s;
+
+    // 3. Difference Between Class and Object
+    /*
+    Class	                      Object
+    Blueprint	                  Real Instance
+    Logical Entity	              Physical Entity
+    not use Memory 	              use Memory
+    before create object          after create class */
+
+    /* 4. Data Member
+
+    A Data Member is a variable declared inside a class.
+
+    Class के अंदर Declare किए गए Variables को Data Members कहते हैं। */
+
+    // Example
+    // class Student
+    // {
+    // public:
+    //     string name;
+    //     int roll;
+    // };
+
+    /* 5. Member Function
+
+     1.A Member Function is a function declared inside a class that works with the data members.
+    Class के अंदर बनाए गए Function को Member Function कहते हैं। 
+    
+    2. defination:
+    A member function is a function declared inside a C++ class that operates on the class's data. It has direct access to all variables within the class and defines the behaviors or operations that its objects can perform. They can be defined either inside or outside the class.
+    */
+
+    // Example
+    // class Student
+    // {
+    // public:
+
+    //     void display()
+    //     {
+    //         cout<<"Hello";
+    //     }
+    // };
+
+    /* 11. Constructor
+
+    A Constructor is a special member function that is automatically called when an object is created.
+
+    Constructor एक विशेष Member Function है जो Object बनने पर अपने आप Call होता है। */
+
+   // Syntax
+    class Student
+    {
+    public:
+
+        Student()
+        {
+
+        }
+    };
+
+    // Example
+     /*  #include<iostream>
+   using namespace std;
+   class Student
+   {
+   public:
+    //   Student()
+    //   {
+    //       cout<<"Constructor Called";
+    //   }
+    void display(){
+         cout<<"Constructor Called";
+    }
+   };
+   int main()
+   {
+       Student s;
+       s.display();
+   } */
+
+    /* 12. this Pointer
+
+    this is a pointer that points to the current object.
+
+    this Pointer वर्तमान Object (Current Object) का Address रखता है। */
+
+    // Example
+
+    /* #include<iostream>
+    using namespace std;
+
+    class Student
+    {
+    private:
+        int marks;
+
+    public:
+
+        void setMarks(int marks)
+        {
+            this->marks=marks;
+        }
+
+        void display()
+        {
+            cout<<marks;
+        }
+    };
+
+    int main()
+    {
+        Student s;
+
+        s.setMarks(95);
+
+        s.display();
+    } */
+
+    /* 13. Static Data Member
+
+     A Static Data Member is shared by all objects of a class.
+
+    Static Data Member Class के सभी Objects द्वारा साझा (Share) किया जाता है। */
+
+    // Example
+    /* #include<iostream>
+    using namespace std;
+
+    class Demo
+    {
+    public:
+
+        static int count;
+    };
+
+    int Demo::count=0;
+
+    int main()
+    {
+        Demo d1,d2;
+
+        d1.count++;
+
+        cout<<d2.count;
+    }*/
+
+    /* 14. Static Member Function
+
+    A Static Member Function can access only static data members.
+
+    Static Member Function केवल Static Data Members को Access कर सकता है। */
+
+    // Example
+    /*   #include<iostream>
+    using namespace std;
+
+    class Demo
+    {
+    public:
+
+        static void show()
+        {
+            cout<<"Static Function";
+        }
+    };
+
+    int main()
+    {
+        Demo::show();
+    } */
+
+    /* 15. Friend Function
+
+    A Friend Function is a non-member function that can access private and protected members of a class.
+
+    Friend Function Class का Member नहीं होता, लेकिन वह Class के Private और Protected Members को Access कर सकता है। */
+
+    // Example
+    /*  #include<iostream>
+    using namespace std;
+
+    class Demo
+    {
+    private:
+        int num=100;
+
+        friend void show(Demo);
+    };
+
+    void show(Demo d)
+    {
+        cout<<d.num;
+    }
+
+    int main()
+    {
+        Demo d;
+
+        show(d);
+    } */
+
+    // 16. Friend Class
+
+    /* A Friend Class can access private members of another class.
+
+    Friend Class दूसरी Class के Private Members को Access कर सकती है। */
+
+    // Example
+    /*   #include<iostream>
+    using namespace std;
+
+    class A
+    {
+    private:
+        int x=10;
+
+        friend class B;
+    };
+
+    class B
+    {
+    public:
+
+        void display(A obj)
+        {
+            cout<<obj.x;
+        }
+    };
+
+    int main()
+    {
+        A a;
+        B b;
+
+        b.display(a);
+    } */
+
+    /*  17. Nested Class
+
+     A Nested Class is a class declared inside another class.
+
+    जब एक Class दूसरी Class के अंदर बनाई जाती है, तो उसे Nested Class कहते हैं। */
+
+    // Example
+    // #include<iostream>
+    // using namespace std;
+
+    // class Outer
+    // {
+    // public:
+
+    //     class Inner
+    //     {
+    //     public:
+    //         void show()
+    //         {
+    //             cout<<"Nested Class";
+    //         }
+    //     };
+    // };
+
+    // int main()
+    // {
+    //     Outer::Inner obj;
+
+    //     obj.show();
+    // }
+
+    /*  18. Array of Objects
+
+    An Array of Objects stores multiple objects of the same class.
+
+    एक ही Class के कई Objects को Array में Store करना Array of Objects कहलाता है। */
+
+    // Example
+    // #include<iostream>
+    // using namespace std;
+
+    // class Student
+    // {
+    // public:
+    //     string name;
+
+    //     void input()
+    //     {
+    //         cin>>name;
+    //     }
+
+    //     void display()
+    //     {
+    //         cout<<name<<endl;
+    //     }
+    // };
+
+    // int main()
+    // {
+    //     Student s[2];
+
+    //     for(int i=0;i<2;i++)
+    //         s[i].input();
+
+    //     for(int i=0;i<2;i++)
+    //         s[i].display();
+    // }
+
+    /* 19. Object as Function Argument
+
+      Passing an object to a function is called Object as Function Argument.
+
+    जब किसी Function में Object को Argument के रूप में भेजा जाता है, तो उसे Object as Function Argument कहते हैं। */
+
+    // Example
+    // #include<iostream>
+    // using namespace std;
+
+    // class Student
+    // {
+    // public:
+    //     int marks=90;
+    // };
+
+    // void display(Student s)
+    // {
+    //     cout<<s.marks;
+    // }
+
+    // int main()
+    // {
+    //     Student s;
+
+    //     display(s);
+    // }
+
+    /* 20. Returning Object from Function
+
+      A function can return an object of a class.
+
+    कोई Function Class का Object Return कर सकता है। */
+
+    // Example
+    // #include<iostream>
+    // using namespace std;
+
+    // class Student
+    // {
+    // public:
+    //     int marks;
+    // };
+
+    // Student getData()
+    // {
+    //     Student s;
+
+    //     s.marks=95;
+
+    //     return s;
+    // }
+
+    // int main()
+    // {
+    //     Student obj=getData();
+
+    //     cout<<obj.marks;
+    // }
+
+    /* 21. Memory Allocation for Objects
+
+     Objects can be created in Stack Memory or Heap Memory.
+
+    Object को Stack Memory या Heap Memory में बनाया जा सकता है। */
+
+    // Example
+    // #include<iostream>
+    // using namespace std;
+
+    // class Student
+    // {
+    // public:
+    //     void show()
+    //     {
+    //         cout<<"Hello";
+    //     }
+    // };
+
+    // int main()
+    // {
+    //     Student *s=new Student;
+
+    //     s->show();
+
+    //     delete s;
+    // }
+
+    // 2. example object value and address print
+
+    /* #include<iostream>
+   using namespace std;
+
+   class Student
+   {
+   public:
+       string name;
+       int roll;
+
+       void input()
+       {
+           cout<<"Enter Name: ";
+           cin>>name;
+
+           cout<<"Enter Roll: ";
+           cin>>roll;
+       }
+
+       void show()
+       {
+           cout<<"\nName : "<<name<<endl;
+           cout<<"Roll : "<<roll<<endl;
+       }
+   };
+
+   int main()
+   {
+       Student *s = new Student;
+
+       s->input();
+
+       s->show();
+
+       cout<<"\nObject Address = "<<s<<endl;
+       cout<<"Name Address   = "<<&s->name<<endl;
+       cout<<"Roll Address   = "<<&s->roll<<endl;
+
+       delete s;
+
+       return 0;
+   }*/
+
+    // 3. addres value aur address
+
+    /* #include<iostream>
+    using namespace std;
+
+    class Student
+    {
+    public:
+        int marks;
+    };
+
+    int main()
+    {
+        Student *s = new Student; // heap me object create krega
+
+        cout<<"Enter Marks: ";
+        cin>>s->marks;
+        // s object address pr mark member ki value input
+
+        cout<<"Marks = "<<s->marks<<endl;
+        //s Object के marks Member की Value display
+
+        cout<<"Address of Object = "<<s<<endl;
+
+        cout<<"Address of Marks = "<<&s->marks<<endl;
+        //& ka use krk object pr input ki value ka address
+
+        delete s;
+
+        return 0;
+    } */

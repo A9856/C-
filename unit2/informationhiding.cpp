@@ -25,6 +25,7 @@ public:
     {
         if(amount<=balance)
             balance -= amount;
+                // balance =balance - amount;
         else
             cout<<"Insufficient Balance"<<endl;
     }

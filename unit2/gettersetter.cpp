@@ -16,7 +16,7 @@ public:
         if(s>10000)
             salary=s;
         else
-            salary=10000;
+            salary=90000;
     }
 
     int getSalary()
