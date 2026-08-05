@@ -471,7 +471,46 @@ Static Object = class के हर object के अंदर नहीं ब�
 
     Static Member Function केवल Static Data Members को Access कर सकता है। */
 
-    // Example
+    // 2.Example Static Member Function and user Input 
+ 
+ /*   #include<iostream>
+using namespace std;
+
+class Employee
+{
+private:
+    static int companyBonus;
+
+public:
+
+    static void setBonus(int b)
+    {
+        companyBonus = b;
+    }
+
+    static void showBonus()
+    {
+        cout<<"Company Bonus = "<<companyBonus<<endl;
+    }
+};
+
+int Employee::companyBonus = 5000;
+
+int main()
+{
+    int bonus;
+
+    cout<<"Enter Company Bonus: ";
+    cin>>bonus;
+
+    Employee::setBonus(bonus);
+
+    Employee::showBonus();
+
+    return 0;
+} */
+
+    // 1.Example
     /*   #include<iostream>
     using namespace std;
 
