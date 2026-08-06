@@ -552,29 +552,27 @@ int main()
     Friend Function Class का Member नहीं होता, लेकिन वह Class के Private और Protected Members को Access कर सकता है। */
 
     // Example
-    /*  #include<iostream>
+     #include<iostream>
     using namespace std;
-
     class Demo
     {
     private:
         int num=100;
 
-        friend void show(Demo); // yah statement show() ko demo class ka frnd announce krta hai.
-         jisse show()class ka member function nhi hai frnd ki vjh se private data member ko  access kr skega.
+        friend void show(Demo);
+         // yah statement show() ko demo class ka frnd       announce krta hai.
+         //jisse show()class ka member function nhi
+         // hai frnd ki vjh se private data member ko  access kr skega.
     };
-
     void show(Demo d)
     {
         cout<<d.num;
     }
-
     int main()
     {
         Demo d;
-
         show(d);
-    } */
+    } 
 
     // 16. Friend Class
 
@@ -583,7 +581,7 @@ int main()
     Friend Class दूसरी Class के Private Members को Access कर सकती है। */
 
     // Example
-    /*   #include<iostream>
+   /*  #include<iostream>
     using namespace std;
 
     class A
@@ -619,7 +617,7 @@ int main()
     जब एक Class दूसरी Class के अंदर बनाई जाती है, तो उसे Nested Class कहते हैं। */
 
     // Example
-  /*  #include<iostream>
+    #include<iostream>
     using namespace std;
 
     class Outer
@@ -633,15 +631,23 @@ int main()
             {
                 cout<<"Nested Class";
             }
+            class threeclass{
+                public:
+                void display(){
+                    cout<<"Display called";
+                }
+            };
         };
     };
 
     int main()
     {
-        Outer::Inner obj;
+        Outer::Inner  obj1;
+        Outer::Inner ::threeclass obj;
+        obj1.show();
 
-        obj.show();
-    }  */
+        obj.display();
+    }  
 
 //    2. Example Project 
 
