@@ -510,24 +510,40 @@ int main()
     return 0;
 } */
 
-    // 1.Example
-    /*   #include<iostream>
-    using namespace std;
+ // 1.Example static counter advance
+    /*#include<iostream>
+using namespace std;
 
-    class Demo
+class Student
+{
+private:
+    static int totalStudents;
+
+public:
+
+    Student()
     {
-    public:
+        totalStudents++;
+    }
 
-        static void show()
-        {
-            cout<<"Static Function";
-        }
-    };
-
-    int main()
+    static void displayCount()
     {
-        Demo::show();
-    } */
+        cout<<"Total Objects Created = "<<totalStudents<<endl;
+    }
+};
+
+int Student::totalStudents = 0;
+
+int main()
+{
+    Student s1;
+    Student s2;
+    Student s3;
+
+    Student::displayCount();
+
+    return 0;
+} */
 
     /* 15. Friend Function
 
@@ -544,7 +560,8 @@ int main()
     private:
         int num=100;
 
-        friend void show(Demo);
+        friend void show(Demo); // yah statement show() ko demo class ka frnd announce krta hai.
+         jisse show()class ka member function nhi hai frnd ki vjh se private data member ko  access kr skega.
     };
 
     void show(Demo d)
@@ -602,66 +619,140 @@ int main()
     जब एक Class दूसरी Class के अंदर बनाई जाती है, तो उसे Nested Class कहते हैं। */
 
     // Example
-    // #include<iostream>
-    // using namespace std;
+  /*  #include<iostream>
+    using namespace std;
 
-    // class Outer
-    // {
-    // public:
+    class Outer
+    {
+    public:
 
-    //     class Inner
-    //     {
-    //     public:
-    //         void show()
-    //         {
-    //             cout<<"Nested Class";
-    //         }
-    //     };
-    // };
+        class Inner
+        {
+        public:
+            void show()
+            {
+                cout<<"Nested Class";
+            }
+        };
+    };
 
-    // int main()
-    // {
-    //     Outer::Inner obj;
+    int main()
+    {
+        Outer::Inner obj;
 
-    //     obj.show();
-    // }
+        obj.show();
+    }  */
 
-    /*  18. Array of Objects
+//    2. Example Project 
+
+    /*
+    #include<iostream>
+using namespace std;
+
+class Account
+{
+private:
+    int accountNo;
+    double balance;
+
+public:
+
+    // Nested Class
+    class Customer
+    {
+    public:
+        string name;
+        int age;
+
+        void inputCustomer()
+        {
+            cout<<"Enter Customer Name: ";
+            cin>>name;
+
+            cout<<"Enter Age: ";
+            cin>>age;
+        }
+
+        void displayCustomer()
+        {
+            cout<<"\nCustomer Name : "<<name<<endl;
+            cout<<"Age           : "<<age<<endl;
+        }
+    };
+
+    void inputAccount()
+    {
+        cout<<"Enter Account Number: ";
+        cin>>accountNo;
+
+        cout<<"Enter Balance: ";
+        cin>>balance;
+    }
+
+    void displayAccount()
+    {
+        cout<<"Account Number : "<<accountNo<<endl;
+        cout<<"Balance        : "<<balance<<endl;
+    }
+};
+
+int main()
+{
+    Account acc;
+    Account::Customer c;
+
+    c.inputCustomer();
+    acc.inputAccount();
+
+    cout<<"\n-------- BANK DETAILS --------\n";
+
+    c.displayCustomer();
+    acc.displayAccount();
+
+    return 0;
+}
+    */
+
+/*  18. Array of Objects
 
     An Array of Objects stores multiple objects of the same class.
 
     एक ही Class के कई Objects को Array में Store करना Array of Objects कहलाता है। */
 
     // Example
-    // #include<iostream>
-    // using namespace std;
+ /*   #include<iostream>
+    using namespace std;
 
-    // class Student
-    // {
-    // public:
-    //     string name;
+    class Student
+    {
+    public:
+        string name;
 
-    //     void input()
-    //     {
-    //         cin>>name;
-    //     }
+        void input()
+        {
+        cout<<"Enter the Name : ";
+            cin>>name;
+        }
 
-    //     void display()
-    //     {
-    //         cout<<name<<endl;
-    //     }
-    // };
+        void display()
+        {
+            cout<<name<<endl;
+        }
+    };
 
-    // int main()
-    // {
-    //     Student s[2];
+    int main()
+    {
+        Student s[2];
 
-    //     for(int i=0;i<2;i++)
-    //         s[i].input();
+        for(int i=0;i<2;i++)
+            s[i].input();
 
-    //     for(int i=0;i<2;i++)
-    //         s[i].display();
-    // }
+        for(int i=0;i<2;i++)
+            s[i].display();
+
+            return 0;
+    }
+            */
 
     /* 19. Object as Function Argument
 
@@ -826,3 +917,78 @@ int main()
 
         return 0;
     } */
+   
+/*
+Attributes (Data Members) in C++
+
+Attributes (also called Data Members) are the variables declared inside a class. They are used to store the data, properties, or characteristics of an object. Every object of the class has its own copy of the attributes, which can store different values. Attributes represent the state of an object.
+
+
+Attributes (Data Members) वे Variables होते हैं जो किसी Class के अंदर Declare किए जाते हैं। इनका उपयोग Object के Data, Properties या Characteristics को Store करने के लिए किया जाता है। Class के प्रत्येक Object के पास Attributes की अपनी अलग Copy होती है, जिसमें अलग-अलग Values Store हो सकती हैं। Attributes किसी Object की State (स्थिति) को दर्शाते हैं।
+
+Example
+class Student
+{
+public:
+    string name;
+    int roll;
+    int marks;
+};
+
+
+Methods (Member Functions) 
+
+
+A Method (also called a Member Function) is a function defined inside a class. It is used to perform operations on the attributes of the class. Methods can read, modify, display, or process the data stored in the attributes. They represent the behavior or actions of an object.
+
+Method (Member Function) वह Function होता है जो Class के अंदर बनाया जाता है। इसका उपयोग Class के Attributes पर कार्य करने के लिए किया जाता है। Method Data को Input, Display, Update, Calculate या Process कर सकता है। Method किसी Object के Behavior (व्यवहार) या Action (कार्य) को दर्शाता है।
+
+Example
+#include<iostream>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int marks;
+
+    void input()
+    {
+        cin>>name>>marks;
+    }
+
+    void display()
+    {
+        cout<<"Name : "<<name<<endl;
+        cout<<"Marks : "<<marks;
+    }
+};
+
+int main()
+{
+    Student s;
+
+    s.input();
+    s.display();
+
+    return 0;
+}
+
+Explanation
+name और marks → Attributes
+input() और display() → Methods
+
+
+Difference Between Attributes and Methods
+Attributes	                                Methods
+Variables declared inside a class	        Functions declared inside a class
+Store data or properties	                Perform operations on data
+Represent the State of an object	        Represent the Behavior of an object
+Example: name, roll, marks	                Example: input(), display(), calculateResult()
+
+
+Attributes = What an object has (Data/Properties)
+Methods = What an object does (Functions/Actions)
+    
+    */
