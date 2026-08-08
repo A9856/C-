@@ -767,88 +767,70 @@ int main()
     जब किसी Function में Object को Argument के रूप में भेजा जाता है, तो उसे Object as Function Argument कहते हैं। */
 
     // Example
-    // #include<iostream>
-    // using namespace std;
+    #include<iostream>
+    using namespace std;
 
-    // class Student
-    // {
-    // public:
-    //     int marks=90;
-    // };
+    class Student
+    {
+    public:
+        int marks=90;
+    };
 
-    // void display(Student s)
-    // {
-    //     cout<<s.marks;
-    // }
+    void display(Student s)
+    {
+        cout<<s.marks;
+    }
 
-    // int main()
-    // {
-    //     Student s;
+    int main()
+    {
+        Student s;
 
-    //     display(s);
-    // }
+        display(s);
+    }
 
-    /* 20. Returning Object from Function
+    /* 20. Returning Object from Function:
 
       A function can return an object of a class.
 
     कोई Function Class का Object Return कर सकता है। */
 
     // Example
-    // #include<iostream>
-    // using namespace std;
+    #include<iostream>
+    using namespace std;
 
-    // class Student
-    // {
-    // public:
-    //     int marks;
-    // };
+    class Student
+    {
+    public:
+        int marks;
+    };
 
-    // Student getData()
-    // {
-    //     Student s;
+    Student getData()
+    {
+        Student s;
 
-    //     s.marks=95;
+        s.marks=95;
 
-    //     return s;
-    // }
+        return s;
+    }
 
-    // int main()
-    // {
-    //     Student obj=getData();
+    int main()
+    {
+        Student obj=getData();
 
-    //     cout<<obj.marks;
-    // }
+        cout<<obj.marks;
+    }
 
     /* 21. Memory Allocation for Objects
 
      Objects can be created in Stack Memory or Heap Memory.
 
-    Object को Stack Memory या Heap Memory में बनाया जा सकता है। */
+    Object को Stack Memory या Heap Memory में बनाया जा सकता है। 
+    
+    Arrow Operator (->) -->
+     The Arrow Operator (->) is used to access the data members and member functions of an object through a pointer.
+    */
 
-    // Example
-    // #include<iostream>
-    // using namespace std;
-
-    // class Student
-    // {
-    // public:
-    //     void show()
-    //     {
-    //         cout<<"Hello";
-    //     }
-    // };
-
-    // int main()
-    // {
-    //     Student *s=new Student;
-
-    //     s->show();
-
-    //     delete s;
-    // }
-
-    // 2. example object value and address print
+    // 1. example object value and address print
 
     /* #include<iostream>
    using namespace std;
@@ -879,7 +861,7 @@ int main()
    {
        Student *s = new Student;
 
-       s->input();
+       (*s).input();
 
        s->show();
 
@@ -892,7 +874,7 @@ int main()
        return 0;
    }*/
 
-    // 3. addres value aur address
+    // 2. addres value aur address
 
     /* #include<iostream>
     using namespace std;
@@ -998,3 +980,243 @@ Attributes = What an object has (Data/Properties)
 Methods = What an object does (Functions/Actions)
     
     */
+
+//Class Declaration in C++
+
+/* A Class Declaration is the process of defining a class by specifying its name, data members (attributes), member functions (methods), and access specifiers. A class acts as a blueprint or template for creating objects. It does not allocate memory until an object is created.
+
+Features of Class Declaration
+
+1.  It is a blueprint for objects.
+2.  It groups data and functions together.
+3.  It supports encapsulation.
+4.  It improves code reusability.
+5.  It provides data security through access specifiers.
+6.  Memory is allocated only when objects are created.
+
+
+Class Declaration वह प्रक्रिया है जिसमें किसी Class का नाम, Data Members (Variables), Member Functions (Methods) तथा Access Specifiers को Define किया जाता है। Class एक Blueprint (नक्शा) या Template होती है, जिसके आधार पर Objects बनाए जाते हैं। केवल Class Declare करने से Memory Allocate नहीं होती; Memory तभी मिलती है जब Object बनाया जाता है। */
+
+//Sytanx
+/* class ClassName
+{
+access_specifier:
+
+    // Data Members
+
+    // Member Functions
+};
+*/
+
+//program 
+/* #include<iostream>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int roll;
+
+    void display()
+    {
+        cout<<"Name : "<<name<<endl;
+        cout<<"Roll : "<<roll;
+    }
+};
+
+int main()
+{
+    Student s;
+
+    s.name="Adil";
+    s.roll=101;
+
+    s.display();
+
+    return 0;
+} */
+
+
+
+/* State, Identity and Behavior of an Object in C++
+
+Object-Oriented Programming (OOP) me kisi object ko mainly 3 part me smjha ja skta hai.
+
+Object = Identity + State + Behavior */
+
+/*--> Identity of an Object
+
+1. defination-->
+Identity is the unique identity or address by which an object can be distinguished from other objects, even if both objects contain the same data.
+
+Identity Object की वह अलग और Unique पहचान है, जिससे हम उसे दूसरे Objects से अलग पहचान सकते हैं, भले ही दोनों Objects का Data समान हो।
+
+2. defination ->
+
+Identity is the unique characteristic of an object that distinguishes it from every other object in a program. Even if two objects belong to the same class and contain exactly the same data, they are still different objects because each object has its own identity and separate existence in memory. Identity allows the programmer or system to recognize and refer to a particular object independently of its current state or behavior. In C++, an object's identity can practically be associated with its particular object instance and its memory location.
+
+Identity Object की वह Unique पहचान है जो उसे Program में मौजूद दूसरे Objects से अलग पहचानती है। यदि एक ही Class के दो Objects में बिल्कुल समान Data हो, तब भी वे दो अलग Objects होते हैं क्योंकि प्रत्येक Object का अपना अलग अस्तित्व और सामान्यतः अपनी अलग Memory Location होती है। Identity की सहायता से किसी विशेष Object को दूसरे Objects से अलग पहचानकर उसे Access या Refer किया जा सकता है।  */
+
+
+Example
+Student s1;
+Student s2;
+
+
+s1.name = "Ankit";
+s1.roll = 101;
+
+s2.name = "Ankit";
+s2.roll = 101;
+
+//data same but object & address different hai.
+
+          Student Class
+       
+     Object s1        Object s2
+     Roll = 101       Roll = 101
+     Name = Ankit      Name = Ankit
+        │                 │
+     Identity 1        Identity 2
+
+both location different in memory.
+
+cout << &s1 << endl; 
+cout << &s2 << endl;
+
+Identity = Object ki Unique pahchan 
+
+/* --> State of an Object
+
+1 defination -->
+State represents the current values of an object's data members or attributes at a particular time.
+
+State किसी विशेष समय पर Object के Data Members की Current Values को दर्शाती है।
+
+2. defination -->
+State represents the current condition or situation of an object at a particular point in time. It is determined by the current values stored in the object's data members or attributes. The state of an object can change during program execution when its data members are modified through member functions or other permitted operations. Therefore, state describes what an object currently contains or what condition it is currently in.
+
+State किसी Object की किसी विशेष समय पर वर्तमान स्थिति (Current Condition) को दर्शाती है। यह Object के Data Members या Attributes में Stored वर्तमान Values से निर्धारित होती है। Program के दौरान जब Object के Data Members की Values Change होती हैं, तो Object की State भी Change हो जाती है। इसलिए State यह बताती है कि किसी समय Object के अंदर कौन-सा Data है और उसकी वर्तमान स्थिति क्या है। */
+
+Example
+Student s;
+
+s.name = "Ankit";
+s.roll = 101;
+s.marks = 85;
+
+current time student state
+
+Name  = Ankit
+Roll  = 101
+Marks = 85 // mark change 95
+
+
+s.marks = 95;
+
+object ki state change 
+Before:                 After 
+
+Name  = Ankit           Name = Ankit
+Roll  = 101             Roll = 101
+Marks = 85              Marks=95
+
+Exam Point
+
+State =current value of object Data
+
+/* --> Behavior of an Object
+
+1. Defination ->
+Behavior describes the actions or operations that an object can perform through its member functions or methods.
+
+Behavior यह बताता है कि Object कौन-कौन से कार्य (Actions/Operations) कर सकता है। ये कार्य सामान्यतः उसके Member Functions/Methods द्वारा किए जाते हैं।
+
+2. Defination-->
+Behavior represents the actions, operations, or activities that an object can perform during the execution of a program. The behavior of an object is generally implemented through member functions or methods defined in its class. These methods can read, modify, calculate, process, or display the object's state. Thus, behavior explains what an object can do and how it can interact with other objects or components of a program.
+
+Behavior Object द्वारा किए जाने वाले Actions, Operations या Activities को दर्शाता है। Object का Behavior सामान्यतः उसकी Class में बनाए गए Member Functions या Methods द्वारा Implement किया जाता है। ये Methods Object के Data को Read, Modify, Calculate, Process या Display कर सकते हैं। इसलिए Behavior यह बताता है कि कोई Object क्या कार्य कर सकता है और Program में किस प्रकार कार्य करता है। */
+
+Example
+class Student
+{
+public:
+
+    void input()
+    {
+        // Input data
+    }
+
+    void display()
+    {
+        // Display data
+    }
+
+    void calculateResult()
+    {
+        // Calculate result
+    }
+};
+
+//here Student Behavior
+
+input()
+display()
+calculateResult()
+Exam Point
+
+Behavior = Actions/Operations by Object
+
+Complete Example
+/*
+#include<iostream>
+using namespace std;
+
+class Student
+{
+public:
+
+    // State
+    string name;
+    int roll;
+    int marks;
+
+    // Behavior
+    void display()
+    {
+        cout<<"Name  : "<<name<<endl;
+        cout<<"Roll  : "<<roll<<endl;
+        cout<<"Marks : "<<marks<<endl;
+    }
+
+    void updateMarks(int m)
+    {
+        marks = m;
+    }
+};
+
+int main()
+{
+    Student s1;
+
+    // State
+    s1.name = "Adil";
+    s1.roll = 101;
+    s1.marks = 80;
+
+    // Identity
+    cout<<"Object Address = "<<&s1<<endl;
+
+    // Behavior
+    s1.display();
+
+    s1.updateMarks(95);
+
+    cout<<"\nAfter Update:\n";
+    s1.display();
+
+    return 0;
+}
+*/
+
