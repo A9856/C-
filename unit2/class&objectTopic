@@ -37,7 +37,7 @@
     // int main()
     // {
     //     Student s;
-    //     s.name="Adil";
+    //     s.name="Ankit";
     //     s.display();
     // }
 
@@ -1029,7 +1029,7 @@ int main()
 {
     Student s;
 
-    s.name="Adil";
+    s.name="Ankit";
     s.roll=101;
 
     s.display();
@@ -1201,7 +1201,7 @@ int main()
     Student s1;
 
     // State
-    s1.name = "Adil";
+    s1.name = "Ankit";
     s1.roll = 101;
     s1.marks = 80;
 
