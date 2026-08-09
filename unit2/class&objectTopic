@@ -832,27 +832,36 @@ int main()
 
     // 1. example object value and address print
 
-    /* #include<iostream>
+    /*
+    #include<iostream>
    using namespace std;
 
    class Student
    {
    public:
        string name;
+       string className;
        int roll;
+       
 
        void input()
        {
            cout<<"Enter Name: ";
            cin>>name;
+           
+             cout<<"Enter class: ";
+           cin>>className;
 
            cout<<"Enter Roll: ";
            cin>>roll;
+           
+           
        }
 
        void show()
        {
            cout<<"\nName : "<<name<<endl;
+           cout<<"\nClass :"<<className<<endl;
            cout<<"Roll : "<<roll<<endl;
        }
    };
@@ -867,6 +876,8 @@ int main()
 
        cout<<"\nObject Address = "<<s<<endl;
        cout<<"Name Address   = "<<&s->name<<endl;
+       cout<<"Class Address   = "<<&s->className<<endl;
+         cout<<"Roll Address   = "<<s->roll<<endl;
        cout<<"Roll Address   = "<<&s->roll<<endl;
 
        delete s;
@@ -907,6 +918,7 @@ int main()
     } */
    
 /*
+
 Attributes (Data Members) in C++
 
 Attributes (also called Data Members) are the variables declared inside a class. They are used to store the data, properties, or characteristics of an object. Every object of the class has its own copy of the attributes, which can store different values. Attributes represent the state of an object.
@@ -918,14 +930,13 @@ Example
 class Student
 {
 public:
-    string name;
+    string name; //data member,variable,Attributes
     int roll;
     int marks;
 };
 
 
 Methods (Member Functions) 
-
 
 A Method (also called a Member Function) is a function defined inside a class. It is used to perform operations on the attributes of the class. Methods can read, modify, display, or process the data stored in the attributes. They represent the behavior or actions of an object.
 
@@ -943,6 +954,7 @@ public:
 
     void input()
     {
+    
         cin>>name>>marks;
     }
 
