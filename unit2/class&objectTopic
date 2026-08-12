@@ -832,7 +832,7 @@ int main()
 
     // 1. example object value and address print
 
-    /*
+
     #include<iostream>
    using namespace std;
 
@@ -883,7 +883,7 @@ int main()
        delete s;
 
        return 0;
-   }*/
+   }
 
     // 2. addres value aur address
 

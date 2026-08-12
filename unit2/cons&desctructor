@@ -1,0 +1,678 @@
+Constructor in C++
+
+A constructor is a special member function of a class that is automatically called when an object is created. It is mainly used to initialize the data members of an object.
+
+Constructor class का एक special member function होता है, जो object create होते ही automatically call हो जाता है। इसका मुख्य काम object के data members को initial value देना (initialize करना) होता है।
+
+Important Points
+Constructor का नाम class के नाम के same होता है।
+इसका कोई return type नहीं होता, void भी नहीं।
+Object बनते ही automatically call होता है।
+Constructor का मुख्य काम initialization है।
+एक class में multiple constructors हो सकते हैं।
+Constructor overloading possible है।
+
+2. Types of Constructor
+
+Default Constructor
+Parameterized Constructor
+Copy Constructor
+
+
+3. Default Constructor
+
+A default constructor is a constructor that takes no arguments.
+
+Default Constructor वह constructor होता है जो कोई argument/parameter नहीं लेता।
+
+/*#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    int age;
+
+    // Default Constructor
+    Student()
+    {
+        age = 20;
+    }
+
+    void display()
+    {
+        cout << "Age = " << age << endl;
+    }
+};
+
+int main()
+{
+    Student s1;
+
+    s1.display();
+
+    return 0;
+} 
+*/
+
+4. Parameterized Constructor
+
+A parameterized constructor is a constructor that accepts one or more parameters to initialize an object with specific values.
+
+Parameterized Constructor वह constructor होता है जो एक या एक से अधिक parameters लेता है और उनकी मदद से object को specific values से initialize करता है।
+
+Complete Program
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    int age;
+    string name;
+
+    // Parameterized Constructor
+    Student(string n, int a)
+    {
+        name = n;
+        age = a;  //initialize value
+    }
+
+    void display()
+    {
+        cout << "Name = " << name << endl;
+        cout << "Age = " << age << endl;
+    }
+};
+
+int main()
+{
+    Student s1("Adil", 22);
+
+    s1.display();
+
+    return 0;
+}
+
+5. Multiple Objects with Parameterized Constructor
+
+A parameterized constructor can be used to create multiple objects with different values by passing different arguments to each object.
+
+
+Parameterized Constructor की मदद से एक ही class के multiple objects बनाए जा सकते हैं और प्रत्येक object को अलग-अलग values दी जा सकती हैं।
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int age;
+
+    Student(string n, int a)
+    {
+        name = n;
+        age = a;
+    }
+
+    void display()
+    {
+        cout << "Name = " << name << endl;
+        cout << "Age = " << age << endl;
+        cout << endl;
+    }
+};
+
+int main()
+{
+    Student s1("Adil", 22);
+    Student s2("Rahul", 20);
+    Student s3("Aman", 21);
+
+    s1.display();
+    s2.display();
+    s3.display();
+
+    return 0;
+}
+
+
+6. Copy Constructor
+
+A copy constructor is a special constructor that creates a new object by copying the values of an existing object of the same class.
+
+Copy Constructor ऐसा constructor होता है जो किसी existing object की values को copy करके एक नया object create करता है।
+
+General Syntax
+ClassName(const ClassName &object)
+{
+    // copy data
+}
+
+
+existing object को reference के रूप में receive करता है।
+
+Complete Copy Constructor Program
+
+/* #include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int age;
+
+    // Parameterized Constructor
+    Student(string n, int a)
+    {
+        name = n;
+        age = a;
+    }
+
+    // Copy Constructor
+    Student(const Student &s)
+    {
+        name = s.name;
+        age = s.age;
+    }
+
+    void display()
+    {
+        cout << "Name = " << name << endl;
+        cout << "Age = " << age << endl;
+    }
+};
+
+int main()
+{
+    Student s1("Adil", 22);
+
+    // Copy Constructor
+    Student s2 = s1;
+
+    cout << "First Object:" << endl;
+    s1.display();
+
+    cout << endl;
+
+    cout << "Copied Object:" << endl;
+    s2.display();
+
+    return 0;
+}
+*/
+
+7. Constructor Overloading
+
+Constructor overloading means having more than one constructor in the same class with different parameter lists.
+
+एक ही class में एक से अधिक constructors रखना, जिनके parameters अलग-अलग हों, Constructor Overloading कहलाता है।
+
+/* #include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int age;
+
+    // Default Constructor
+    Student()
+    {
+        name = "Unknown";
+        age = 0;
+    }
+
+    // Parameterized Constructor
+    Student(string n, int a)
+    {
+        name = n;
+        age = a;
+    }
+
+    void display()
+    {
+        cout << "Name = " << name << endl;
+        cout << "Age = " << age << endl;
+        cout << endl;
+    }
+};
+
+int main()
+{
+    Student s1;
+    Student s2("Adil", 22);
+
+    s1.display();
+    s2.display();
+
+    return 0;
+}
+*/
+
+8. Constructor Using Initialization List
+
+A constructor initialization list is a special syntax used to initialize data members of a class before the constructor body is executed.
+
+Initialization List constructor की एक special syntax है, जिसका उपयोग class के data members को constructor body execute होने से पहले initialize करने के लिए किया जाता है।
+
+// syntax:
+// ClassName(parameters) : dataMember1(value1), dataMember2(value2)
+// {
+//     // constructor body
+// }
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int age;
+
+    Student(string n, int a) : name(n), age(a)
+    {
+    }
+
+    void display()
+    {
+        cout << "Name = " << name << endl;
+        cout << "Age = " << age << endl;
+    }
+};
+
+int main()
+{
+    Student s1("Adil", 22);
+
+    s1.display();
+
+    return 0;
+}
+
+
+
+10. Constructor Outside the Class
+
+A constructor can be declared inside the class and defined outside the class using the Scope Resolution Operator (::).
+
+
+Constructor को class के अंदर declare करके class के बाहर define किया जा सकता है। इसके लिए Scope Resolution Operator (::) का use किया जाता है।
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    int age;
+
+    Student();
+
+    void display();
+};
+
+// Constructor definition outside class
+Student::Student()
+{
+    age = 22;
+}
+
+void Student::display()
+{
+    cout << "Age = " << age << endl;
+}
+
+int main()
+{
+    Student s1;
+
+    s1.display();
+
+    return 0;
+}
+
+// Important Operator
+// Student::Student()
+
+//  :: को Scope Resolution Operator कहते हैं।
+
+//c&d
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+
+    // Constructor
+    Student()
+    {
+        cout << "Constructor Called" << endl;
+        cout << "Object Created" << endl;
+    }
+
+    // Destructor
+    ~Student()
+    {
+        cout << "Destructor Called" << endl;
+        cout << "Object Destroyed" << endl;
+    }
+};
+
+int main()
+{
+    Student s1;
+
+    cout << "Object is Working" << endl;
+
+    return 0;
+}
+
+// Flow
+// Student s1;
+//      ↓
+// Constructor()
+//      ↓
+// Object Created
+//      ↓
+// Object Used
+//      ↓
+// main() ends
+//      ↓
+// Object Destroyed
+//      ↓
+// ~Student()
+
+
+Destructor in C++
+
+A destructor is a special member function of a class that is automatically called when an object is destroyed. It is mainly used to perform cleanup operations and release resources used by the object.
+
+Destructor class का एक special member function होता है, जो object destroy होने पर automatically call होता है। इसका मुख्य काम cleanup करना और object द्वारा उपयोग किए गए resources को release करना होता है।
+
+
+// Constructor → Object बनाता/initialize करता है
+// Destructor → Object के खत्म होने पर cleanup करता है
+
+// 2. Syntax of Destructor
+// ~ClassName()
+// {
+//     // cleanup code
+// }
+
+For example:
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+
+    ~Student()
+    {
+        cout << "Destructor Called" << endl;
+    }
+};
+
+int main()
+{
+    Student s1;
+
+    cout << "Object is working" << endl;
+
+    return 0;
+}
+
+
+
+/* --> Why Do We Need a Destructor?
+
+Destructor main purpose cleanup.
+
+For example, 
+
+Dynamic memory
+File
+Database connection
+Network connection
+Other resources
+
+use किए हैं, तो destructor में उन्हें release/close किया जा सकता है। */
+
+// Simple Concept
+// Object Created
+//       ↓
+// Resource Used
+//       ↓
+// Object Destroyed
+//       ↓
+// Destructor
+//       ↓
+// Resource Cleanup
+
+5. Destructor with Dynamic Memory
+
+Destructor  important practical use dynamic memory release
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    int *ptr;
+
+    // Constructor
+    Student()
+    {
+        ptr = new int;
+        *ptr = 100;
+
+        cout << "Memory Allocated" << endl;
+        cout << "Value = " << *ptr << endl;
+    }
+
+    // Destructor
+    ~Student()
+    {
+        delete ptr;
+
+        cout << "Memory Released" << endl;
+    }
+};
+
+int main()
+{
+    Student s1;
+
+    return 0;
+}
+
+
+// Constructor → Resource Allocation/Initialization
+
+// Destructor → Resource Release/Cleanup
+
+ /* Destructor with Multiple Objects
+
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+
+    Student()
+    {
+        cout << "Constructor Called" << endl;
+    }
+
+    ~Student()
+    {
+        cout << "Destructor Called" << endl;
+    }
+};
+
+int main()
+{
+    Student s1;
+    Student s2;
+    Student s3;
+
+    cout << "All objects are working" << endl;
+
+    return 0;
+}
+
+Created:
+
+s1
+s2
+s3
+
+Destroyed:
+
+s3
+s2
+s1 */
+
+
+/*
+Main Characteristics of Destructor in C++
+
+1. Special Member Function —
+
+ A destructor is a special member function of a class used to perform cleanup when an object is destroyed.
+ Destructor class का एक special member function है, जो object के destroy होने पर cleanup का काम करता है।
+
+2. Same Name as Class —
+
+ The name of a destructor is the same as the class name, preceded by a tilde (~).
+ Destructor का नाम class के नाम के समान होता है और उसके पहले tilde (~) लगाया जाता है।
+
+Example:
+
+class Student
+{
+    ~Student()
+    {
+    }
+};
+3. Automatically Called —
+
+ A destructor is automatically called when an object is destroyed or goes out of scope.
+ जब object destroy होता है या अपने scope से बाहर चला जाता है, तो destructor automatically call होता है।
+
+4. No Return Type — 
+
+ A destructor does not have any return type, not even void.
+ Destructor का कोई return type नहीं होता, void भी नहीं।
+
+Correct:
+
+~Student()
+{
+}
+5. No Parameters — 
+
+ A destructor cannot accept parameters.
+ Destructor कोई parameter accept नहीं कर सकता।
+
+~Student()
+{
+}
+6. Only One Destructor —
+
+ A class can have only one destructor.
+ एक class में केवल एक destructor हो सकता है।
+
+7. Destructor Cannot Be Overloaded — 
+ Destructors cannot be overloaded because they cannot have parameters.
+ Destructor की overloading possible नहीं है क्योंकि destructor parameters नहीं ले सकता।
+
+8. Used for Cleanup — 
+
+A destructor is mainly used to perform cleanup operations and release resources used by an object.
+ Destructor का मुख्य उपयोग cleanup करने और object द्वारा उपयोग किए गए resources को release करने के लिए किया जाता है।
+
+Examples of resources:
+
+Dynamic memory
+Files
+Database connections
+Network resources
+
+9. Used to Release Dynamic Memory — Dynamic Memory Release
+
+A destructor can be used to release dynamically allocated memory using delete or delete[].
+Destructor में delete या delete[] की सहायता से dynamically allocated memory को release किया जा सकता है।
+
+~Student()
+{
+    delete ptr;
+}
+10. No Return Value — 
+
+A destructor does not return any value.
+Destructor किसी भी प्रकार की value return नहीं करता।
+
+11. Can Be Virtual — 
+
+A destructor can be declared as virtual, especially when inheritance and polymorphism are used.
+Inheritance और polymorphism में destructor को virtual बनाया जा सकता है ताकि derived object को base-class pointer से delete करने पर सही cleanup हो।
+
+virtual ~Student()
+{
+}
+12. Called in Reverse Order — 
+For multiple local objects, destructors are generally called in the reverse order of object creation.
+Multiple local objects होने पर destructors सामान्यतः objects के creation order के reverse order में call होते हैं।
+
+Creation:
+s1 → s2 → s3
+
+Destruction:
+s3 → s2 → s1  */
+
+8. Constructor + Destructor Complete Program
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+
+    // Constructor
+    Student()
+    {
+        cout << "Constructor Called" << endl;
+        cout << "Object Created" << endl;
+    }
+
+    // Destructor
+    ~Student()
+    {
+        cout << "Destructor Called" << endl;
+        cout << "Object Destroyed" << endl;
+    }
+};
+
+int main()
+{
+    Student s1;
+
+    cout << "Object is Working" << endl;
+
+    return 0;
+}
+
+
