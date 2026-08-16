@@ -1,0 +1,693 @@
+/*Instantiation of Objects in C++
+-------------------------------------------------------------
+1. Definition of Instantiation of Objects
+
+Instantiation of an object is the process of creating an actual object (instance) of a class in memory. A class is only a blueprint or design, while an object is its real instance that can store data and use the functions defined by the class.
+
+Hindi:
+Object Instantiation का अर्थ है किसी class का actual object बनाना। Class एक blueprint या design की तरह होती है, जबकि object उस class का real instance होता है जो memory में space लेता है और class के data members तथा member functions को use कर सकता है।
+
+Easy Example
+Student s1;
+
+यहाँ:
+
+Student → Class
+
+s1 → Object
+
+Student s1; → Object Instantiation
+
+Object बनने पर memory में उसके लिए space allocate होता है।
+
+2. Class  vs Instantiation
+Term	            Meaning
+Class	            A blueprint or template for creating objects
+
+Instantiation	    The process of creating an object from a class
+
+Easy Understanding
+Class
+  ↓
+Blueprint / Design
+  ↓
+Instantiation
+  ↓
+Object Created
+  ↓
+Memory Allocated
+
+For example:
+
+class Student
+{
+public:
+    string name;
+    int age;
+};
+
+3. Basic Program of Object Instantiation-:
+
+#include <iostream>
+using namespace std;
+class Student
+{
+public:
+    string name;
+    int age;
+    void display()
+    {
+        cout << "Name = " << name << endl;
+        cout << "Age = " << age << endl;
+    }
+};
+int main()
+{
+    // Object instantiation
+    Student s1;
+    s1.name = "Adil";
+    s1.age = 22;
+    s1.display();
+    return 0;
+}
+
+Types of Object Instantiation in C++--------------------
+--------------------------------------------------
+The main ways of object instantiation/object creation in C++ can be explained as follows.
+
+1. Static / Automatic Object Instantiation--:
+
+Automatic object instantiation is the process of creating an object as a local variable. The object is automatically destroyed when its scope ends.Its lifetime is controlled by its scope.
+
+Automatic object instantiation का अर्थ है object को local variable के रूप में create करना। जब object का scope समाप्त हो जाता है, तो object automatically destroy हो जाता है। इसका lifetime उसके scope द्वारा controlled होता है।
+
+Example:
+Student s1;
+
+2. Multiple Object Instantiation--:
+
+Multiple object instantiation is the process of creating two or more objects of the same class. Each object has its own separate set of non-static data members and can store different values.Multiple objects of the same class can exist at the same time.
+
+Example:
+Student s1;
+Student s2;
+Student s3;
+
+3. Object Instantiation Using a Parameterized Constructor--:
+
+Object instantiation using a parameterized constructor is the process of creating an object by passing specific arguments to a constructor so that the object can be initialized with the given values.The supplied arguments are passed to the parameterized constructor during object creation.
+
+Example:
+Student s1("Adil", 22);
+
+4. Dynamic Object Instantiation--:
+
+Dynamic object instantiation is the process of creating an object dynamically at runtime using the new operator. The allocated memory is released using delete.
+
+Dynamic object instantiation का अर्थ है runtime पर new operator की सहायता से object create करना। इसकी dynamically allocated memory को delete द्वारा release किया जाता है।
+
+Example:
+Student *s1 = new Student;
+To release the object:
+delete s1;
+
+5. Object Instantiation Using a Copy Constructor--:
+
+Copy constructor instantiation is the process of creating a new object by copying the state or values of an existing object of the same class.
+
+Copy constructor के द्वारा object instantiation का अर्थ है किसी existing object की values को copy करके नया object create करना।
+
+Example:
+Student s1;
+Student s2 = s1;
+
+Here, s2 is created by copying s1.
+
+Key Point:
+The copy constructor is automatically invoked when a new object is initialized from an existing object.
+
+6. Object Instantiation Using Move Constructor
+
+Move constructor instantiation is the process of creating a new object by transferring resources from a temporary or expiring object instead of copying them.
+
+Move constructor के द्वारा object instantiation में temporary या expiring object के resources को copy करने के बजाय नए object में transfer किया जाता है।
+
+Example:
+Student s2 = std::move(s1);
+
+7. Main Characteristics of Object Instantiation
+
+1. Creates an Object — 
+
+ Instantiation creates an actual object from a class.
+
+ Instantiation class से actual object create करता है।
+
+2. Memory Allocation — 
+
+ When an object is created, memory is allocated for its non-static data members.
+
+ Object create होने पर उसके non-static data members के लिए memory में space मिलता है।
+
+3. Object Gets Its Own Data
+
+ Each object normally has its own copy of non-static data members.
+
+ प्रत्येक object के पास normally अपने non-static data members की अलग values होती हैं।
+
+Example:
+
+Student s1;
+Student s2;
+
+4. Member Functions Can Be Used
+
+ An instantiated object can access the class's accessible member functions.
+
+Object class के accessible member functions को call कर सकता है।
+
+s1.display();
+
+5. Constructor May Be Called Automatically
+
+When an object is instantiated, the appropriate constructor is automatically called if one exists.
+
+Hindi: Object instantiate होने पर appropriate constructor automatically call हो सकता है।
+
+Student s1;
+
+तो default constructor call हो सकता है।
+
+6. Different Objects Can Have Different Values
+
+Objects of the same class can contain different data values.
+
+Hindi: एक ही class के अलग-अलग objects में अलग-अलग values हो सकती हैं।
+
+s1 → Name = Adil
+s2 → Name = Rahul
+7. Object Has a Lifetime
+
+An object exists for a specific lifetime determined by how and where it is created.
+
+Hindi: Object का एक lifetime होता है, जो उसके creation के तरीके और scope/storage duration पर depend करता है।
+
+8. Destructor May Be Called Automatically
+
+When an automatic object reaches the end of its lifetime, its destructor is automatically called.
+
+Hindi: Automatic object का lifetime समाप्त होने पर उसका destructor automatically call होता है।
+
+Object Created
+      ↓
+Constructor
+      ↓
+Object Used
+      ↓
+Object Destroyed
+      ↓
+Destructor
+
+8. Instantiation and Constructor Difference
+
+ Instantiation                            Constructor                           
+ ---------------------------------------  --------------------------------------
+ Object creation की process है            Special member function है             
+ Class से object create करता है            Object को initialize करता है           
+ Example: `Student s1;`                  Example: `Student()`                   
+ यह कोई function नहीं है                   यह एक special member function है       
+ Object के creation को represent करता है  Creation के समय initialization करता है 
+
+
+9. Instantiation and Destructor Relationship
+Class
+  ↓
+Object Instantiation
+  ↓
+Object Created
+  ↓
+Constructor Called
+  ↓
+Object Used
+  ↓
+Object Lifetime Ends
+  ↓
+Destructor Called
+  ↓
+Object Destroyed
+
+Exam--:
+
+Object instantiation is the process of creating an instance (object) of a class in memory. During instantiation, the appropriate constructor may be invoked to initialize the object, and when the object's lifetime ends, its destructor may be invoked for cleanup.*/
+
+
+
+Default Parameter Value in C++ — 
+
+A default parameter value is a value assigned to a function parameter at the time of function declaration or definition. If the calling function does not provide an argument for that parameter, the compiler automatically uses the specified default value.
+
+Default Parameter Value वह value होती है जो function के parameter को पहले से assign कर दी जाती है। जब function को call करते समय उस parameter के लिए कोई argument नहीं दिया जाता, तब compiler automatically उसकी default value का उपयोग करता है।
+
+Simple Example
+#include <iostream>
+using namespace std;
+void display(int age = 20) //parameter 10 ,20 default parameter value 
+{
+    cout << "Age = " << age << endl;
+}
+int main()
+{
+    display();
+    display(25);
+    return 0;
+}
+
+2. Syntax
+return_type function_name(parameter = default_value);
+
+
+3. Why Do We Use Default Parameters?
+
+Default parameters are used to make function calls more flexible and to avoid passing the same common value repeatedly.
+
+Default parameters का उपयोग function को flexible बनाने के लिए किया जाता है। इससे बार-बार same value pass करने की जरूरत नहीं पड़ती।
+
+Example:
+
+void calculate(int rate = 10)
+{
+    // code
+}
+
+calculate();
+
+4. Example with Two Default Parameters
+
+#include <iostream>
+using namespace std;
+void student(string name = "Unknown", int age = 18)
+{
+    cout << "Name = " << name << endl;
+    cout << "Age = " << age << endl;
+}
+
+int main()
+{
+    student();
+    cout << endl;
+
+    student("Adil");
+    cout << endl;
+
+    student("Rahul", 21);
+    return 0;
+}
+
+5. Important Rule of Default Parameters 
+
+Rule: Default Parameters are generally specified from Right to Left
+Correct
+void show(int a, int b = 20);
+void show(int a, int b = 20, int c = 30);
+void show(int a = 10, int b = 20, int c = 30);
+
+Incorrect
+void show(int a = 10, int b);
+
+Once a parameter is given a default value, all parameters to its right should also have default values.
+
+
+6. Default Parameters with Multiple Arguments
+#include <iostream>
+using namespace std;
+int sum(int a, int b = 10, int c = 20)
+{
+    return a + b + c;
+};
+int main()
+{
+    cout << sum(5) << endl;
+    cout << sum(5, 15) << endl;
+    cout << sum(5, 15, 25) << endl;
+    return 0;
+}
+
+7. Default Parameter in Constructor
+
+Default parameters use constructor.
+
+#include <iostream>
+using namespace std;
+class Student
+{
+public:
+    string name;
+    int age;
+
+    Student(string n = "Unknown", int a = 18)
+    {
+        name = n;
+        age = a;
+    }
+    void display()
+    {
+        cout << "Name = " << name << endl;
+        cout << "Age = " << age << endl;
+    }
+};
+int main()
+{
+    Student s1;
+    Student s2("Adil");
+    Student s3("Rahul", 21);
+    s1.display();
+    cout << endl;
+
+    s2.display();
+    cout << endl;
+    s3.display();
+
+    return 0;
+}
+
+2. Main Characteristics of Default Parameters
+
+1. Predefined Value —
+
+English: A default parameter has a predefined value that is assigned in advance.
+
+Hindi: Default parameter में एक value पहले से निर्धारित होती है।
+
+void show(int age = 20);
+
+2. Optional Argument — 
+
+English: The caller may omit the argument for a parameter that has a default value.
+
+Hindi: जिस parameter की default value है, उसका argument function call के समय देना optional होता है।
+
+show();       // 20 will be used
+show(25);     // 25 will be used
+
+
+3. Automatically Used — 
+
+English: If an argument is not supplied, the compiler uses the default value automatically.
+
+Hindi: अगर argument नहीं दिया गया, तो compiler automatically default value use करता है।
+
+void show(int x = 10)
+{
+    cout << x;
+}
+
+
+show();       // Output: 10
+
+4. Supplied Value Gets Priority — 
+
+English: If the caller provides an argument, the supplied value is used instead of the default value.
+
+Hindi: अगर caller कोई value provide करता है, तो default value की जगह वही provided value use होती है।
+
+show(50);
+
+Output:
+
+50
+5. Makes Function Flexible —
+
+English: Default parameters allow a function to be called with different numbers of arguments.
+
+Hindi: Default parameters की मदद से function को अलग-अलग number of arguments के साथ call किया जा सकता है।
+
+show();
+show(20);
+6. Reduces Code —
+
+English: Default parameters can reduce the need for writing separate functions for common cases.
+
+Hindi: Common values के लिए अलग-अलग functions लिखने की जरूरत कम हो जाती है।
+
+7. Can Be Used in Constructors — 
+
+English: Default parameters can also be used in constructors.
+
+Hindi: Default parameters को constructor में भी use किया जा सकता है।
+
+Student(string name = "Unknown")
+{
+}
+
+8. Default Parameters Are Compile-Time Features
+
+English: Default arguments are substituted by the compiler when the corresponding argument is omitted.
+
+Hindi: जब argument omit किया जाता है, तो compiler default argument का उपयोग करता है।
+
+3. Rules / Limitations / Important Points
+
+1. Default Parameters Should Generally Be From Right to Left
+
+English: Once a parameter has a default value, parameters to its right should also have default values.
+
+Hindi: एक parameter को default value देने के बाद उसके right side के parameters को भी default value देनी चाहिए।
+
+Correct
+void show(int a, int b = 10);
+void show(int a = 10, int b = 20);
+Incorrect
+void show(int a = 10, int b);
+
+2. Default Value Is Used Only When Argument Is Omitted
+
+English: The default value is used only when the caller does not provide that argument.
+
+Hindi: Default value तभी use होती है जब caller उस parameter का argument नहीं देता।
+
+show();      // Default value
+show(50);    // Given value
+
+3. Do Not Repeatedly Specify the Same Default Argument
+
+English: A default argument should not be redundantly specified in multiple declarations within the same scope.
+
+Hindi: एक ही scope में same parameter के लिए default value को multiple declarations में बार-बार specify नहीं करना चाहिए।
+
+4. Default Parameters and Function Overloading Can Cause Ambiguity
+
+English: Using default parameters together with overloaded functions can sometimes make a function call ambiguous.
+
+Hindi: Default parameters और function overloading को साथ use करने पर कभी-कभी compiler को यह तय करने में problem हो सकती है कि कौन-सा function call करना है।
+
+Example:
+
+void show(int x = 10)
+{
+}
+
+void show()
+{
+}
+
+अब:
+
+show();
+
+ambiguous हो सकता है क्योंकि दोनों functions match कर सकते हैं।
+
+5. Default Parameters Are Not the Same as Function Overloading
+
+English: A default parameter provides an optional value within the same function, while function overloading provides multiple functions with different parameter lists.
+
+Hindi: Default parameter में एक ही function के parameter को default value दी जाती है, जबकि function overloading में multiple functions बनाए जाते हैं।
+
+6. Default Parameters Should Be Declared Carefully
+
+English: In a program with separate function declarations and definitions, the default value is normally specified in the declaration visible to the caller, not redundantly repeated in the definition.
+
+Hindi: अगर function declaration और definition अलग हैं, तो default value को generally उस declaration में देना चाहिए जो caller को दिखाई देती है और definition में दोबारा नहीं देना चाहिए।
+
+4. Default Parameter vs Function Overloading
+
+A. Default Parameter
+
+English:
+A default parameter allows a function parameter to have a predefined value when the caller does not provide an argument.
+
+Hindi:
+Default parameter में function के parameter को एक predefined value दी जाती है, जो argument न देने पर automatically use होती है।
+
+Syntax
+return_type function_name(parameter = default_value);
+
+Example
+#include <iostream>
+using namespace std;
+
+void display(int age = 20)
+{
+    cout << "Age = " << age << endl;
+}
+
+int main()
+{
+    display();
+    display(25);
+    return 0;
+}
+
+Output:
+
+Age = 20
+Age = 25
+
+5. Function Overloading
+
+English:
+Function overloading is a feature of C++ that allows multiple functions to have the same name but different parameter lists.
+
+Hindi:
+Function Overloading C++ का feature है जिसमें एक ही नाम के multiple functions बनाए जाते हैं, लेकिन उनके parameter list अलग होते हैं।
+
+Syntax
+void show(int a);
+void show(int a, int b);
+Example
+
+#include <iostream>
+using namespace std;
+void show(int a)
+{
+    cout << "One parameter: " << a << endl;
+}
+
+void show(int a, int b)
+{
+    cout << "Two parameters: " << a + b << endl;
+}
+
+int main()
+{
+    show(10);
+    show(10, 20);
+
+
+    return 0;
+}
+
+One parameter: 10
+Two parameters: 30
+
+6. Default Parameter vs Function Overloading — Difference
+| Basis                   | Default Parameter                         | Function Overloading                                      |
+| ----------------------- | ----------------------------------------- | --------------------------------------------------------- |
+| **Meaning**             | Gives a predefined value to a parameter   | Creates multiple functions with the same name             |
+| **Number of Functions** | Usually one function                      | Two or more functions                                     |
+| **Parameter Value**     | Uses default value if argument is omitted | Selects a matching overloaded function                    |
+| **Main Purpose**        | Provide optional arguments                | Perform different operations using the same function name |
+| **Syntax**              | `void show(int x = 10);`                  | `void show(int x);` and `void show(int x, int y);`        |
+| **Code**                | Usually less code                         | Requires multiple function definitions                    |
+| **Flexibility**         | Allows optional arguments                 | Allows different parameter lists                          |
+| **Ambiguity**           | Can cause ambiguity with overloads        | Can cause ambiguity when signatures overlap               |
+| **Example Call**        | `show()` or `show(10)`                    | `show(10)` or `show(10,20)`                               |
+
+⭐ Exam Difference
+
+Default parameter provides an optional value to a parameter, whereas function overloading allows multiple functions with the same name but different parameter lists.
+
+7. Default Parameter vs Default Constructor
+
+यह दोनों terms अलग हैं और exam में अक्सर confuse किए जाते हैं।
+
+Default Parameter
+Definition
+
+English:
+A default parameter is a function parameter that has a predefined value used when the caller does not provide an argument.
+
+Hindi:
+Default parameter function के parameter की predefined value होती है, जो argument न देने पर automatically use होती है।
+
+Syntax
+void show(int age = 20);
+
+यहाँ:
+
+age → Parameter
+20  → Default Value
+
+8. Default Constructor
+
+English:
+A default constructor is a constructor that can be called without arguments. A user-defined default constructor typically has no parameters.
+
+Hindi:
+Default constructor ऐसा constructor होता है जिसे बिना arguments के call किया जा सकता है। User-defined default constructor में सामान्यतः कोई parameter नहीं होता।
+
+Syntax
+class Student
+{
+public:
+    Student()
+    {
+        // initialization
+    }
+};
+Object Creation
+Student s1;
+
+Object create होते ही:
+
+Student()
+
+automatically call होता है।
+
+9. Default Parameter vs Default Constructor — Professional Table
+| **Basis**        | **Default Parameter**                               | **Default Constructor**                                          |
+| ---------------- | --------------------------------------------------- | ---------------------------------------------------------------- |
+| **Definition**   | A predefined value assigned to a function parameter | A constructor that can be called without arguments               |
+| **Used In**      | Functions and constructors                          | Classes                                                          |
+| **Purpose**      | Provides an optional/default argument               | Initializes an object when no constructor arguments are supplied |
+| **Syntax**       | `void show(int x = 10);`                            | `Student();`                                                     |
+| **Related To**   | Function parameter                                  | Object creation                                                  |
+| **Value**        | Has a predefined value                              | Does not necessarily mean a parameter has a predefined value     |
+| **Parameters**   | Parameter has a default value                       | User-defined default constructor has no parameters               |
+| **Calling**      | `show()` uses the default value                     | `Student s1;` calls the default constructor                      |
+| **Example**      | `int age = 20`                                      | `Student()`                                                      |
+| **Main Concept** | Optional argument                                  | Object initialization                                            |
+
+10. Very Important Example — Both Together
+
+एक program में default parameter और default constructor को समझें:
+
+#include <iostream>
+using namespace std;
+class Student
+{
+public:
+    // Default constructor
+    Student()
+    {
+        cout << "Default Constructor Called" << endl;
+    }
+
+    // Function with default parameter
+    void display(int age = 20)
+    {
+        cout << "Age = " << age << endl;
+    }
+};
+
+int main()
+{
+    Student s1;
+    s1.display();
+    s1.display(25);
+    return 0;
+}
+Output
+Default Constructor Called
+Age = 20
+Age = 25
+

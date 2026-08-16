@@ -4,14 +4,6 @@ A constructor is a special member function of a class that is automatically call
 
 Constructor class का एक special member function होता है, जो object create होते ही automatically call हो जाता है। इसका मुख्य काम object के data members को initial value देना (initialize करना) होता है।
 
-Important Points
-Constructor का नाम class के नाम के same होता है।
-इसका कोई return type नहीं होता, void भी नहीं।
-Object बनते ही automatically call होता है।
-Constructor का मुख्य काम initialization है।
-एक class में multiple constructors हो सकते हैं।
-Constructor overloading possible है।
-
 2. Types of Constructor
 
 Default Constructor
@@ -25,7 +17,7 @@ A default constructor is a constructor that takes no arguments.
 
 Default Constructor वह constructor होता है जो कोई argument/parameter नहीं लेता।
 
-/*#include <iostream>
+#include <iostream>
 using namespace std;
 
 class Student
@@ -53,7 +45,7 @@ int main()
 
     return 0;
 } 
-*/
+
 
 4. Parameterized Constructor
 
@@ -87,7 +79,7 @@ public:
 
 int main()
 {
-    Student s1("Adil", 22);
+    Student s1("Adil", 22);//pare Student s1("Adil", 22)
 
     s1.display();
 
@@ -100,7 +92,6 @@ A parameterized constructor can be used to create multiple objects with differen
 
 
 Parameterized Constructor की मदद से एक ही class के multiple objects बनाए जा सकते हैं और प्रत्येक object को अलग-अलग values दी जा सकती हैं।
-
 #include <iostream>
 using namespace std;
 
@@ -127,7 +118,7 @@ public:
 int main()
 {
     Student s1("Adil", 22);
-    Student s2("Rahul", 20);
+    Student s2(20);
     Student s3("Aman", 21);
 
     s1.display();
@@ -138,8 +129,7 @@ int main()
 }
 
 
-6. Copy Constructor
-
+6. Copy Constructor--:
 A copy constructor is a special constructor that creates a new object by copying the values of an existing object of the same class.
 
 Copy Constructor ऐसा constructor होता है जो किसी existing object की values को copy करके एक नया object create करता है।
@@ -201,7 +191,7 @@ int main()
     s2.display();
 
     return 0;
-}
+} send
 */
 
 7. Constructor Overloading
@@ -210,29 +200,25 @@ Constructor overloading means having more than one constructor in the same class
 
 एक ही class में एक से अधिक constructors रखना, जिनके parameters अलग-अलग हों, Constructor Overloading कहलाता है।
 
-/* #include <iostream>
+#include <iostream>
 using namespace std;
-
 class Student
 {
 public:
     string name;
     int age;
-
     // Default Constructor
     Student()
     {
         name = "Unknown";
         age = 0;
     }
-
     // Parameterized Constructor
     Student(string n, int a)
     {
         name = n;
         age = a;
     }
-
     void display()
     {
         cout << "Name = " << name << endl;
@@ -240,30 +226,27 @@ public:
         cout << endl;
     }
 };
-
 int main()
 {
     Student s1;
     Student s2("Adil", 22);
-
     s1.display();
     s2.display();
-
     return 0;
 }
-*/
 
-8. Constructor Using Initialization List
+
+8. Constructor Using Initialization List--
 
 A constructor initialization list is a special syntax used to initialize data members of a class before the constructor body is executed.
 
 Initialization List constructor की एक special syntax है, जिसका उपयोग class के data members को constructor body execute होने से पहले initialize करने के लिए किया जाता है।
+syntax:
 
-// syntax:
-// ClassName(parameters) : dataMember1(value1), dataMember2(value2)
-// {
-//     // constructor body
-// }
+ClassName(parameters) : dataMember1(value1), dataMember2(value2)
+{
+    // constructor body
+}
 
 #include <iostream>
 using namespace std;
@@ -276,6 +259,7 @@ public:
 
     Student(string n, int a) : name(n), age(a)
     {
+
     }
 
     void display()
