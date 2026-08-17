@@ -691,18 +691,31 @@ int main()
 // Age = 20
 // Age = 25
 
+<<<<<<< HEAD
 
 // Object Types
 
 1. Local / Automatic Object
 Definition
+=======
+Types of object---:
+
+1. Local / Automatic Object
+
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 English:
 A local object is an object declared inside a function or block. Its lifetime is limited to that scope. It is automatically destroyed when the scope ends.
 Hindi:
 Local Object वह object है जो किसी function या block के अंदर create किया जाता है। इसका lifetime उसी scope तक रहता है और scope समाप्त होने पर यह automatically destroy हो जाता है।
+<<<<<<< HEAD
 
 Syntax
 ClassName objectName;
+=======
+Syntax
+ClassName objectName
+;
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 Complete Example
 #include <iostream>
 using namespace std;
@@ -711,7 +724,10 @@ class Student
 {
 public:
     string name;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
     void display()
     {
         cout << "Name: " << name << endl;
@@ -721,16 +737,23 @@ public:
 void showStudent()
 {
     Student s1;       // Local / Automatic Object
+<<<<<<< HEAD
 
     s1.name = "Adil";
 
+=======
+    s1.name = "Adil";
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
     s1.display();
 }
 
 int main()
 {
     showStudent();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
     return 0;
 }
 Output
@@ -738,14 +761,20 @@ Name: Adil
 Important Point
 Student s1;
 showStudent() के अंदर है, इसलिए s1 एक local/automatic object है।
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 2. Global Object
 Definition
 English:
 A global object is an object declared outside all functions. It has program-level scope according to its declaration and normally remains alive until program termination.
 Hindi:
 Global Object वह object है जो सभी functions के बाहर declare किया जाता है। इसका scope program-level होता है और सामान्यतः इसका lifetime program के termination तक रहता है।
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 Syntax
 ClassName objectName;
 
@@ -783,14 +812,20 @@ Name: Adil
 Important Point
 Student s1;
 main() के बाहर है, इसलिए यह global object है।
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 3. Static Object
 Definition
 English:
 A static object is an object declared with the static keyword. It has static storage duration and remains alive until the program terminates.
 Hindi:
 Static Object वह object है जिसे static keyword के साथ declare किया जाता है। इसका lifetime सामान्यतः पूरे program के execution तक रहता है।
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 Syntax
 static ClassName objectName;
 Complete Example
@@ -839,14 +874,20 @@ Important
 First call  → Object created → count = 1
 Second call → Same object    → count = 2
 Third call  → Same object    → count = 3
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 4. Dynamic Object
 Definition
 English:
 A dynamic object is an object created at runtime using dynamic memory allocation. In traditional C++, the new operator is used to create the object and delete is used to release it.
 Hindi:
 Dynamic Object वह object है जो runtime पर dynamic memory में create होता है। Traditional C++ में object बनाने के लिए new और memory release करने के लिए delete use किया जाता है।
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 Syntax
 ClassName *pointerName = new ClassName;
 Memory release:
@@ -891,14 +932,20 @@ new Student → Runtime पर object creation
 और:
 delete s1;
 → dynamically allocated object की memory release करता है।
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 5. Constant Object
 Definition
 English:
 A constant object is an object declared using the const keyword. Its non-mutable data cannot be modified after initialization, and it can normally call only const member functions.
 Hindi:
 Constant Object वह object है जिसे const keyword के साथ declare किया जाता है। इसके non-mutable data को initialization के बाद change नहीं किया जा सकता और यह normally केवल const member functions को call कर सकता है।
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 Syntax
 const ClassName objectName;
 Complete Example
@@ -935,7 +982,10 @@ int main()
 Output
 Name: Adil
 Age: 22
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 Important Point
 Constant object:
 const Student s1("Adil", 22);
@@ -947,18 +997,27 @@ void display()
 {
 }
 ऐसा non-const member function constant object से normally call नहीं किया जा सकता।
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 6. Array of Objects
 Definition
 English:
 An array of objects is an array whose elements are objects of the same class. It is used to store multiple objects under a single array name.
 Hindi:
 Array of Objects ऐसा array है जिसके प्रत्येक element में एक ही class का object होता है। इसका उपयोग एक ही नाम के अंतर्गत multiple objects store करने के लिए किया जाता है।
+<<<<<<< HEAD
 
 Syntax
 ClassName objectName[size];
 Complete Example
 
+=======
+Syntax
+ClassName objectName[size];
+Complete Example
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 #include <iostream>
 using namespace std;
 
@@ -1011,18 +1070,27 @@ creates:
 students[0] → Object 1
 students[1] → Object 2
 students[2] → Object 3
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 7. Object Using Constructor
 Definition
 English:
 An object can be created using a constructor. The constructor is automatically called when the object is created and is used to initialize the object.
 Hindi:
 Constructor की सहायता से object create किया जा सकता है। Object create होते ही constructor automatically call होता है और object को initialize करता है।
+<<<<<<< HEAD
 
 Syntax
 ClassName objectName(arguments);
 Complete Example
 
+=======
+Syntax
+ClassName objectName(arguments);
+Complete Example
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 #include <iostream>
 using namespace std;
 
@@ -1053,7 +1121,10 @@ int main()
 
     return 0;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 Output
 Name: Adil
 Age: 22
@@ -1061,14 +1132,20 @@ Explanation
 Student s1("Adil", 22);
 Object create हुआ और constructor automatically call हुआ:
 Student(string n, int a)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 8. Object Using Copy Constructor
 Definition
 English:
 A copy constructor object is a new object initialized using an existing object of the same class. The copy constructor copies the state of the existing object into the new object.
 Hindi:
 Copy Constructor की सहायता से existing object की values से एक नया object initialize किया जाता है।
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 Syntax
 ClassName object2 = object1;
 Complete Example
@@ -1126,18 +1203,27 @@ Age: 22
 Copied Object:
 Name: Adil
 Age: 22
+<<<<<<< HEAD
 
 Explanation
 Student s2 = s1;
  s1 से s2 की initialization हुई।
 
+=======
+Explanation
+Student s2 = s1;
+ s1 से s2 की initialization हुई।
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 9. Object Using Move Constructor
 Definition
 English:
 A move constructor initializes a new object by transferring resources from a temporary or expiring object instead of copying them.
 Hindi:
 Move Constructor temporary या expiring object के resources को copy करने के बजाय नए object में transfer करके initialize करता है।
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 यह modern C++ का advanced topic है।
 Syntax
 ClassName(ClassName&& object);
@@ -1186,6 +1272,7 @@ Important Point
 Student s2 = move(s1);
 यहाँ s1 के resource को s2 में move किया जाता है।
 10. Comparison of Main Object Types
+<<<<<<< HEAD
 | Object Type             | English Definition                             | Hindi Meaning                        | Main Keyword/Syntax      |
 | ----------------------- | ---------------------------------------------- | ------------------------------------ | ------------------------ |
 | **Local / Automatic**   | Object created inside a function/block         | Function/block के अंदर object        | `Student s1;`            |
@@ -1198,6 +1285,75 @@ Student s2 = move(s1);
 | **Copy-created**        | Object initialized from another object         | Existing object से copy object       | `Student s2 = s1;`       |
 | **Move-created**        | Object initialized by transferring resources   | Resources transfer करके object       | `Student s2 = move(s1);` |
 
+=======
+Object Type
+English Definition
+Hindi Meaning
+Main Keyword/Syntax
+Local / Automatic
+Object created inside a function/block
+Function/block के अंदर object
+Student s1;
+Global
+Object declared outside all functions
+सभी functions के बाहर object
+Student s1;
+Static
+Object with static storage duration
+static keyword वाला object
+static Student s1;
+Dynamic
+Object created at runtime using dynamic memory
+Runtime पर dynamic memory में object
+new
+Constant
+Object declared with const
+Constant object
+const Student s1;
+Array of Objects
+Array containing objects of the same class
+एक array में multiple objects
+Student s[5];
+Constructor-created
+Object initialized through constructor
+Constructor द्वारा initialize object
+Student s1(...);
+Copy-created
+Object initialized from another object
+Existing object से copy object
+Student s2 = s1;
+Move-created
+Object initialized by transferring resources
+Resources transfer करके object
+Student s2 = move(s1);
+⭐ BCA Exam के लिए सबसे Important Classification
+अगर exam में सिर्फ "Types of Objects in C++" पूछा जाए, तो इस order में लिख सकते हैं:
+1. Local / Automatic Object
+Object created inside a function or block.
+2. Global Object
+Object declared outside all functions.
+3. Static Object
+Object declared with static and having static storage duration.
+4. Dynamic Object
+Object created dynamically at runtime using new.
+5. Constant Object
+Object declared with const whose non-mutable state cannot be modified.
+6. Array of Objects
+An array containing multiple objects of the same class.
+7. Copy-Constructed Object
+A new object initialized from an existing object.
+8. Move-Constructed Object
+A new object initialized by transferring resources from another object.
+⭐ Easy Memory Trick
+LOCAL       → Function के अंदर
+GLOBAL      → Functions के बाहर
+STATIC      → static keyword
+DYNAMIC     → new / delete
+CONSTANT    → const
+ARRAY       → Multiple objects
+COPY        → Existing object से copy
+MOVE        → Resource transfer
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
 Object Creation Flow
               CLASS
                 ↓
@@ -1209,4 +1365,8 @@ Object Creation Flow
  Static             Copy Constructor
  Dynamic            Move Constructor
  Constant
+<<<<<<< HEAD
  Array
+=======
+ Array
+>>>>>>> 26033df08d688df2f871c04868506ff0a42641f7
