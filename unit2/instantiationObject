@@ -1,7 +1,6 @@
 /*Instantiation of Objects in C++
 -------------------------------------------------------------
-1. Definition of Instantiation of Objects
-
+1. Definition of Instantiation of Objects-->
 Instantiation of an object is the process of creating an actual object (instance) of a class in memory. A class is only a blueprint or design, while an object is its real instance that can store data and use the functions defined by the class.
 
 Hindi:
@@ -98,7 +97,7 @@ Student s3;
 Object instantiation using a parameterized constructor is the process of creating an object by passing specific arguments to a constructor so that the object can be initialized with the given values.The supplied arguments are passed to the parameterized constructor during object creation.
 
 Example:
-Student s1("Adil", 22);
+Student s1("APCS", 22);
 
 4. Dynamic Object Instantiation--:
 
@@ -120,6 +119,53 @@ Copy constructor के द्वारा object instantiation का अर्
 Example:
 Student s1;
 Student s2 = s1;
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+    public:
+    int roll;
+    string name;
+
+    // Parameterized Constructor
+    Student()
+    {
+        roll = 101;
+        name = "APCS";
+    }
+
+    // Copy Constructor
+    Student(const Student &obj)
+    {
+        roll = obj.roll;
+        name = obj.name;
+    }
+
+    void display()
+    {
+        cout << "Roll No: " << roll << endl;
+        cout << "Name: " << name << endl;
+    }
+};
+
+int main()
+{
+    // Object 1: Parameterized constructor
+    Student s1;
+
+    // Object 2: Copy constructor
+    Student s2(s1);
+
+    cout << "First Object:" << endl;
+    s1.display();
+
+    cout << "\nCopied Object:" << endl;
+    s2.display();
+
+    return 0;
+}
 
 Here, s2 is created by copying s1.
 
