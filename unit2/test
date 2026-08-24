@@ -1,0 +1,489 @@
+Q1. What is Object-Oriented Programming (OOP)?
+
+Answer 
+
+English:
+Object-Oriented Programming (OOP) is a programming approach in which a program is designed using objects and classes. An object contains data and functions that operate on that data.
+
+Main Features of OOP:
+
+Class – Objects  blueprint.
+Object – Class का real instance.
+Encapsulation – Data और functions को एक unit में bind करना.
+Abstraction – केवल आवश्यक information दिखाना.
+Inheritance – Existing class से नई class बनाना.
+Polymorphism – एक interface के कई forms.
+Information Hiding – Data को unauthorized access से protect करना.
+Example:
+class Student
+{
+    int marks;
+
+public:
+
+    void display()
+    {
+        cout << marks;
+    }
+};
+यहाँ Student एक class है।
+Q2. What is a Class and Object?
+Class और Object क्या होते हैं?
+Answer / उत्तर:
+Class
+English:
+A class is a user-defined data type that acts as a blueprint for creating objects.
+Hindi:
+Class एक user-defined data type है जो objects बनाने के लिए blueprint/template का काम करती है।
+Object
+English:
+An object is an instance of a class. It represents a real-world entity.
+Hindi:
+Object किसी class का instance होता है। यह किसी real-world entity को represent करता है।
+Example:
+class Student
+{
+public:
+
+    string name;
+
+    void display()
+    {
+        cout << name;
+    }
+};
+
+int main()
+{
+    Student s1;
+
+    s1.name = "Adil";
+
+    s1.display();
+
+    return 0;
+}
+यहाँ:
+Student → Class
+s1 → Object
+name → Data member
+display() → Member function
+Q3. What is Encapsulation?
+Encapsulation क्या है?
+Answer / उत्तर:
+English:
+Encapsulation is the process of wrapping data and functions together into a single unit called a class.
+Hindi:
+Encapsulation वह process है जिसमें data और functions को एक ही unit यानी class के अंदर bind/wrap किया जाता है।
+Example:
+class Student
+{
+private:
+
+    int marks;
+
+public:
+
+    void setMarks(int m)
+    {
+        marks = m;
+    }
+
+    int getMarks()
+    {
+        return marks;
+    }
+};
+यहाँ marks को private रखा गया है और उसे access करने के लिए setMarks() और getMarks() functions का use किया गया है।
+Advantages:
+Data security
+Data hiding
+Controlled access
+Code organization
+Hindi: Encapsulation data को सुरक्षित रखता है और data पर controlled access प्रदान करता है।
+Q4. What is Information Hiding?
+Information Hiding क्या है?
+Answer / उत्तर:
+English:
+Information hiding is the technique of hiding internal implementation details of a class from outside users.
+Hindi:
+Information hiding वह technique है जिसमें class की internal details को बाहर से direct access करने से hide किया जाता है।
+इसके लिए C++ में मुख्य रूप से:
+private
+protected
+access specifiers का उपयोग किया जाता है।
+Example:
+class Bank
+{
+private:
+
+    int balance;
+
+public:
+
+    void setBalance(int b)
+    {
+        balance = b;
+    }
+};
+यहाँ balance को बाहर से directly access नहीं किया जा सकता।
+Encapsulation vs Information Hiding
+Encapsulation
+Information Hiding
+Data + functions को एक unit में bind करता है
+Internal details को hide करता है
+Class के concept से related है
+Access restriction से related है
+class इसका major example है
+private/protected इसका major example है
+Q5. What is Abstraction?
+Abstraction क्या है?
+Answer / उत्तर:
+English:
+Abstraction means showing only essential information and hiding unnecessary implementation details.
+Hindi:
+Abstraction का अर्थ है केवल आवश्यक information दिखाना और unnecessary internal details को छिपाना।
+Real-life Example:
+जब हम ATM से पैसे निकालते हैं, तो हमें अंदर ATM machine किस तरह database से communicate करती है यह नहीं पता होता। हमें केवल आवश्यक options दिखाई देते हैं।
+C++ Example:
+class Car
+{
+public:
+
+    void start()
+    {
+        cout << "Car Started";
+    }
+};
+User को केवल start() function दिखाई देता है। अंदर engine कैसे start होता है, इसकी implementation hidden हो सकती है।
+Abstraction का फायदा:
+Complexity कम होती है।
+Program easy to use होता है।
+Security improve होती है।
+Implementation details hide रहती हैं।
+Q6. What are Inheritance and Polymorphism?
+Inheritance और Polymorphism क्या हैं?
+Inheritance
+English:
+Inheritance is a mechanism in which a new class acquires the properties and functions of an existing class.
+Hindi:
+Inheritance वह mechanism है जिसमें एक नई class existing class की properties और functions को acquire करती है।
+Example:
+class Animal
+{
+public:
+
+    void eat()
+    {
+        cout << "Eating";
+    }
+};
+
+class Dog : public Animal
+{
+public:
+
+    void bark()
+    {
+        cout << "Barking";
+    }
+};
+यहाँ Dog ने Animal से eat() function inherit किया।
+Polymorphism
+English:
+Polymorphism means one name or interface having multiple forms.
+Hindi:
+Polymorphism का अर्थ है एक नाम/interface का अलग-अलग forms में काम करना।
+Example:
+void display(int x)
+{
+}
+
+void display(string x)
+{
+}
+एक ही display() function name अलग-अलग parameter के साथ काम कर रहा है।
+
+Q7. What is a Constructor?
+Constructor क्या होता है?
+Answer / उत्तर:
+English:
+A constructor is a special member function of a class that is automatically called when an object is created.
+Hindi:
+Constructor class का एक special member function है जो object create होते ही automatically call होता है।
+Characteristics:
+Constructor का नाम class के नाम के समान होता है।
+इसका कोई return type नहीं होता।
+यह automatically call होता है।
+इसका use object को initialize करने के लिए किया जाता है।
+Constructor overloaded हो सकता है।
+Types:
+Default Constructor
+Parameterized Constructor
+Copy Constructor
+Default Constructor:
+class Student
+{
+public:
+
+    Student()
+    {
+        cout << "Constructor Called";
+    }
+};
+Parameterized Constructor:
+class Student
+{
+public:
+
+    Student(int marks)
+    {
+        cout << marks;
+    }
+};
+Q8. What is a Destructor?
+Destructor क्या होता है?
+Answer / उत्तर:
+English:
+A destructor is a special member function that is automatically called when an object is destroyed. It is generally used for cleanup and releasing resources.
+Hindi:
+Destructor class का special member function है जो object destroy होने पर automatically call होता है। इसका use cleanup और resources release करने के लिए किया जाता है।
+Syntax:
+class Student
+{
+public:
+
+    ~Student()
+    {
+        cout << "Destructor Called";
+    }
+};
+Characteristics:
+Destructor का नाम class के नाम के आगे ~ लगाकर बनता है।
+इसका return type नहीं होता।
+यह automatically call होता है।
+Destructor parameters नहीं लेता।
+एक class में normally एक destructor होता है।
+Constructor vs Destructor
+Constructor
+Destructor
+Object creation पर call
+Object destruction पर call
+Initialization के लिए
+Cleanup के लिए
+ClassName()
+~ClassName()
+Parameters हो सकते हैं
+Parameters नहीं होते
+Q9. What is Object Instantiation?
+Object Instantiation क्या है?
+Answer / उत्तर:
+English:
+Object instantiation is the process of creating an object from a class.
+Hindi:
+Object instantiation का अर्थ है किसी class से object create करने की process।
+Syntax:
+ClassName objectName;
+Example:
+class Student
+{
+public:
+
+    string name;
+};
+
+int main()
+{
+    Student s1;
+
+    s1.name = "Adil";
+
+    cout << s1.name;
+
+    return 0;
+}
+यहाँ:
+Student s1;
+एक object instantiation है।
+Q10. What is Dynamic Memory Allocation?
+Dynamic Memory Allocation क्या है?
+Answer / उत्तर:
+English:
+Dynamic memory allocation means allocating memory at runtime according to the program's requirements.
+Hindi:
+Dynamic Memory Allocation का अर्थ है program चलने के समय यानी runtime पर memory allocate करना।
+C++ में इसके लिए मुख्यतः:
+new
+delete
+का use होता है।
+new
+new operator dynamically memory allocate करता है।
+int *p = new int;
+delete
+delete dynamically allocated memory को release करता है।
+delete p;
+Example:
+int *p = new int;
+
+*p = 50;
+
+cout << *p;
+
+delete p;
+फायदा:
+Runtime पर memory allocation.
+जरूरत के अनुसार memory लेना.
+Dynamic objects बनाने में useful.
+Q11. Programming Question – Class and Object
+Question / प्रश्न:
+English:
+Write a C++ program to create a Student class with name, rollNo, and marks data members. Create an object and display student information.
+Hindi:
+C++ में एक Student class बनाइए जिसमें name, rollNo और marks data members हों। एक object बनाकर student की information display कीजिए।
+Solution / समाधान:
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+
+    string name;
+    int rollNo;
+    int marks;
+
+    void display()
+    {
+        cout << "Name: " << name << endl;
+        cout << "Roll No: " << rollNo << endl;
+        cout << "Marks: " << marks << endl;
+    }
+};
+
+int main()
+{
+    Student s1;
+
+    s1.name = "Adil";
+    s1.rollNo = 101;
+    s1.marks = 85;
+
+    s1.display();
+
+    return 0;
+}
+Output:
+Name: Adil
+Roll No: 101
+Marks: 85
+Explanation / समझिए:
+Student s1;
+Student class का object s1 बनाया।
+s1.name = "Adil";
+Object के name में value store की।
+s1.display();
+Member function call किया।
+Q12. Programming Question – Parameterized Constructor
+Question / प्रश्न:
+English:
+Write a C++ program to create a Student class with name and marks. Use a parameterized constructor to initialize the values and display them.
+Hindi:
+C++ में Student class बनाइए जिसमें name और marks हों। Parameterized constructor का use करके values initialize कीजिए और उन्हें display कीजिए।
+Solution / समाधान:
+#include <iostream>
+using namespace std;
+
+class Student
+{
+private:
+
+    string name;
+    int marks;
+
+public:
+
+    Student(string n, int m)
+    {
+        name = n;
+        marks = m;
+    }
+
+    void display()
+    {
+        cout << "Name: " << name << endl;
+        cout << "Marks: " << marks << endl;
+    }
+};
+
+int main()
+{
+    Student s1("Adil", 85);
+
+    s1.display();
+
+    return 0;
+}
+Output:
+Name: Adil
+Marks: 85
+Important:
+Student s1("Adil", 85);
+यहाँ object create होते समय:
+"Adil" → n
+85 → m
+में जाता है।
+फिर:
+Student(string n, int m)
+constructor इन values को data members में store करता है।
+Q13. Programming Question – Dynamic Object Instantiation
+Question / प्रश्न:
+English:
+Write a C++ program to create a Student object dynamically using the new operator. Initialize and display student information and release the memory using delete.
+Hindi:
+C++ में new operator का use करके Student का object dynamically create कीजिए। Student की information initialize और display कीजिए तथा delete operator से memory release कीजिए।
+Solution / समाधान:
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+
+    string name;
+    int marks;
+
+    void display()
+    {
+        cout << "Name: " << name << endl;
+        cout << "Marks: " << marks << endl;
+    }
+};
+
+int main()
+{
+    Student *s1 = new Student;
+
+    s1->name = "Adil";
+    s1->marks = 90;
+
+    s1->display();
+
+    delete s1;
+
+    return 0;
+}
+Output:
+Name: Adil
+Marks: 90
+सबसे important concept:
+Student *s1 = new Student;
+new Student runtime पर memory में एक नया Student object बनाता है।
+s1 उस object का address store करता है।
+इसलिए members access करने के लिए:
+s1->name
+s1->marks
+s1->display()
+का use करते हैं।
+अंत में:
+delete s1;
+allocated memory को release करता है।

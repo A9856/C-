@@ -1,0 +1,875 @@
+C++ Garbage Collection  
+1. What is Garbage Collection?
+
+Garbage Collection (GC) is an automatic memory-management technique in which a runtime system identifies memory that is no longer being used by a program and automatically reclaims that memory.
+Standard C++ does not have a built-in automatic garbage collector like Java or C#. C++ mainly provides deterministic resource management through mechanisms such as destructors, delete, and RAII.
+
+Note->C++ is not a garbage-collected language by default.
+C++ gives programmers greater direct control over memory management.
+
+Garbage Collection एक automatic memory-management technique है, जिसमें system/program runtime ऐसी memory को identify करता है जो अब program के लिए उपयोगी नहीं है और उस memory को automatically वापस free कर देता है।
+Standard C++ में Java या C# की तरह built-in automatic Garbage Collector नहीं होता। C++ में memory और resources को manage करने के लिए delete, destructors और विशेष रूप से RAII का उपयोग किया जाता है।C++ programmer को memory management पर ज्यादा direct control देता है।
+
+Object/Memory Created
+        ↓
+Program Uses It
+        ↓
+Object No Longer Needed
+        ↓
+Garbage Collector Identifies It
+        ↓
+Memory Reclaimed
+
+2. What is Garbage?
+
+Garbage is memory or an object that is no longer reachable or useful to the program but still occupies memory.
+
+Garbage ऐसी memory/object को कहा जाता है जो program के लिए अब useful नहीं है, लेकिन memory में space occupy कर रहा है।
+
+Example Concept
+Memory
+┌───────────────┐
+│ Object A      │ ← In use
+├───────────────┤
+│ Object B      │ ← No longer needed // Garbage  
+├───────────────┤
+│ Object C      │ ← In use
+└───────────────┘
+
+Example
+
+Student *s = new Student;
+
+// Use object
+
+delete s; // Programmer Explicity object  dynamically allocated memory release 
+
+In C++, the programmer can decide when to release a dynamically allocated resource. This provides precise control over resource management.
+
+C++ में programmer खुद decide कर सकता है कि dynamically allocated resource को कब release करना है। इससे resource management पर precise control मिलता है। 
+
+
+5. Dynamic Memory and Garbage Collection
+
+Dynamic memory is the memory that is allocated during the execution (runtime) of a program according to the program'/'s requirement. In C++, dynamic memory is generally allocated from the heap using new and released using delete.
+
+int *p = new int; //heap memory 
+*p = 50; // address of 50 value point p
+
+delete p; //release memory
+
+int *p = new int(100);
+
+p = nullptr; // p not store valid variable address present time p null blank but use memory.
+
+6. Memory Leak
+
+A memory leak occurs when dynamically allocated memory is no longer needed but is not released, causing the program to gradually lose available memory.
+
+Hindi
+
+Memory Leak तब होता है जब dynamically allocated memory की जरूरत समाप्त हो जाती है लेकिन उसे release नहीं किया जाता। इससे वह memory program के लिए unavailable हो जाती है और समय के साथ memory consumption बढ़ सकता है।
+
+Example
+void test()
+{
+    int *p = new int[100];
+
+
+    // No delete delete[] ptr;
+}
+
+जब test() खत्म हो गया:
+
+p pointer → scope ended
+        ↓
+Allocated memory still exists
+        ↓
+No pointer can properly release it
+        ↓
+Memory Leak
+
+Correct
+void test()
+{
+    int *p = new int(100);
+
+
+    delete p;
+}
+
+note->how to memory leak-->
+
+Dynamically allocated memory को deallocate नहीं किया जाता।
+Memory program के लिए allocated रहती है, लेकिन program उसे दोबारा use नहीं कर पाता।
+इससे available memory धीरे-धीरे कम होती जाती है।
+
+practicle-
+#include <iostream>
+using namespace std;
+
+void func() {
+    // Allocate memory
+    int* ptr = new int[10];
+
+    //delete[]ptr;
+    // Memory is never released
+    return;
+}
+
+int main() {
+    func();
+    return 0;
+}
+
+Causes of Memory Leaks----:
+
+1: Forgetting to release memory-
+Programmer uses new but forgets to use delete.
+
+Programmer new से memory लेता है लेकिन delete करना भूल जाता है।
+
+int* ptr = new int;
+
+// delete ptr;  // forgotten
+
+2: Losing the pointer
+If the pointer holding the address of allocated memory is lost before delete, the memory cannot be properly released.
+
+अगर allocated memory का address रखने वाला pointer खो जाए, तो उस memory को release करना मुश्किल/असंभव हो जाता है।
+
+Example:
+
+int* ptr = new int(10);
+
+ptr = nullptr;
+
+यहाँ allocated memory का address खो गया।
+
+delete ptr;
+
+से release नहीं किया जा सकता, क्योंकि ptr अब nullptr है।
+
+3: Returning before releasing memory
+A function may allocate memory and return before releasing it.
+
+Function memory allocate करने के बाद उसे release किए बिना return कर दे, तो memory leak हो सकता है।
+
+void func() {
+    int* ptr = new int[10];
+
+    return;
+}
+
+not use  delete[] ptr
+
+4: Overwriting a pointer
+If a pointer containing allocated memory is assigned another address before deleting the old memory, the old memory may be leaked.
+
+अगर pointer में पहले allocated memory का address है और उसे delete किए बिना कोई दूसरा address दे दिया जाए, तो पहली memory का address खो सकता है।
+
+Example:
+
+int* ptr = new int(10);
+
+ptr = new int(20);
+
+//first allocate memory can leak
+
+Consequences of Memory Leak--->
+A memory leak may seem like a small problem, but it can become a serious problem in large and long-running programs.
+
+1. Reduced Performance--:
+
+Leaked memory remains occupied, so less memory is available for the program and other applications.
+Leaked memory occupied रहती है, इसलिए program और दूसरी applications के लिए available memory कम हो जाती है।
+
+2. Program Crashes--:
+
+If memory leaks continue for a long time, the program may use too much memory and become unstable or crash.
+अगर लगातार memory leak होती रहे, तो program बहुत ज्यादा memory use कर सकता है और eventually crash हो सकता है।
+
+3. Resource Depletion--:
+
+Memory remains occupied even when the program no longer needs it.
+
+Program को memory की जरूरत खत्म हो जाने के बाद भी memory occupied रहती है।
+इसी को resource depletion यानी available resource का धीरे-धीरे कम होना कह सकते हैं।
+
+4. Greater Impact on Long-Running Programs--:
+
+Memory leaks are especially dangerous in programs that run for a long time, such as servers and background services.
+
+Memory leaks उन programs में ज्यादा dangerous होते हैं जो बहुत लंबे समय तक चलते हैं, जैसे:
+
+Web servers
+Database servers
+Background services
+Operating system services 
+
+अगर server लगातार memory leak करता रहे, तो कुछ समय बाद बहुत ज्यादा memory consume हो सकती है।
+
+8. Preventing Memory Leaks
+Example:
+int* ptr = new int(10);
+
+delete ptr;
+2. Use delete[] with new[]
+
+int* ptr = new int[10];
+
+delete[] ptr;
+
+Remember:
+
+new       → delete
+new[]     → delete[]
+9. Prefer Smart Pointers
+
+Smart pointers automatically manage dynamically allocated memory and help reduce memory leaks.
+
+Smart pointers dynamically allocated memory को automatically manage करने में मदद करते हैं और memory leaks की possibility कम करते हैं।
+
+Example:
+
+#include <memory>
+
+int main() {
+    std::unique_ptr<int> ptr = std::make_unique<int>(10);
+
+    return 0;
+}
+
+//not use manually delete 
+
+10. Constructors and Destructors — RAII
+
+English:
+
+A destructor is not a garbage collector. A destructor is a special C++ member function that runs when an object'/'s lifetime ends and is used for cleanup.
+
+Destructor Garbage Collector नहीं है। Destructor एक special member function है जो object का lifetime समाप्त होने पर cleanup करने के लिए execute होता है।
+
+Example:
+
+class Student
+{
+public:
+    ~Student()
+    {
+        cout << "Destructor Called";
+    }
+};
+
+Important Difference
+Destructor
+   ↓
+Specific object'/'s cleanup
+
+
+Garbage Collector
+   ↓
+Automatically identifies/reclaims
+unreachable memory
+
+Object → resource acquire
+
+Object destroy → resource release 
+
+Example:
+
+class Test {
+public:
+    int* ptr;
+
+    Test() {
+        ptr = new int(10);
+    }
+
+    ~Test() {
+        delete ptr;
+    }
+};
+
+
+11. Assign nullptr after deleting
+
+Example:
+
+int* ptr = new int(10);
+
+delete ptr;
+ptr = nullptr;
+
+After deleting the memory, setting the pointer to nullptr makes it clear that the pointer no longer points to a valid object.
+Memory delete करने के बाद pointer को nullptr करने से यह clear हो जाता है कि pointer अब किसी valid memory/object को point नहीं कर रहा है।
+
+Note: nullptr use memory not delete before delete,according to need use nullptr
+
+12. Avoid Overwriting Pointers-->
+int* ptr = new int(10);//first memory address lost
+ptr = new int(20);
+//correct 
+int* ptr = new int(10);
+delete ptr;
+ptr = new int(20);
+
+
+7. Garbage Collection vs Memory Leak
+
+Image:
+
+
+
+8. How Memory Management Works in C++
+
+Traditional dynamic memory management:
+        new
+         ↓
+Memory Allocated
+         ↓
+      Object
+         ↓
+    Program Uses
+         ↓
+       delete
+         ↓
+Memory Released
+
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int *p = new int(50);
+
+    cout << *p << endl;
+
+    delete p;
+
+    return 0;
+}
+
+output-50
+
+9. new and delete
+new
+English
+
+The new operator dynamically allocates memory and can construct an object.
+
+new operator runtime पर dynamically memory allocate करता है और object को construct कर सकता है।
+
+Example:
+
+int *p = new int;
+
+delete
+The delete operator destroys a dynamically allocated single object and releases its storage.
+
+delete dynamically allocated single object को destroy करता है और उसकी storage release करता है।
+
+Example:
+
+delete p;
+
+
+12. RAII —Important C++ Concept-->
+
+RAII (Resource Acquisition Is Initialization) is a C++ resource-management technique in which a resource is acquired and associated with an object'/'s lifetime, and the resource is automatically released when the object is destroyed.
+
+RAII (Resource Acquisition Is Initialization) C++ की एक important resource-management technique है, जिसमें resource को object के lifetime से associate किया जाता है और object destroy होने पर resource automatically release हो जाता है।
+
+Simple Idea
+
+Object Created
+     ↓
+Resource Acquired
+     ↓
+Object Used
+     ↓
+Object Destroyed
+     ↓
+Resource Automatically Released
+
+RAII C++ में garbage collection की जरूरत को कई situations में कम करता है।
+
+13. Smart Pointers-->
+Smart pointers are C++ objects that automatically manage dynamically allocated memory.
+
+Modern C++ में raw pointers के बजाय smart pointers का use memory management को safer बनाने के लिए किया जाता है।
+
+Main smart pointers:
+
+unique_ptr
+shared_ptr
+weak_ptr
+
+14. unique_ptr
+English
+
+unique_ptr provides exclusive ownership of a dynamically allocated object. When the unique_ptr is destroyed, the managed object is automatically deleted.
+
+Hindi
+
+unique_ptr किसी dynamically allocated object की exclusive ownership रखता है। unique_ptr destroy होने पर managed object automatically delete हो जाता है।
+
+Example
+#include <iostream>
+#include <memory>
+using namespace std;
+
+
+int main()
+{
+    unique_ptr<int> p = make_unique<int>(100);
+
+
+    cout << *p << endl;
+
+
+    return 0;
+}
+
+जब main() समाप्त होगा, p destroy होगा और managed memory automatically release हो जाएगी।
+
+Output
+100
+
+Note -->
+unique_ptr normally copy not possible because ownership 2 same objct not possible.
+but ownership move possible.
+
+std::unique_ptr<int> p2 = std::move(p);
+
+
+15. shared_ptr
+English
+
+shared_ptr allows multiple smart pointers to share ownership of the same dynamically allocated object. The object is destroyed when the last owning shared_ptr is destroyed or reset.
+
+Hindi
+
+shared_ptr में multiple smart pointers एक ही object की shared ownership रख सकते हैं। जब last owning shared_ptr भी destroy/reset हो जाता है, तब object की memory release हो जाती है।
+
+Example :
+#include <memory>
+
+int main() {
+    std::shared_ptr<int> p1 = std::make_shared<int>(10);
+
+    std::shared_ptr<int> p2 = p1;
+
+    return 0;
+}
+
+Example
+#include <iostream>
+#include <memory>
+using namespace std;
+
+
+int main()
+{
+    shared_ptr<int> p1 = make_shared<int>(100);
+    shared_ptr<int> p2 = p1;
+
+
+    cout << *p1 << endl;
+    cout << *p2 << endl;
+
+
+    cout << "Owners: " << p1.use_count() << endl;
+
+
+    return 0;
+}
+
+Output
+100
+100
+Owners: 2
+
+16. weak_ptr
+English
+
+weak_ptr is a non-owning smart pointer used to observe an object managed by shared_ptr without increasing its reference count.
+
+Hindi
+
+weak_ptr किसी shared_ptr द्वारा managed object को observe करता है, लेकिन उसकी ownership नहीं लेता और reference count को increase नहीं करता।
+
+#include <memory>
+
+int main() {
+    std::shared_ptr<int> p1 = std::make_shared<int>(10);
+
+    std::weak_ptr<int> p2 = p1;
+
+    return 0;
+}
+
+Main Purpose
+
+यह विशेष रूप से circular references को avoid करने में useful है।
+
+unique_ptr-->
+
+unique_ptr is a smart pointer that provides exclusive ownership of an object.
+unique_ptr ऐसा smart pointer है जो किसी object की exclusive यानी केवल एक owner वाली ownership प्रदान करता है।
+
+shared_ptr-->
+
+shared_ptr is a smart pointer that allows multiple pointers to share ownership of an object.
+shared_ptr ऐसा smart pointer है जो कई pointers को एक object की ownership share करने देता है।
+
+weak_ptr-->
+
+weak_ptr is a smart pointer that observes an object managed by shared_ptr without owning it.
+weak_ptr ऐसा smart pointer है जो shared_ptr के object को observe करता है लेकिन उसकी ownership नहीं लेता।
+
+RAII → Object lifetime से resource management
+unique_ptr → One owner
+shared_ptr → Multiple owners
+weak_ptr → Observer, no ownership
+
+17. Garbage Collection vs C++ RAII
+
+| Garbage Collection                                           | C++ RAII                                                              |
+| ------------------------------------------------------------ | --------------------------------------------------------------------- |
+| Automatically reclaims unreachable memory                    | Resource is tied to object lifetime                                   |
+| Runtime GC system identifies garbage                         | Destructor automatically performs cleanup                             |
+| Common in Java/C#                                            | Fundamental C++ technique                                             |
+| Exact cleanup time may depend on GC                          | Cleanup is normally deterministic at object lifetime end              |
+| Programmer usually doesn't manually call GC-managed `delete` | C++ uses destructors/smart pointers for automatic resource management |
+
+
+18. Garbage collection vs Destructor -->
+| Garbage Collection                                          | Destructor                                               |
+| ----------------------------------------------------------- | -------------------------------------------------------- |
+| Memory-management mechanism                                 | Special member function                                  |
+| Finds/reclaims garbage or unreachable objects in GC systems | Performs cleanup for a particular object                 |
+| Usually automatic                                           | Called automatically when object lifetime ends           |
+| Not part of standard C++ memory management                  | Built into C++ object lifetime mechanism                 |
+| Can manage many unreachable objects                         | Handles cleanup associated with one object's destruction |
+
+19. Advantages of Garbage Collection
+1. Automatic Memory Management
+
+English: Reduces the need for explicit memory deallocation.
+Hindi: Programmer को manually memory release करने की जरूरत कम होती है।
+
+2. Reduces Certain Memory Leaks
+
+English: Unreachable objects can be automatically reclaimed.
+Hindi: Unreachable objects की memory automatically reclaim हो सकती है।
+
+3. Easier Programming
+
+English: Developers can focus more on application logic rather than manual memory management.
+Hindi: Programmer का focus memory management के बजाय application logic पर ज्यादा रह सकता है।
+
+4. Safer Memory Management
+
+English: It can prevent some errors related to forgotten deallocation.
+Hindi: Memory release भूलने से होने वाली कुछ problems को कम कर सकता है।
+
+20. Disadvantages of Garbage Collection
+1. Runtime Overhead
+
+GC को memory scan और reclaim करने के लिए processing करनी पड़ती है।
+
+2. Less Predictable Cleanup Timing
+
+GC-managed objects का exact cleanup time programmer के direct control में नहीं होता।
+
+3. Additional Memory Usage
+
+GC को tracking और management के लिए additional resources की आवश्यकता हो सकती है।
+
+4. Not Available as Standard Automatic GC in C++
+
+Standard C++ में Java जैसी built-in automatic garbage collection system नहीं है।
+
+21. Does delete Mean Garbage Collection?
+
+No. ❌
+
+delete p;
+
+का मतलब garbage collection नहीं है।
+
+यह programmer द्वारा manually किया गया memory deallocation है।
+
+Difference
+
+delete
+  ↓
+Programmer explicitly releases
+one dynamically allocated object
+
+Garbage Collection
+  ↓
+Runtime automatically identifies
+and reclaims eligible unused objects
+
+22. C++ Memory Management Methods
+
+Traditional C++
+int *p = new int(10);
+
+
+delete p;
+Modern C++
+
+Prefer:
+
+#include <memory>
+
+auto p = std::make_unique<int>(10);
+
+या:
+
+auto p = std::make_shared<int>(10);
+
+Modern C++ में RAII और smart pointers generally raw new/delete से safer approach हैं।
+
+
+23. Important Terms of Exam 
+
+| Term                   | Meaning                                                      |
+| ---------------------- | ------------------------------------------------------------ |
+| **Garbage**            | Memory/object no longer useful or reachable                  |
+| **Garbage Collection** | Automatic reclamation of eligible unused memory              |
+| **Memory Management**  | Allocating, using and releasing memory                       |
+| **Memory Leak**        | Allocated memory that is not properly released               |
+| **`new`**              | Dynamically allocates memory/creates object                  |
+| **`delete`**           | Releases a single dynamically allocated object               |
+| **`new[]`**            | Dynamically allocates an array                               |
+| **`delete[]`**         | Releases a dynamically allocated array                       |
+| **Destructor**         | Performs cleanup when an object's lifetime ends              |
+| **RAII**               | Manages resources through object lifetime                    |
+| **Smart Pointer**      | Object that automatically manages pointer ownership/lifetime |
+| **`unique_ptr`**       | Exclusive ownership                                          |
+| **`shared_ptr`**       | Shared ownership                                             |
+| **`weak_ptr`**         | Non-owning observation of a shared object                    |
+
+
+24. Most Important BCA Exam Questions
+Q1. What is Garbage Collection?
+
+Garbage Collection is an automatic memory-management technique that identifies unused or unreachable memory and reclaims it.
+
+Q2. Does C++ support Garbage Collection?
+
+Standard C++ does not provide a built-in automatic garbage collector like Java or C#. C++ primarily uses RAII, destructors, and explicit/deterministic resource management.
+
+Q3. What is Garbage?
+
+Garbage is memory or an object that is no longer useful/reachable but still occupies memory.
+
+Q4. What is Memory Leak?
+
+A memory leak occurs when allocated memory is no longer needed but is not released.
+
+Q5. What is the role of delete?
+
+delete destroys a single object allocated with new and releases its storage.
+
+Q6. What is RAII?
+
+RAII is a C++ resource-management technique that ties resource lifetime to object lifetime and automatically releases the resource when the object is destroyed.
+
+Q7. Is Destructor a Garbage Collector?
+
+No. A destructor performs cleanup for an object's lifetime; it is not an automatic garbage-collection system.
+
+ Final Exam Summary
+Garbage Collection
+        ↓
+Automatic Memory Reclamation
+        ↓
+Used by GC-based languages
+        ↓
+Standard C++ → No built-in GC
+        ↓
+C++ Memory Management
+        ↓
+RAII + Destructors + Smart Pointers
+        ↓
+unique_ptr / shared_ptr / weak_ptr
+
+One-Line:
+
+Garbage Collection automatically reclaims eligible unused memory, whereas standard C++ primarily manages resources through deterministic object lifetime, RAII, destructors, and smart pointers.
+
+Memory consumption ky h
+Memory Consumption क्या है?
+English Definition
+
+Memory consumption refers to the amount of computer memory (RAM) that a program, process, or system uses while it is running.
+
+Hindi Definition
+
+Memory Consumption का मतलब है कि कोई program, application या process RAM की कितनी memory use कर रहा है।
+
+Easy Example
+
+मान लो आपके computer में:
+
+8 GB RAM है।
+
+आपने एक program चलाया और वह:
+
+500 MB RAM use कर रहा है।
+
+तो उस program की memory consumption = 500 MB है।
+
+Computer RAM = 8 GB
+       ↓
+Program
+       ↓
+Uses 500 MB
+       ↓
+Memory Consumption = 500 MB
+C++ Example
+int arr[1000000];
+
+यह बड़ा array RAM में काफी memory consume करेगा।
+
+अगर program में बहुत सारे बड़े objects, arrays या dynamically allocated memory हैं, तो:
+
+Memory Consumption ↑
+
+और अगर unused memory properly release नहीं होती, तो memory consumption लगातार बढ़ सकती है, जिससे system slow हो सकता है।
+
+ Exam Definition
+
+Memory consumption is the amount of RAM or memory resources occupied by a program, process, or application during its execution.
+
+Hindi:
+
+Memory consumption वह मात्रा है जितनी computer memory किसी program या process द्वारा execution के दौरान उपयोग की जाती है।
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

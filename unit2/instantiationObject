@@ -272,7 +272,7 @@ Object Instantiation
   ↓
 Object Created
   ↓
-Constructor Called
+Constructor Called delete[]a;
   ↓
 Object Used
   ↓
