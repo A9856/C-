@@ -407,8 +407,7 @@ shared_ptr
 weak_ptr
 
 14. unique_ptr
-English
-
+English-->
 unique_ptr provides exclusive ownership of a dynamically allocated object. When the unique_ptr is destroyed, the managed object is automatically deleted.
 
 Hindi
@@ -419,10 +418,9 @@ Example
 #include <iostream>
 #include <memory>
 using namespace std;
-
-
 int main()
 {
+   
     unique_ptr<int> p = make_unique<int>(100);
 
 
@@ -445,8 +443,7 @@ std::unique_ptr<int> p2 = std::move(p);
 
 
 15. shared_ptr
-English
-
+English-->
 shared_ptr allows multiple smart pointers to share ownership of the same dynamically allocated object. The object is destroyed when the last owning shared_ptr is destroyed or reset.
 
 Hindi
@@ -457,9 +454,9 @@ Example :
 #include <memory>
 
 int main() {
-    std::shared_ptr<int> p1 = std::make_shared<int>(10);
+    shared_ptr<int> p1 = make_shared<int>(10);
 
-    std::shared_ptr<int> p2 = p1;
+    shared_ptr<int> p2 = p1;
 
     return 0;
 }
@@ -528,6 +525,44 @@ weak_ptr-->
 
 weak_ptr is a smart pointer that observes an object managed by shared_ptr without owning it.
 weak_ptr ऐसा smart pointer है जो shared_ptr के object को observe करता है लेकिन उसकी ownership नहीं लेता।
+
+#include <iostream>
+#include <memory>
+using namespace std;
+
+int main()
+{
+    shared_ptr<int> p1 = make_shared<int>(100);
+    shared_ptr<int> p2 = make_shared<int>(200);
+
+    weak_ptr<int> w1 = p1;
+    weak_ptr<int> w2 = p2;
+
+    // Destroy first object
+    p1.reset();
+
+    auto temp1 = w1.lock();
+    auto temp2 = w2.lock();
+
+    if (temp1 || temp2)
+    {
+        if (temp1)
+        {
+            cout << "Object 1 is alive: " << *temp1 << endl;
+        }
+
+        if (temp2)
+        {
+            cout << "Object 2 is alive: " << *temp2 << endl;
+        }
+    }
+    else
+    {
+        cout << "Both objects are destroyed." << endl;
+    }
+
+    return 0;
+}
 
 RAII → Object lifetime से resource management
 unique_ptr → One owner
@@ -753,118 +788,258 @@ Hindi:
 Memory consumption वह मात्रा है जितनी computer memory किसी program या process द्वारा execution के दौरान उपयोग की जाती है।
 
 
+all type mix
+#include <iostream>
+#include <memory>
+using namespace std;
 
+class Student
+{
+public:
+    Student()
+    {
+        cout << "Student Constructor Called" << endl;
+    }
 
+    ~Student()
+    {
+        cout << "Student Destructor Called" << endl;
+    }
+
+    void display()
+    {
+        cout << "Student Object is Working" << endl;
+    }
+};
+
+int main()
+{
+    cout << "----- unique_ptr -----" << endl;
 
+    {
+        unique_ptr<Student> p1 = make_unique<Student>();
 
+        p1->display();
+    }
 
+    cout << "\n----- shared_ptr -----" << endl;
 
+    {
+        shared_ptr<Student> p2 = make_shared<Student>();
 
+        cout << "Owners: "
+             << p2.use_count() << endl;
 
+        shared_ptr<Student> p3 = p2;
 
+        cout << "Owners: "
+             << p2.use_count() << endl;
+    }
 
+    cout << "\n----- weak_ptr -----" << endl;
 
+    {
+        shared_ptr<Student> p4 = make_shared<Student>();
 
+        weak_ptr<Student> w = p4;
 
+        cout << "Owners: "
+             << p4.use_count() << endl;
 
+        if (auto temp = w.lock())
+        {
+            temp->display();
+        }
+    }
 
+    cout << "\nProgram End" << endl;
 
+    return 0;
+}
 
 
+weakprtr
+#include <iostream>
+#include <memory>
+using namespace std;
 
+int main()
+{
+    shared_ptr<int> p = make_shared<int>(100);
 
+    weak_ptr<int> w = p;
 
+    if (auto temp = w.lock())
+    {
+        cout << "Value = " << *temp << endl;
+    }
+    else
+    {
+        cout << "Object does not exist." << endl;
+    }
 
+    return 0;
+}
 
+unique_ptr
+#include <iostream>
+#include <memory>
+using namespace std;
 
+class Student
+{
+public:
+    Student()
+    {
+        cout << "Student created" << endl;
+    }
+
+    ~Student()
+    {
+        cout << "Student destroyed" << endl;
+    }
 
+    void display()
+    {
+        cout << "Student is working" << endl;
+    }
+};
 
+int main()
+{
+    {
+        unique_ptr<Student> s = make_unique<Student>();
 
+        s->display();
 
+    } // s destroyed → Student destructor automatically called
 
+    cout << "Program continues..." << endl;
 
+    return 0;
+}
 
+shared_ptr
+#include <iostream>
+#include <memory>
+using namespace std;
 
+int main()
+{
+    shared_ptr<int> p1 = make_shared<int>(100);
 
+    cout << "After p1: "
+         << p1.use_count() << endl;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    {
+        shared_ptr<int> p2 = p1;
+
+        cout << "After p2: "
+             << p1.use_count() << endl;
+
+        {
+            shared_ptr<int> p3 = p1;
+
+            cout << "After p3: "
+                 << p1.use_count() << endl;
+        }
+
+        cout << "After p3 destroyed: "
+             << p1.use_count() << endl;
+    }
+
+    cout << "After p2 destroyed: "
+         << p1.use_count() << endl;
+
+    return 0;
+}
+
+weak_ptr
+#include <iostream>
+#include <memory>
+using namespace std;
+
+class Student;
+
+class School
+{
+public:
+    shared_ptr<Student> student;
+
+    ~School()
+    {
+        cout << "School destroyed" << endl;
+    }
+};
+
+class Student
+{
+public:
+    weak_ptr<School> school;
+
+    ~Student()
+    {
+        cout << "Student destroyed" << endl;
+    }
+};
+
+int main()
+{
+    shared_ptr<School> s = make_shared<School>();
+    shared_ptr<Student> st = make_shared<Student>();
+
+    // School owns Student
+    s->student = st;
+
+    // Student only observes School
+    st->school = s;
+
+    cout << "School owners: "
+         << s.use_count() << endl;
+
+    cout << "Student owners: "
+         << st.use_count() << endl;
+
+    return 0;
+}
+
+
+
+#include <iostream>
+#include <memory>
+using namespace std;
+
+int main()
+{
+    // 1. Create an object using shared_ptr
+    shared_ptr<int> p = make_shared<int>(100);
+      shared_ptr<int> p1 = make_shared<int>(100);
+
+    // 2. Create weak_ptr observing the same object
+    weak_ptr<int> w = p;
+
+    cout << "Shared pointer count: "
+         << p.use_count() << endl;
+         //second pointer count
+         
+          shared_ptr<int> q = p1;
+          cout << "second Shared pointer count: "
+         << p.use_count() << endl;
+
+    p.reset();
+    if (auto temp = w.lock())
+    {
+        cout << "Object is alive." << endl;
+        cout << "Value = " << *temp << endl;
+    }
+    else
+    {
+        cout << "Object is destroyed." << endl;
+        cout << "weak_ptr cannot access the object." << endl;
+    }
+
+    return 0;
+}
 
 
 

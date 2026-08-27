@@ -1,0 +1,583 @@
+1. Dynamic Memory Allocation -->
+
+Dynamic Memory Allocation is the process of allocating memory at runtime, according to the program's requirements. In C++, dynamic memory is traditionally allocated from the free store (commonly called the heap) using new and released using delete.
+
+Dynamic Memory Allocation वह process है जिसमें program के run time पर आवश्यकता के अनुसार memory allocate की जाती है। C++ में traditionally dynamic memory allocate करने के लिए new और release करने के लिए delete का उपयोग किया जाता है।
+
+Program Start
+     ↓
+Memory Need
+     ↓
+Runtime Memory Allocate
+     ↓
+Data/Object use
+     ↓
+end work
+     ↓
+Memory Release
+
+2. Static and Dynamic memory allocation-->Image
+
+int arr[10];              // Normal array
+
+int *p = new int[10];     // Dynamic array
+
+3. Why Dynamic Memory Allocation is Used?
+
+Dynamic memory allocation is useful when the required amount of memory is not known at compile time or when memory needs to exist independently of a particular local scope.
+
+Dynamic memory allocation तब useful होती है जब program को कितनी memory चाहिए यह compile time पर निश्चित नहीं होता, या allocated object को उसके local scope से अलग lifetime तक रखना होता है।
+
+Main Uses
+Runtime पर memory allocate करना
+User की requirement के अनुसार memory लेना
+Dynamic arrays बनाना
+Dynamic objects बनाना
+Linked List, Tree, Graph जैसी data structures बनाना
+Large data structures को dynamically manage करना
+
+1. Runtime Memory Allocate
+Dynamic allocation allows memory to be allocated during program execution.
+Program run होने के दौरान आवश्यकता पड़ने पर memory allocate की जा सकती है।
+
+int *p = new int(50);
+
+2. User Requirement
+It allows the program to allocate memory according to the amount of data entered or required by the user at runtime.
+User से runtime पर मिलने वाली requirement के अनुसार memory allocate की जा सकती है।
+
+int n;
+cin >> n;
+
+int *arr = new int[n];
+
+अगर user 5 देता है:
+
+n = 5
+↓
+5 integers की memory allocate
+
+3. Dynamic Arrays
+Dynamic allocation allows arrays whose size is determined at runtime.
+Dynamic allocation से ऐसा array बनाया जा सकता है जिसका size runtime पर तय होता है।
+
+int n;
+cin >> n;
+
+int *arr = new int[n];
+
+delete[] arr;
+
+4. Dynamic Objects 
+Dynamic allocation can be used to create objects at runtime.
+Runtime पर dynamically allocated memory में objects create किए जा सकते हैं।
+
+Student *s = new Student;
+
+5. Linked List, Tree, Graph such as Data Structures 
+Dynamic memory allocation is important for dynamic data structures such as linked lists, trees, and graphs.
+Linked List, Tree और Graph जैसी dynamic data structures में nodes को runtime पर create करने के लिए dynamic memory allocation बहुत useful है।
+
+Example:
+Node *newNode = new Node;
+
+6. Large Data Structures  Dynamically Manage 
+
+It allows large data structures to be allocated according to actual runtime requirements instead of always reserving a fixed amount of storage.
+
+Program की actual requirement के अनुसार बड़ी data structures के लिए memory allocate की जा सकती है, जिससे पहले से fixed amount reserve करने की जरूरत कम होती है।
+
+4. new Operator
+The new operator dynamically allocates memory and, for class types, constructs an object in that storage.
+new operator runtime पर dynamically memory allocate करता है और class type के लिए उस memory में object को construct करता है।
+
+Syntax
+data_type *pointer = new data_type;
+
+Example
+int *p = new int;
+
+5. Dynamic Variable Initialization
+int *p = new int(50);
+
+Complete example:
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int *p = new int(50);
+
+    cout << "Value = " << *p << endl;
+
+    delete p;
+
+    return 0;
+}
+
+6. delete Operator
+The delete operator releases the storage of a single object that was dynamically allocated using new.
+delete operator new द्वारा dynamically allocated single object की storage को release करता है।
+
+Syntax
+delete pointer;
+
+Example
+int *p = new int(50);
+cout << *p;
+delete p;
+
+Important
+new → delete
+
+7. Dynamic Array
+Dynamic allocation is useful when the required array size is known only at runtime. The program can obtain the size and allocate the required storage dynamically.
+
+जब array का required size compile time पर पता नहीं होता और runtime पर मिलता है, तब dynamic allocation useful होती है।
+
+8. Complete Dynamic Array Program
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int n;
+
+    cout << "Enter array size: ";
+    cin >> n;
+
+    int *arr = new int[n];
+
+    cout << "Enter " << n << " values:" << endl;
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+
+    cout << "Array values:" << endl;
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+
+    delete[] arr;
+
+    return 0;
+}
+
+9. delete[] Operator
+
+delete[] releases the storage of an array allocated using new[].
+delete[] उस dynamic array की memory release करता है जिसे new[] से allocate किया गया था।
+
+Correct Pair 
+
+int *arr = new int[5];
+delete[] arr;
+
+note->
+new       → delete
+new[]     → delete[]
+
+10. Dynamic Object
+A dynamic object is an object created at runtime using dynamic memory allocation.
+Dynamic Object वह object है जो runtime पर dynamically allocated memory में create होता है।
+
+Syntax
+ClassName *ptr = new ClassName;
+
+Example
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+
+    void display()
+    {
+        cout << "Name: " << name << endl;
+    }
+};
+
+int main()
+{
+    Student *s1 = new Student;
+
+    s1->name = "abc";
+
+    s1->display();
+
+    delete s1;
+
+    return 0;
+}
+11. Dynamic Object with Constructor
+
+Dynamic Object with Constructor means creating an object dynamically at runtime using the new operator while simultaneously calling its constructor to initialize the object.
+Dynamic Object with Constructor का अर्थ है new operator की सहायता से runtime पर object create करना और उसी समय उसके constructor को call करके object को initialize करना।
+
+Syntax
+ClassName *pointer = new ClassName(arguments);
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int age;
+
+    Student(string n, int a)
+    {
+        name = n;
+        age = a;
+    }
+
+    void display()
+    {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+    }
+};
+
+int main()
+{
+    Student *s1 = new Student("XYZ", 22);
+
+    s1->display();
+
+    delete s1;
+
+    return 0;
+}
+12. Pointer Role
+
+A pointer is a variable that stores the address of another object or memory location. In dynamic memory allocation, a pointer is used to store the address of dynamically allocated memory and access that memory.
+Pointer एक ऐसा variable है जो किसी दूसरे object या memory location का address store करता है। Dynamic memory allocation में pointer dynamically allocated memory का address store करता है और उस memory को access करने में मदद करता है।
+
+int *p = new int(100);
+cout << *p;
+
+13. . vs -> Operator
+The dot operator (.) is used to access data members and member functions through a normal object.
+
+Student s1;
+
+s1.display();
+
+Pointer to Dynamic Object
+The arrow operator (->) is used to access data members and member functions through a pointer to an object.
+Student *s1 = new Student;
+s1->display();
+
+Equivalent Form
+s1->name/(*s1).name
+
+Note-->
+Object  → .
+Pointer → ->
+
+14. Dynamic Memory Deallocation
+Deallocation is the process of releasing dynamically allocated memory when it is no longer required.
+Deallocation का मतलब है जब dynamically allocated memory की आवश्यकता समाप्त हो जाए, तब उस memory को release करना।
+
+Example
+int *p = new int(10);
+
+// use p
+
+delete p;
+p = nullptr;
+
+nullptr assign करना pointer को safely indicate करता है कि अब वह किसी valid object को point नहीं कर रहा।
+
+15. Memory Leak
+A memory leak occurs when dynamically allocated memory is no longer needed but is not properly released.
+Memory Leak तब होता है जब dynamically allocated memory की जरूरत खत्म हो जाती है लेकिन उसे properly release नहीं किया जाता।
+
+Example
+void test()
+{
+    int *p = new int(100);
+
+    // delete नहीं किया
+}
+
+Function समाप्त हो गया, लेकिन allocated memory release नहीं हुई।
+
+Correct
+void test()
+{
+    int *p = new int(100);
+
+    delete p;
+}
+
+16. Dangling Pointer
+
+A dangling pointer is a pointer that refers to an object or memory location whose lifetime has ended.
+Dangling Pointer वह pointer है जो ऐसी memory/object को point करता है जिसका lifetime समाप्त हो चुका है।
+
+Example
+int *p = new int(50);
+
+delete p;
+// p is now dangling
+
+//best approach
+delete p;
+p = nullptr;
+
+17. Double Deletion
+
+Double Deletion occurs when a program attempts to release the same dynamically allocated memory more than once using delete or delete[]. This results in undefined behavior.
+Double Deletion तब होता है जब program एक ही dynamically allocated memory को दो या अधिक बार delete या delete[] करने की कोशिश करता है। इससे undefined behavior हो सकता है।
+
+Wrong
+int *p = new int(10);
+
+delete p;
+delete p;    // Wrong
+Better
+delete p;
+p = nullptr;
+
+18. nullptr
+
+nullptr is the modern C++ null pointer value used to represent a pointer that does not point to an object.
+nullptr modern C++ में यह बताने के लिए use होता है कि pointer currently किसी valid object को point नहीं कर रहा।
+
+Example
+int *p = new int(10);
+
+delete p;
+
+p = nullptr;
+
+19. Dynamic Memory Allocation and Constructor
+
+जब dynamic object बनाया जाता है:
+
+Student *s = new Student("XYZ", 22);
+
+तो sequence:
+
+new
+ ↓
+Memory allocated
+ ↓
+Constructor called
+ ↓
+Object initialized
+ ↓
+Object used
+ ↓
+delete
+ ↓
+Destructor called
+ ↓
+Memory released
+
+Important
+
+For a dynamically allocated class object:
+
+delete s;
+
+करने पर पहले destructor चलता है और फिर object's storage release होती है।
+
+20. Smart Pointers — Modern C++
+
+Modern C++ में raw new/delete को manually manage करने के बजाय smart pointers preferred हैं।
+
+Main types:
+
+unique_ptr
+shared_ptr
+weak_ptr
+
+20.1 unique_ptr
+unique_ptr provides exclusive ownership of a dynamically allocated object and automatically releases the object when the unique_ptr is destroyed.
+
+unique_ptr dynamically allocated object की exclusive ownership रखता है और unique_ptr destroy होने पर object की memory automatically release कर देता है।
+
+Example
+#include <iostream>
+#include <memory>
+using namespace std;
+
+int main()
+{
+    unique_ptr<int> p = make_unique<int>(100);
+
+    cout << *p << endl;
+
+    return 0;
+}
+
+21. shared_ptr
+
+shared_ptr allows multiple smart pointers to share ownership of the same object.
+shared_ptr multiple smart pointers को एक ही object की shared ownership रखने देता है।
+
+Example
+#include <iostream>
+#include <memory>
+using namespace std;
+
+int main()
+{
+    shared_ptr<int> p1 = make_shared<int>(100);
+
+    shared_ptr<int> p2 = p1;
+
+    cout << *p1 << endl;
+    cout << *p2 << endl;
+
+    cout << "Owners = " << p1.use_count() << endl;
+
+    return 0;
+}
+
+22. weak_ptr
+
+weak_ptr is a non-owning smart pointer that observes an object managed by shared_ptr without increasing its reference count.
+
+weak_ptr shared_ptr द्वारा managed object को observe करता है लेकिन उसकी ownership नहीं लेता।
+
+Main Use
+
+यह विशेष रूप से circular references को avoid करने में useful है।
+
+23. RAII = Resource Acquisition Is Initialization
+
+RAII is a C++ resource-management technique in which resource ownership is tied to an object's lifetime, so the resource is automatically released when the object is destroyed.
+RAII C++ की resource-management technique है जिसमें resource को object के lifetime से जोड़ दिया जाता है। Object destroy होने पर resource automatically release हो जाता है।
+
+Flow
+Object Created
+      ↓
+Resource Acquired
+      ↓
+Object Used
+      ↓
+Object Destroyed
+      ↓
+Resource Released
+
+Examples
+unique_ptr
+shared_ptr
+vector
+string
+File streams
+
+24. Dynamic Memory Allocation Advantages
+1. Runtime Allocation
+ Memory can be allocated during program execution.
+ Program run होने के दौरान memory allocate की जा सकती है।
+
+2. Flexible Size
+
+ Memory size can be determined according to runtime requirements.
+ Runtime requirement के अनुसार size तय किया जा सकता है।
+
+3. Useful for Dynamic Data Structures
+
+ Useful for linked lists, trees, graphs, etc.
+ Linked List, Tree और Graph जैसी data structures के लिए useful है।
+
+4. Better Control
+
+ Traditional C++ gives programmers direct control over dynamically allocated storage.
+ Traditional C++ programmer को dynamically allocated storage पर direct control देता है।
+
+25. Disadvantages / Risks
+1. Memory Leak
+
+Memory release करना भूलने पर leak हो सकता है।
+
+2. Dangling Pointer
+
+Freed memory को pointer से access करने की कोशिश unsafe है।
+
+3. Double Delete
+
+Same memory को दो बार delete करना undefined behavior हो सकता है।
+
+4. Manual Management
+
+Raw new/delete में programmer को allocation/deallocation सही तरीके से manage करना पड़ता है।
+
+5. Fragmentation
+
+Long-running programs में अलग-अलग sizes की allocations/deallocations से memory fragmentation हो सकती है।
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    // 1. Different sizes की memory allocate
+    int *a = new int[10];
+    int *b = new int[20];
+    int *c = new int[30];
+    int *d = new int[40];
+
+    cout << "Memory allocated." << endl;
+
+    // 2. mid memory release
+    delete[] b;
+    delete[] d;
+
+    cout << "B and D memory released." << endl;
+
+    // Conceptually memory pattern:
+    //
+    // [ A ][ FREE ][ C ][ FREE ]
+    //
+    // Free memory different place 
+
+    // 3.large block 
+    int *e = new int[50];
+
+    cout << "Large block allocated." << endl;
+
+    // 4. all memory release
+    delete[] a;
+    delete[] c;
+    delete[] e;
+
+    return 0;
+}
+
+Dynamic Memory Allocation – Definition
+Need for Dynamic Memory Allocation
+Static vs Dynamic Memory Allocation
+new Operator
+delete Operator
+Dynamic Variable
+Dynamic Array
+new[] and delete[]
+Dynamic Object Instantiation
+Dynamic Object with Constructor
+Pointer and Dynamic Memory
+. vs ->
+Memory Deallocation
+Memory Leak
+Dangling Pointer
+Double Deletion
+nullptr
+RAII
+Smart Pointers
+unique_ptr
+shared_ptr
+weak_ptr
+Advantages
+Disadvantages / Risks
+Dynamic Memory Allocation vs Garbage Collection
