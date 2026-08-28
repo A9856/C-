@@ -1,0 +1,880 @@
+1. Definition of Abstract Class
+
+An Abstract Class is a class that contains at least one pure virtual function.
+It cannot be instantiated directly.
+It is mainly used as a base class for derived classes.
+It provides a common structure or interface to derived classes.
+
+Abstract Class ऐसी class होती है जिसमें कम-से-कम एक pure virtual function होता है।
+इसका direct object नहीं बनाया जा सकता।
+इसका मुख्य उपयोग base class के रूप में किया जाता है।
+यह derived classes को common structure या interface प्रदान करती है।
+Easy Example
+class Animal
+{
+public:
+    virtual void sound() = 0;
+};
+
+यहाँ Animal एक Abstract Class है।
+
+    2. Pure Virtual Function
+
+        A Pure Virtual Function is a virtual function declared with = 0. It does not provide a required implementation in the base class.Derived classes are expected to override it.
+
+                                                                      Pure Virtual Function वह virtual function है जिसे = 0 के साथ declare किया जाता है।
+            Base class में इसका implementation आवश्यक नहीं होता।
+                Derived class को इसे override करना पड़ता है।
+
+                    Syntax virtual void
+                    display() = 0;
+Example class Animal
+{
+public:
+    virtual void sound() = 0;
+};
+3. Syntax of Abstract Class
+    English class ClassName
+{
+public:
+    virtual returnType functionName() = 0;
+};
+
+Abstract class बनाने के लिए class के अंदर कम - से - कम एक pure virtual function declare किया जाता है।
+
+                                                   Example class Shape
+{
+public:
+    virtual void draw() = 0;
+};
+
+4. Why Abstract Class is Used?
+
+Abstract classes are used to:
+
+Provide a common interface.
+Define common rules for derived classes.
+Achieve abstraction.
+Support runtime polymorphism.
+Avoid creating objects of an incomplete/general base concept.
+
+Abstract class का उपयोग:
+
+Common interface देने के लिए।
+Derived classes के लिए common rules बनाने के लिए।
+Abstraction प्राप्त करने के लिए।
+Runtime polymorphism support करने के लिए।
+General/base concept का direct object बनने से रोकने के लिए।
+
+5. Object of Abstract Class
+
+An object of an abstract class cannot be created directly.
+This is because the class contains at least one pure virtual function.
+
+Abstract class का direct object नहीं बनाया जा सकता।
+इसका कारण है कि इसमें कम-से-कम एक pure virtual function होता है।
+Example
+class Animal
+{
+public:
+    virtual void sound() = 0;
+};
+
+int main()
+{
+    Animal a; //  Error
+}
+याद रखें
+        Abstract Class
+      ↓ Direct Object
+
+    6. Pointer /
+    Reference to Abstract Class
+
+        Although an abstract class cannot have a direct object,
+    its pointer or reference can be created.The pointer / reference can refer to an object of a derived class.
+
+                                                          Abstract class का direct object नहीं बना सकते। लेकिन उसका pointer या reference बनाया जा सकता है। यह pointer /
+                       reference derived class के object को refer कर सकता है।
+                           Example class Animal
+{
+public:
+    virtual void sound() = 0;
+};
+
+class Dog : public Animal
+{
+public:
+    void sound()
+    {
+        cout << "Dog barks";
+    }
+};
+
+int main()
+{
+    Dog d;
+
+    Animal *ptr = &d;
+
+    ptr->sound();
+}
+
+Output:
+
+Dog barks
+
+7. Derived Class
+
+A class derived from an abstract class must provide implementations for all inherited pure virtual functions to become a concrete class.
+After implementing them, its object can be created.
+
+Abstract class से derived class बनाने पर inherited pure virtual functions को implement/override करना पड़ता है।
+सभी required pure virtual functions को override करने के बाद derived class का object बनाया जा सकता है।
+Example
+class Animal
+{
+public:
+    virtual void sound() = 0;
+};
+
+class Dog : public Animal
+{
+public:
+    void sound()
+    {
+        cout << "Dog barks";
+    }
+};
+
+अब :
+
+    Dog d;
+
+Valid है।
+
+    8. Overriding Pure Virtual Function
+
+        The derived class should override the pure virtual function.This provides the actual implementation of the function.
+
+    Derived class को pure virtual function को override करना चाहिए।
+        इससे function का actual implementation मिलता है।
+            Example class Animal
+{
+public:
+    virtual void sound() = 0;
+};
+
+class Dog : public Animal
+{
+public:
+    void sound() override
+    {
+        cout << "Dog barks";
+    }
+};
+
+यहाँ :
+
+    void
+    sound() override
+
+    ने base class के pure virtual function को implement किया।
+
+    9. Multiple Pure Virtual Functions
+
+    An abstract class can contain multiple pure virtual functions.The derived class must implement all of them to become concrete.
+
+    एक abstract class में multiple pure virtual functions हो सकते हैं।
+    Derived class को सभी required functions implement करने पड़ते हैं।
+    Example
+    class Shape
+{
+public:
+    virtual void draw() = 0;
+    virtual void area() = 0;
+};
+
+class Circle : public Shape
+{
+public:
+    void draw() override
+    {
+        cout << "Drawing Circle" << endl;
+    }
+
+    void area() override
+    {
+        cout << "Area of Circle" << endl;
+    }
+};
+
+10. Constructor in Abstract Class
+
+    An abstract class can have a constructor.Its constructor is called when a derived class object is created.The abstract class itself still cannot be instantiated directly.
+
+    Abstract class में constructor हो सकता है।
+        Derived class का object बनाते समय base abstract class का constructor call होता है।
+            फिर भी abstract class का direct object नहीं बनाया जा सकता।
+                Example class Animal
+{
+public:
+    Animal()
+    {
+        cout << "Animal Constructor" << endl;
+    }
+
+    virtual void sound() = 0;
+};
+
+class Dog : public Animal
+{
+public:
+    void sound() override
+    {
+        cout << "Dog Barks" << endl;
+    }
+};
+
+जब :
+
+    Dog d;
+
+होगा :
+
+    Animal Constructor
+        ↓ Dog Object Created
+
+    11. Destructor in Abstract Class
+
+        An abstract class can have a destructor.A virtual destructor is especially useful when deleting derived objects through a base -
+    class pointer.
+
+    Abstract class में destructor हो सकता है।
+        Base class pointer से derived object delete करने की situation में virtual destructor important होता है।
+            Example class Animal
+{
+public:
+    virtual void sound() = 0;
+
+    virtual ~Animal()
+    {
+        cout << "Animal Destructor";
+    }
+};
+
+12. Normal Functions in Abstract Class
+
+An abstract class can contain normal member functions.
+It is not necessary for every function to be pure virtual.
+
+Abstract class में normal member functions भी हो सकते हैं।
+ऐसा जरूरी नहीं है कि class के सभी functions pure virtual हों।
+Example
+class Animal
+{
+public:
+    void eat()
+    {
+        cout << "Animal eats" << endl;
+    }
+
+    virtual void sound() = 0;
+};
+
+यहाँ :
+
+    eat()    → Normal Function
+    sound()  → Pure Virtual Function
+
+    इसलिए Animal abstract class है।
+
+    13. Data Members in Abstract Class
+
+    An abstract class can contain data members like a normal class.Derived classes can access them according to their access specifier.
+
+    Abstract class में normal variables
+    / data members हो सकते हैं।
+    Derived class उन्हें access कर सकती है,
+    depending on access specifier।
+    Example
+    class Animal
+{
+public:
+    string name;
+
+    virtual void sound() = 0;
+};
+
+14. Abstract Class with Multiple Derived Classes
+
+    One abstract class can have multiple derived classes,
+    and each derived class can provide its own implementation.
+
+        एक abstract class से कई derived classes बनाई जा सकती हैं और प्रत्येक derived class अपने तरीके से pure virtual function implement कर सकती है।
+
+            Example
+                Animal |
+        ┌───────┴───────┐
+        ↓               ↓ Dog Cat
+        ↓               ↓ Dog barks Cat meows
+
+            Code :
+
+    class Animal
+{
+public:
+    virtual void sound() = 0;
+};
+
+class Dog : public Animal
+{
+public:
+    void sound() override
+    {
+        cout << "Dog barks";
+    }
+};
+
+class Cat : public Animal
+{
+public:
+    void sound() override
+    {
+        cout << "Cat meows";
+    }
+};
+
+15. Runtime Polymorphism with Abstract Class
+
+        Abstract classes can be used with base -
+    class pointers / references to achieve runtime polymorphism.Abstract class के pointer / reference का उपयोग करके runtime polymorphism प्राप्त किया जा सकता है।
+
+                                                                                               Example Animal *ptr;
+
+Dog d;
+Cat c;
+
+ptr = &d;
+ptr->sound();
+
+ptr = &c;
+ptr->sound();
+
+Output : Dog barks
+             Cat meows
+
+         16. If Derived Class Does Not Override
+
+             If a derived class does not implement all inherited pure virtual functions,
+         it also remains an abstract class.
+
+         अगर derived class सभी inherited pure virtual functions को override नहीं करती,
+         तो वह भी abstract class बनी रहती है।
+
+             Example class Animal
+{
+public:
+    virtual void sound() = 0;
+};
+
+class Dog : public Animal
+{
+    // sound() not implemented
+};
+
+अब :
+
+    Dog d; //  Error
+
+क्योंकि Dog अभी भी abstract है।
+
+21. Advantages of Abstract Class
+
+Provides abstraction.
+Provides a common interface.
+Supports code reusability.
+Supports runtime polymorphism.
+Provides a common structure for derived classes.
+Prevents direct creation of inappropriate/general base objects.
+
+Abstraction प्रदान करती है।
+Common interface प्रदान करती है।
+Code reusability में मदद करती है।
+Runtime polymorphism support करती है।
+Derived classes को common structure देती है।
+General base class के unwanted direct objects को रोकती है।
+
+22. Disadvantages / Limitations
+
+Cannot create a direct object.
+Derived classes must implement required pure virtual functions.
+Improper design can make inheritance unnecessarily complex.
+Virtual functions may involve runtime dispatch overhead.
+
+इसका direct object नहीं बना सकते।
+Derived class को required pure virtual functions implement करने पड़ते हैं।
+गलत design से inheritance complex हो सकती है।
+Virtual function के कारण runtime dispatch का थोड़ा overhead हो सकता है।
+
+Characteristics of Abstract Class in C++ 
+
+• Cannot be Instantiated
+ An abstract class cannot be instantiated directly.
+ Abstract class का direct object नहीं बनाया जा सकता।
+Example: Animal obj;
+
+• Contains Pure Virtual Function
+        An abstract class contains at least one pure virtual function.Abstract class में कम -
+    से - कम एक pure virtual function होता है। Example : virtual void sound() = 0;
+
+• Used as a Base Class
+ An abstract class is mainly used as a base class for derived classes.
+ Abstract class का मुख्य रूप से derived classes की base class के रूप में उपयोग किया जाता है।
+
+• Supports Abstraction
+ It helps hide unnecessary implementation details and shows only the required features.
+ यह unnecessary implementation details को hide करके केवल required features को दिखाने में मदद करती है।
+
+• Supports Polymorphism
+ It supports runtime polymorphism through base-class pointers or references.
+ यह base-class pointer या reference के माध्यम से runtime polymorphism को support करती है।
+
+• Can Have Normal Functions
+ An abstract class can contain normal member functions along with pure virtual functions.
+ Abstract class में pure virtual functions के साथ normal member functions भी हो सकते हैं।
+
+• Can Have Data Members
+ An abstract class can contain data members or variables.
+ Abstract class में data members या variables भी हो सकते हैं।
+
+• Can Have Constructor
+ An abstract class can have a constructor, which is called when a derived-class object is created.
+ Abstract class में constructor हो सकता है, जो derived-class का object बनाते समय call होता है।
+
+• Can Have Destructor
+ An abstract class can have a destructor, and a virtual destructor is useful when deleting derived objects through a base pointer.
+ Abstract class में destructor हो सकता है और base pointer के द्वारा derived object को delete करते समय virtual destructor useful होता है।
+
+• Can Have Multiple Pure Virtual Functions
+ An abstract class can contain more than one pure virtual function.
+ Abstract class में एक से अधिक pure virtual functions हो सकते हैं।
+
+• Derived Class Must Implement Pure Virtual Functions
+ A derived class must override all required pure virtual functions to become a concrete class.
+ Derived class को concrete class बनने के लिए सभी required pure virtual functions को override करना पड़ता है।
+
+• Pointer and Reference are Allowed
+ A pointer or reference to an abstract class can be created, but its direct object cannot be created.
+ Abstract class का pointer या reference बनाया जा सकता है, लेकिन इसका direct object नहीं बनाया जा सकता।
+
+• Derived Class Object Can Be Created
+ An object of a derived class can be created if it implements all inherited pure virtual functions.
+ अगर derived class सभी inherited pure virtual functions को implement कर देती है, तो उसका object बनाया जा सकता है।
+
+• Provides Common Interface
+ An abstract class provides a common interface or common rules for derived classes.
+ Abstract class derived classes के लिए common interface या common rules प्रदान करती है।
+
+
+Abstract base class
+Pure virtual functions
+Normal virtual function
+Normal member function
+Data members
+Constructor / Destructor
+Multiple derived classes
+Normal/stack objects
+Dynamic objects using new
+Manual delete
+Base-class pointer
+Runtime polymorphism
+Runtime-size dynamic array
+new[] / delete[]
+Multiple objects
+Function overriding
+Base-class pointer from derived objects access
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// =====================================================
+// ABSTRACT BASE CLASS
+// =====================================================
+class Person
+{
+protected:
+    string name;
+    int age;
+
+public:
+    // Constructor
+    Person(string n, int a)
+    {
+        name = n;
+        age = a;
+        cout << "Person Constructor: "
+             << name << endl;
+    }
+    // Normal Member Function
+    void showBasicInfo()
+    {
+        cout << "Name: " << name << endl;
+        cout << "Age : " << age << endl;
+    }
+    // Normal Virtual Function
+    virtual void role()
+    {
+        cout << "Person role" << endl;
+    }
+    // Pure Virtual Function
+    virtual void work() = 0;
+
+    // Another Pure Virtual Function
+    virtual void displayDetails() = 0;
+
+    // Virtual Destructor
+    virtual ~Person()
+    {
+        cout << "Person Destructor: "
+             << name << endl;
+    }
+};
+
+// =====================================================
+// STUDENT CLASS
+// =====================================================
+class Student : public Person
+{
+private:
+    int rollNo;
+    int marks;
+
+public:
+    // Constructor
+    Student(string n, int a, int r, int m) : Person(n, a)
+    {
+        rollNo = r;
+        marks = m;
+
+        cout << "Student Constructor: "
+             << name << endl;
+    }
+    // Override Normal Virtual Function
+    void role() override
+    {
+        cout << "Role: Student" << endl;
+    }
+
+    // Override Pure Virtual Function
+    void work() override
+    {
+        cout << "Student is studying." << endl;
+    }
+
+    // Override Second Pure Virtual Function
+    void displayDetails() override
+    {
+        cout << "Roll No: " << rollNo << endl;
+        cout << "Marks  : " << marks << endl;
+    }
+
+    // Destructor
+    ~Student()
+    {
+        cout << "Student Destructor: "
+             << name << endl;
+    }
+};
+
+// =====================================================
+// TEACHER CLASS
+// =====================================================
+
+class Teacher : public Person
+{
+private:
+    string subject;
+    double salary;
+
+public:
+    // Constructor
+    Teacher(string n, int a, string s, double sal) : Person(n, a)
+    {
+        subject = s;
+        salary = sal;
+
+        cout << "Teacher Constructor: "
+             << name << endl;
+    }
+
+    // Override Normal Virtual Function
+    void role() override
+    {
+        cout << "Role: Teacher" << endl;
+    }
+
+    // Override Pure Virtual Function
+    void work() override
+    {
+        cout << "Teacher is teaching." << endl;
+    }
+
+    // Override Pure Virtual Function
+    void displayDetails() override
+    {
+        cout << "Subject: " << subject << endl;
+        cout << "Salary : " << salary << endl;
+    }
+
+    // Destructor
+    ~Teacher()
+    {
+        cout << "Teacher Destructor: "
+             << name << endl;
+    }
+};
+
+// =====================================================
+// STAFF CLASS
+// =====================================================
+class Staff : public Person
+{
+private:
+    string department;
+
+public:
+    // Constructor
+    Staff(string n, int a, string d) : Person(n, a)
+    {
+        department = d;
+        cout << "Staff Constructor: "
+             << name << endl;
+    }
+
+    // Override Normal Virtual Function
+    void role() override
+    {
+        cout << "Role: Administrative Staff" << endl;
+    }
+
+    // Override Pure Virtual Function
+    void work() override
+    {
+        cout << "Staff is managing office work." << endl;
+    }
+
+    // Override Pure Virtual Function
+    void displayDetails() override
+    {
+        cout << "Department: "
+             << department << endl;
+    }
+
+    // Destructor
+    ~Staff()
+    {
+        cout << "Staff Destructor: "
+             << name << endl;
+    }
+};
+
+// =====================================================
+// FUNCTION TO DISPLAY ANY PERSON
+// =====================================================
+
+void displayPerson(Person *p)
+{
+    cout << "\n-----------------------------" << endl;
+
+    p->showBasicInfo();
+
+    // Runtime Polymorphism
+    p->role();
+
+    p->work();
+
+    p->displayDetails();
+
+    cout << "-----------------------------" << endl;
+}
+
+// =====================================================
+// MAIN FUNCTION
+// =====================================================
+
+int main()
+{
+    cout << "\n====================================" << endl;
+    cout << "      SCHOOL MANAGEMENT SYSTEM" << endl;
+    cout << "====================================\n"
+         << endl;
+
+    // =================================================
+    // 1. NORMAL / STACK OBJECT
+    // =================================================
+
+    cout << "\n1. NORMAL OBJECT\n"<< endl;
+
+    Student s1("Aman", 20, 101, 85);
+
+    s1.showBasicInfo();
+    s1.role();
+    s1.work();
+    s1.displayDetails();
+
+    // =================================================
+    // 2. ANOTHER NORMAL OBJECT
+    // =================================================
+
+    cout << "\n2. NORMAL TEACHER OBJECT\n"<< endl;
+
+    Teacher t1("Rahul",35,"Computer Science",45000);
+
+    t1.showBasicInfo();
+    t1.role();
+    t1.work();
+    t1.displayDetails();
+
+    // =================================================
+    // 3. DYNAMIC OBJECT USING new
+    // =================================================
+
+    cout << "\n3. DYNAMIC OBJECT\n"
+         << endl;
+
+    Student *s2 =new Student("Priya", 19, 102, 92);
+
+    s2->showBasicInfo();
+    s2->role();
+    s2->work();
+    s2->displayDetails();
+
+    // =================================================
+    // 4. MANUAL delete
+    // =================================================
+
+    cout << "\n4. MANUAL DELETE\n"
+         << endl;
+
+    delete s2;
+    s2 = nullptr;
+
+    // =================================================
+    // 5. BASE CLASS POINTER
+    // =================================================
+
+    cout << "\n5. BASE CLASS POINTER\n"
+         << endl;
+
+    Teacher t2("Anita",40,"Mathematics",55000);
+
+    Person *ptr = &t2;
+    ptr->showBasicInfo();
+
+    // Runtime Polymorphism
+    ptr->role();
+    ptr->work();
+    ptr->displayDetails();
+
+    // =================================================
+    // 6. BASE POINTER + DYNAMIC DERIVED OBJECT
+    // =================================================
+
+    cout << "\n6. BASE POINTER + DYNAMIC OBJECT\n"
+         << endl;
+
+    Person *p1 =new Student("Ravi", 21, 103, 78);
+
+    p1->showBasicInfo();
+    p1->role();
+    p1->work();
+    p1->displayDetails();
+
+    delete p1;
+    p1 = nullptr;
+
+    // =================================================
+    // 7. MULTIPLE DYNAMIC OBJECTS
+    // =================================================
+
+    cout << "\n7. MULTIPLE DYNAMIC OBJECTS\n"
+         << endl;
+
+    Person *p2 =new Teacher("Suresh",42,"Physics",60000);
+    Person *p3 =new Staff("Neha",30,"Administration");
+
+    displayPerson(p2);
+    displayPerson(p3);
+
+    delete p2;
+    delete p3;
+    p2 = nullptr;
+    p3 = nullptr;
+
+    // =================================================
+    // 8. RUNTIME SIZE DYNAMIC ARRAY
+    // =================================================
+
+    cout << "\n8. DYNAMIC ARRAY\n"
+         << endl;
+
+    int n;
+    cout << "Enter number of students: ";
+    cin >> n;
+
+    int *marks = new int[n];
+
+    cout << "\nEnter marks:\n";
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Student "<< i + 1<< ": ";
+       cin >> marks[i];
+    }
+
+    cout << "\nEntered Marks:\n";
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Student "<< i + 1<< " = "<< marks[i]<< endl;
+    }
+
+    // Release dynamic array
+    delete[] marks;
+    marks = nullptr;
+
+    // =================================================
+    // 9. MULTIPLE DERIVED OBJECTS THROUGH
+    //    BASE CLASS POINTER ARRAY
+    // =================================================
+
+    cout << "\n9. POLYMORPHISM USING POINTER ARRAY\n"
+         << endl;
+
+    Person *people[3];
+
+    people[0] =new Student("Karan",20,104,88);
+    people[1] =new Teacher("Meena",38,"English",50000);
+    people[2] =new Staff("Vikas",32,"Accounts");
+
+    for (int i = 0; i < 3; i++)
+    {
+        displayPerson(people[i]);
+    }
+
+    // Delete all dynamic objects
+
+    for (int i = 0; i < 3; i++)
+    {
+        delete people[i];
+
+        people[i] = nullptr;
+    }
+
+    cout << "\n====================================" << endl;
+    cout << "        PROGRAM FINISHED" << endl;
+    cout << "====================================" << endl;
+
+    return 0;
+}

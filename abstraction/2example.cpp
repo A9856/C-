@@ -4,10 +4,8 @@ Abstract Classes using Pure Virtual Functions
 A Pure Virtual Function is declared using:
 A class containing at least one Pure Virtual Function is called an Abstract Class, and its object cannot be created.*/
 
-
 #include<iostream>
 using namespace std;
-
 class Shape
 {
 public:
