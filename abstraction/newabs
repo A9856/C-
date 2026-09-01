@@ -18,23 +18,25 @@ public:
 
 यहाँ Animal एक Abstract Class है।
 
-    2. Pure Virtual Function
+2. Pure Virtual Function
 
-        A Pure Virtual Function is a virtual function declared with = 0. It does not provide a required implementation in the base class.Derived classes are expected to override it.
+  A Pure Virtual Function is a virtual function declared with = 0. It does not provide a required implementation in the base class.Derived classes are expected to override it.
 
-                                                                      Pure Virtual Function वह virtual function है जिसे = 0 के साथ declare किया जाता है।
-            Base class में इसका implementation आवश्यक नहीं होता।
-                Derived class को इसे override करना पड़ता है।
+  Pure Virtual Function वह virtual function है जिसे = 0 के साथ declare किया जाता है।Base class में इसका implementation आवश्यक नहीं होता।
+  Derived class को इसे override करना पड़ता है।
 
-                    Syntax virtual void
-                    display() = 0;
-Example class Animal
+  Syntax virtual void
+  display() = 0;
+Example 
+class Animal
 {
 public:
     virtual void sound() = 0;
 };
+
 3. Syntax of Abstract Class
-    English class ClassName
+English
+class ClassName
 {
 public:
     virtual returnType functionName() = 0;
@@ -42,7 +44,8 @@ public:
 
 Abstract class बनाने के लिए class के अंदर कम - से - कम एक pure virtual function declare किया जाता है।
 
-                                                   Example class Shape
+Example 
+class Shape
 {
 public:
     virtual void draw() = 0;
@@ -84,19 +87,18 @@ int main()
 {
     Animal a; //  Error
 }
-याद रखें
-        Abstract Class
-      ↓ Direct Object
 
-    6. Pointer /
-    Reference to Abstract Class
+Abstract Class
+↓ Direct Object
 
-        Although an abstract class cannot have a direct object,
-    its pointer or reference can be created.The pointer / reference can refer to an object of a derived class.
+6. Pointer/Reference to Abstract Class
 
-                                                          Abstract class का direct object नहीं बना सकते। लेकिन उसका pointer या reference बनाया जा सकता है। यह pointer /
-                       reference derived class के object को refer कर सकता है।
-                           Example class Animal
+Although an abstract class cannot have a direct object,
+its pointer or reference can be created.The pointer / reference can refer to an object of a derived class.
+
+Abstract class का direct object नहीं बना सकते। लेकिन उसका pointer या reference बनाया जा सकता है। यह pointer /                     reference derived class के object को refer कर सकता है।
+Example
+class Animal
 {
 public:
     virtual void sound() = 0;
@@ -153,13 +155,13 @@ public:
 
 Valid है।
 
-    8. Overriding Pure Virtual Function
+8. Overriding Pure Virtual Function
 
-        The derived class should override the pure virtual function.This provides the actual implementation of the function.
+The derived class should override the pure virtual function.This provides the actual implementation of the function.
 
-    Derived class को pure virtual function को override करना चाहिए।
-        इससे function का actual implementation मिलता है।
-            Example class Animal
+Derived class को pure virtual function को override करना चाहिए।इससे function का actual implementation मिलता है।
+Example
+class Animal
 {
 public:
     virtual void sound() = 0;
@@ -176,19 +178,17 @@ public:
 
 यहाँ :
 
-    void
-    sound() override
+void
+sound() override
+ने base class के pure virtual function को implement किया।
 
-    ने base class के pure virtual function को implement किया।
+9. Multiple Pure Virtual Functions
 
-    9. Multiple Pure Virtual Functions
+An abstract class can contain multiple pure virtual functions.The derived class must implement all of them to become concrete.
 
-    An abstract class can contain multiple pure virtual functions.The derived class must implement all of them to become concrete.
-
-    एक abstract class में multiple pure virtual functions हो सकते हैं।
-    Derived class को सभी required functions implement करने पड़ते हैं।
-    Example
-    class Shape
+एक abstract class में multiple pure virtual functions हो सकते हैं।Derived class को सभी required functions implement करने पड़ते हैं।
+Example
+class Shape
 {
 public:
     virtual void draw() = 0;
@@ -211,12 +211,11 @@ public:
 
 10. Constructor in Abstract Class
 
-    An abstract class can have a constructor.Its constructor is called when a derived class object is created.The abstract class itself still cannot be instantiated directly.
+An abstract class can have a constructor.Its constructor is called when a derived class object is created.The abstract class itself still cannot be instantiated directly.
 
-    Abstract class में constructor हो सकता है।
-        Derived class का object बनाते समय base abstract class का constructor call होता है।
-            फिर भी abstract class का direct object नहीं बनाया जा सकता।
-                Example class Animal
+Abstract class में constructor हो सकता है।Derived class का object बनाते समय base abstract class का constructor call होता है।फिर भी abstract class का direct object नहीं बनाया जा सकता।
+Example
+class Animal
 {
 public:
     Animal()
@@ -236,23 +235,15 @@ public:
     }
 };
 
-जब :
+11. Destructor in Abstract Class
 
-    Dog d;
+An abstract class can have a destructor.A virtual destructor is especially useful when deleting derived objects through a base -
+class pointer.
 
-होगा :
-
-    Animal Constructor
-        ↓ Dog Object Created
-
-    11. Destructor in Abstract Class
-
-        An abstract class can have a destructor.A virtual destructor is especially useful when deleting derived objects through a base -
-    class pointer.
-
-    Abstract class में destructor हो सकता है।
-        Base class pointer से derived object delete करने की situation में virtual destructor important होता है।
-            Example class Animal
+Abstract class में destructor हो सकता है।
+Base class pointer से derived object delete करने की situation में virtual destructor important होता है।
+Example 
+class Animal
 {
 public:
     virtual void sound() = 0;
@@ -282,23 +273,14 @@ public:
     virtual void sound() = 0;
 };
 
-यहाँ :
+13. Data Members in Abstract Class
 
-    eat()    → Normal Function
-    sound()  → Pure Virtual Function
+An abstract class can contain data members like a normal class.Derived classes can access them according to their access specifier.
 
-    इसलिए Animal abstract class है।
+Abstract class में normal variables / data members हो सकते हैं।Derived class उन्हें access कर सकती है,depending on access specifier।
 
-    13. Data Members in Abstract Class
-
-    An abstract class can contain data members like a normal class.Derived classes can access them according to their access specifier.
-
-    Abstract class में normal variables
-    / data members हो सकते हैं।
-    Derived class उन्हें access कर सकती है,
-    depending on access specifier।
-    Example
-    class Animal
+Example
+class Animal
 {
 public:
     string name;
@@ -308,20 +290,19 @@ public:
 
 14. Abstract Class with Multiple Derived Classes
 
-    One abstract class can have multiple derived classes,
-    and each derived class can provide its own implementation.
+One abstract class can have multiple derived classes,and each derived class can provide its own implementation.
 
-        एक abstract class से कई derived classes बनाई जा सकती हैं और प्रत्येक derived class अपने तरीके से pure virtual function implement कर सकती है।
+एक abstract class से कई derived classes बनाई जा सकती हैं और प्रत्येक derived class अपने तरीके से pure virtual function implement कर सकती है।
 
-            Example
-                Animal |
-        ┌───────┴───────┐
-        ↓               ↓ Dog Cat
-        ↓               ↓ Dog barks Cat meows
+    Example
+        Animal |
+┌───────┴───────┐
+↓               ↓ Dog Cat
+↓               ↓ Dog barks Cat meows
 
-            Code :
+Code :
 
-    class Animal
+class Animal
 {
 public:
     virtual void sound() = 0;
@@ -347,10 +328,11 @@ public:
 
 15. Runtime Polymorphism with Abstract Class
 
-        Abstract classes can be used with base -
-    class pointers / references to achieve runtime polymorphism.Abstract class के pointer / reference का उपयोग करके runtime polymorphism प्राप्त किया जा सकता है।
+Abstract classes can be used with base - class pointers / references to achieve runtime polymorphism.
+Abstract class के pointer / reference का उपयोग करके runtime polymorphism प्राप्त किया जा सकता है।
 
-                                                                                               Example Animal *ptr;
+Example 
+Animal *ptr;
 
 Dog d;
 Cat c;
@@ -361,18 +343,16 @@ ptr->sound();
 ptr = &c;
 ptr->sound();
 
-Output : Dog barks
-             Cat meows
+16. If Derived Class Does Not Override
 
-         16. If Derived Class Does Not Override
+NOTE-->
+If a derived class does not implement all inherited pure virtual functions,it also remains an abstract class.
 
-             If a derived class does not implement all inherited pure virtual functions,
-         it also remains an abstract class.
+अगर derived class सभी inherited pure virtual functions को override नहीं करती,
+तो वह भी abstract class बनी रहती है।
 
-         अगर derived class सभी inherited pure virtual functions को override नहीं करती,
-         तो वह भी abstract class बनी रहती है।
-
-             Example class Animal
+Example
+class Animal
 {
 public:
     virtual void sound() = 0;
@@ -382,12 +362,6 @@ class Dog : public Animal
 {
     // sound() not implemented
 };
-
-अब :
-
-    Dog d; //  Error
-
-क्योंकि Dog अभी भी abstract है।
 
 21. Advantages of Abstract Class
 
@@ -420,13 +394,13 @@ Virtual function के कारण runtime dispatch का थोड़ा ove
 Characteristics of Abstract Class in C++ 
 
 • Cannot be Instantiated
- An abstract class cannot be instantiated directly.
- Abstract class का direct object नहीं बनाया जा सकता।
+An abstract class cannot be instantiated directly.
+Abstract class का direct object नहीं बनाया जा सकता।
 Example: Animal obj;
 
 • Contains Pure Virtual Function
-        An abstract class contains at least one pure virtual function.Abstract class में कम -
-    से - कम एक pure virtual function होता है। Example : virtual void sound() = 0;
+An abstract class contains at least one pure virtual function.Abstract class में कम -
+से - कम एक pure virtual function होता है। Example : virtual void sound() = 0;
 
 • Used as a Base Class
  An abstract class is mainly used as a base class for derived classes.
@@ -687,16 +661,11 @@ public:
 void displayPerson(Person *p)
 {
     cout << "\n-----------------------------" << endl;
-
     p->showBasicInfo();
-
     // Runtime Polymorphism
     p->role();
-
     p->work();
-
     p->displayDetails();
-
     cout << "-----------------------------" << endl;
 }
 
@@ -715,7 +684,8 @@ int main()
     // 1. NORMAL / STACK OBJECT
     // =================================================
 
-    cout << "\n1. NORMAL OBJECT\n"<< endl;
+    cout << "\n1. NORMAL OBJECT\n"
+         << endl;
 
     Student s1("Aman", 20, 101, 85);
 
@@ -728,9 +698,10 @@ int main()
     // 2. ANOTHER NORMAL OBJECT
     // =================================================
 
-    cout << "\n2. NORMAL TEACHER OBJECT\n"<< endl;
+    cout << "\n2. NORMAL TEACHER OBJECT\n"
+         << endl;
 
-    Teacher t1("Rahul",35,"Computer Science",45000);
+    Teacher t1("Rahul", 35, "Computer Science", 45000);
 
     t1.showBasicInfo();
     t1.role();
@@ -744,7 +715,7 @@ int main()
     cout << "\n3. DYNAMIC OBJECT\n"
          << endl;
 
-    Student *s2 =new Student("Priya", 19, 102, 92);
+    Student *s2 = new Student("Priya", 19, 102, 92);
 
     s2->showBasicInfo();
     s2->role();
@@ -768,7 +739,7 @@ int main()
     cout << "\n5. BASE CLASS POINTER\n"
          << endl;
 
-    Teacher t2("Anita",40,"Mathematics",55000);
+    Teacher t2("Anita", 40, "Mathematics", 55000);
 
     Person *ptr = &t2;
     ptr->showBasicInfo();
@@ -785,7 +756,7 @@ int main()
     cout << "\n6. BASE POINTER + DYNAMIC OBJECT\n"
          << endl;
 
-    Person *p1 =new Student("Ravi", 21, 103, 78);
+    Person *p1 = new Student("Ravi", 21, 103, 78);
 
     p1->showBasicInfo();
     p1->role();
@@ -802,8 +773,8 @@ int main()
     cout << "\n7. MULTIPLE DYNAMIC OBJECTS\n"
          << endl;
 
-    Person *p2 =new Teacher("Suresh",42,"Physics",60000);
-    Person *p3 =new Staff("Neha",30,"Administration");
+    Person *p2 = new Teacher("Suresh", 42, "Physics", 60000);
+    Person *p3 = new Staff("Neha", 30, "Administration");
 
     displayPerson(p2);
     displayPerson(p3);
@@ -830,14 +801,14 @@ int main()
 
     for (int i = 0; i < n; i++)
     {
-        cout << "Student "<< i + 1<< ": ";
-       cin >> marks[i];
+        cout << "Student " << i + 1 << ": ";
+        cin >> marks[i];
     }
 
     cout << "\nEntered Marks:\n";
     for (int i = 0; i < n; i++)
     {
-        cout << "Student "<< i + 1<< " = "<< marks[i]<< endl;
+        cout << "Student " << i + 1 << " = " << marks[i] << endl;
     }
 
     // Release dynamic array
@@ -854,9 +825,9 @@ int main()
 
     Person *people[3];
 
-    people[0] =new Student("Karan",20,104,88);
-    people[1] =new Teacher("Meena",38,"English",50000);
-    people[2] =new Staff("Vikas",32,"Accounts");
+    people[0] = new Student("Karan", 20, 104, 88);
+    people[1] = new Teacher("Meena", 38, "English", 50000);
+    people[2] = new Staff("Vikas", 32, "Accounts");
 
     for (int i = 0; i < 3; i++)
     {

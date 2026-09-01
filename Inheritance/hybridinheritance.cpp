@@ -1,6 +1,7 @@
 /*Hybrid Inheritance
 
 Hybrid Inheritance is a type of inheritance that combines two or more types of inheritance, such as Multiple and Multilevel Inheritance, into a single program.
+
 Hybrid Inheritance वह प्रकार है जिसमें दो या दो से अधिक प्रकार की Inheritance (जैसे Multiple और Multilevel) को मिलाकर एक ही Program में उपयोग किया जाता है।
 
 Combination of Different Types of Inheritance

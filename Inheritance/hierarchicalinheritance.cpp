@@ -6,6 +6,50 @@ Hierarchical Inheritance वह प्रकार है जिसमें ए
 One Parent Class → Many Child Classes
 एक Parent Class → कई Child Classes */
 
+#include <iostream>
+using namespace std;
+
+class Animal
+{
+public:
+    void eat()
+    {
+        cout << "Animal eats" << endl;
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    void bark()
+    {
+        cout << "Dog barks" << endl;
+    }
+};
+
+class Cat : public Animal
+{
+public:
+    void meow()
+    {
+        cout << "Cat meows" << endl;
+    }
+};
+
+int main()
+{
+    Dog d;
+    Cat c;
+
+    d.eat();
+    d.bark();
+
+    c.eat();
+    c.meow();
+
+    return 0;
+}
+
 #include<iostream>
 using namespace std;
 

@@ -1,10 +1,10 @@
 /*Multilevel Inheritance
 
-Multilevel Inheritance is a type of inheritance in which a derived class becomes the base class for another derived class, forming a chain of inheritance.
-Multilevel Inheritance वह प्रकार है जिसमें एक Derived Class आगे दूसरी Derived Class की Base Class बन जाती है। इस प्रकार Inheritance एक Chain (श्रृंखला) के रूप में कार्य करती है।
+Multilevel Inheritance is a type of inheritance in which a derived class becomes the base class for another derived class, , forming multiple levels of inheritance.
+Multilevel Inheritance वह प्रकार है जिसमें एक Derived Class आगे दूसरी Derived Class की Base Class बन जाती है। और inheritance कई levels तक जाती है।
 
 Grandparent → Parent → Child
-दादा (Grandparent) → पिता (Parent) → बच्चा (Child)
+(Grandparent) →(Parent) → (Child)
  */
 
 #include<iostream>

@@ -51,7 +51,7 @@ Hindi
 •	Objects of an abstract class cannot be instantiated.
 Abstract Class का Object नहीं बनाया जा सकता (Cannot be Instantiated) क्योंकि इसमें कम से कम एक Function अधूरा (Pure Virtual Function) होता है।
 
-❌ Example:
+Example:
 Shape s;   // Error
 
 •	Derived classes must implement the pure virtual functions.

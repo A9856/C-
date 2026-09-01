@@ -1,0 +1,436 @@
+Diamond Problem in C++ 
+
+The Diamond Problem is a problem in multiple inheritance that occurs when a derived class inherits the same base class through two different intermediate classes. This can create ambiguity because the final class may receive two copies of the same base class.
+
+Diamond Problem multiple inheritance की एक problem है। यह तब होती है जब एक final derived class को same base class की inheritance दो अलग-अलग intermediate classes के through मिलती है। इससे same base class की दो copies आ सकती हैं और ambiguity पैदा हो सकती है।
+
+             A
+            / \
+           /   \
+          B     C
+           \   /
+            \ /
+             D
+
+#include <iostream>
+using namespace std;
+
+class A
+{
+public:
+    int value;
+
+    A()
+    {
+        value = 100;
+    }
+};
+
+class B : public A
+{
+};
+
+class C : public A
+{
+};
+
+class D : public B, public C
+{
+};
+
+int main()
+{
+    D obj;
+
+    // Error: Ambiguous
+    // cout << obj.value << endl;
+
+    cout << "Diamond Problem occurs because D has "
+         << "two copies of A." << endl;
+
+    return 0;
+}
+
+Virtual Base Class 
+
+A Virtual Base Class is a base class that is inherited virtually so that only one shared copy of the base class is inherited by the final derived class in a diamond inheritance structure.
+
+Virtual Base Class वह base class है जिसे virtual inheritance के द्वारा inherit किया जाता है ताकि diamond inheritance में final derived class को base class की केवल एक shared copy मिले।
+
+Main Purpose
+
+Virtual Base Class का main purpose Diamond Problem को solve करना है।
+             A
+          /     \
+         /       \
+        B         C
+         \       /
+          \     /
+             D
+             ↓
+       Only ONE copy of A
+
+#include <iostream>
+using namespace std;
+
+class A
+{
+public:
+    int value;
+
+    A()
+    {
+        value = 100;
+
+        cout << "A Constructor" << endl;
+    }
+};
+
+class B : virtual public A
+{
+};
+
+class C : virtual public A
+{
+};
+
+class D : public B, public C
+{
+};
+
+int main()
+{
+    D obj;
+
+    cout << "Value = "
+         << obj.value << endl;
+
+    return 0;
+}
+
+Access Specifiers in Inheritance 
+C++ in inheritance 3 main access specifiers/modes 
+
+• public
+• protected
+• private
+
+Access specifiers determine the access level of public and protected members of the base class in the derived class.
+Access specifiers यह decide करते हैं कि base class के public और protected members derived class में किस access level पर available होंगे।
+
+Important:
+English: Base class's private members cannot be accessed directly by the derived class, regardless of whether the inheritance is public, protected, or private.
+
+Base class के private members को derived class में directly access नहीं किया जा सकता, चाहे inheritance public, protected या private हो।
+
+Public Inheritance
+
+In public inheritance, the public members of the base class remain public in the derived class, and protected members remain protected.
+
+Public inheritance में base class के public members derived class में public और protected members protected रहते हैं।
+
+#include <iostream>
+using namespace std;
+
+class Animal
+{
+public:
+    void eat()
+    {
+        cout << "Animal eats" << endl;
+    }
+
+protected:
+    void sleep()
+    {
+        cout << "Animal sleeps" << endl;
+    }
+
+private:
+    void privateFunction()
+    {
+        cout << "Private function" << endl;
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    void show()
+    {
+        eat();      // Accessible
+        sleep();    // Accessible
+
+        // privateFunction();  // Error
+    }
+};
+
+int main()
+{
+    Dog d;
+
+    d.eat();        // Public → accessible
+
+    d.show();
+
+    return 0;
+}
+
+Protected Inheritance
+
+In protected inheritance, the public and protected members of the base class become protected members of the derived class.
+
+Protected inheritance में base class के public और protected members derived class में protected बन जाते हैं।
+
+#include <iostream>
+using namespace std;
+
+class Animal
+{
+public:
+    void eat()
+    {
+        cout << "Animal eats" << endl;
+    }
+
+protected:
+    void sleep()
+    {
+        cout << "Animal sleeps" << endl;
+    }
+};
+
+class Dog : protected Animal
+{
+public:
+    void show()
+    {
+        eat();      // Accessible inside derived class
+        sleep();    // Accessible inside derived class
+    }
+};
+
+int main()
+{
+    Dog d;
+    // d.eat();     // Error
+    // because eat() now protected
+    d.show();
+
+    return 0;
+}
+
+Note -->
+Base          Derived
+
+public   →    protected
+protected →   protected
+private  →    inaccessible directly
+
+Private Inheritance
+
+In private inheritance, the public and protected members of the base class become private members of the derived class.
+
+Private inheritance में base class के public और protected members derived class में private बन जाते हैं।
+
+#include <iostream>
+using namespace std;
+
+class Animal
+{
+public:
+    void eat()
+    {
+        cout << "Animal eats" << endl;
+    }
+
+protected:
+    void sleep()
+    {
+        cout << "Animal sleeps" << endl;
+    }
+};
+
+class Dog : private Animal
+{
+public:
+    void show()
+    {
+        eat();      // Accessible inside derived class
+        sleep();    // Accessible inside derived class
+    }
+};
+
+int main()
+{
+    Dog d;
+
+    // d.eat();     // Error
+    // because eat() now private
+
+    d.show();
+
+    return 0;
+}
+
+Constructor in Class Hierarchy->
+
+When a derived class object is created, the base class constructor executes first, followed by the derived class constructor.
+
+जब derived class का object बनाया जाता है, तो पहले base class constructor और उसके बाद derived class constructor call होता है।
+
+Base Constructor
+       ↓
+Derived Constructor
+
+Example
+
+class Animal
+{
+public:
+    Animal()
+    {
+        cout << "Animal Constructor" << endl;
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    Dog()
+    {
+        cout << "Dog Constructor" << endl;
+    }
+};
+
+Destructor in Class Hierarchy->
+
+When a derived object is destroyed, the derived class destructor executes first, followed by the base class destructor.
+
+जब derived object destroy होता है, तो पहले derived class destructor और फिर base class destructor call होता है।
+
+Derived Destructor
+       ↓
+Base Destructor
+
+Virtual Function in Class Hierarchy-->
+
+A virtual function allows a derived class to provide its own implementation of a function and supports runtime polymorphism.
+Virtual function derived class को अपने तरीके से function implement करने की अनुमति देता है और runtime polymorphism को support करता है।
+
+Example
+
+class Animal
+{
+public:
+    virtual void sound()
+    {
+        cout << "Animal sound" << endl;
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    void sound() override
+    {
+        cout << "Dog barks" << endl;
+    }
+};
+
+Pure Virtual Function in Class Hierarchy-->
+A pure virtual function is declared using = 0 and makes the class abstract.
+
+Pure virtual function को = 0 के साथ declare किया जाता है और यह class को abstract class बना देता है।
+
+virtual void sound() = 0;
+
+Abstract Class in Hierarchy-->
+
+An abstract class is commonly used as the top/base class of a hierarchy to define common rules for derived classes.
+
+Abstract class को hierarchy की top/base class के रूप में use करके derived classes के लिए common rules define किए जा सकते हैं।
+
+Diagram
+              Animal
+          Abstract Class
+                 |
+        ┌────────┴────────┐
+        ↓                 ↓
+       Dog               Cat
+   Concrete Class    Concrete Class
+
+Function Overriding in Class Hierarchy-->
+
+Function overriding occurs when a derived class provides its own implementation of a function already defined in the base class.
+
+जब derived class base class में मौजूद function का अपना implementation देती है, तो इसे function overriding कहते हैं।
+
+class Animal
+{
+public:
+    virtual void sound()
+    {
+        cout << "Animal Sound";
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    void sound() override
+    {
+        cout << "Dog Bark";
+    }
+};
+
+Class Hierarchy with Polymorphism-->
+
+#include <iostream>
+using namespace std;
+
+class Animal
+{
+public:
+    virtual void sound()
+    {
+        cout << "Animal sound" << endl;
+    }
+
+    virtual ~Animal() {}
+};
+
+class Dog : public Animal
+{
+public:
+    void sound() override
+    {
+        cout << "Dog barks" << endl;
+    }
+};
+
+class Cat : public Animal
+{
+public:
+    void sound() override
+    {
+        cout << "Cat meows" << endl;
+    }
+};
+
+int main()
+{
+    Animal* ptr;
+
+    Dog d;
+    Cat c;
+
+    ptr = &d;
+    ptr->sound();
+
+    ptr = &c;
+    ptr->sound();
+
+    return 0;
+}
+runtime polymorphism in class hierarchy 

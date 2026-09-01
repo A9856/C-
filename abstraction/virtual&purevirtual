@@ -46,15 +46,15 @@ int main()
 2. Pure Virtual Function 
 
 A Pure Virtual Function is a virtual function that has no implementation (no function body) in the base class and is declared by assigning = 0.
-Pure Virtual Function वह Virtual Function होता है जिसकी Base Class में कोई Implementation (Function Body) नहीं होती और जिसे = 0 लिखकर Declare किया जाता है।
-
 It forces every derived class to provide its own implementation of that function.
+
+Pure Virtual Function वह Virtual Function होता है जिसकी Base Class में कोई Implementation (Function Body) नहीं होती और जिसे = 0 लिखकर Declare किया जाता है।
 यह Derived Class को मजबूर (Force) करता है कि वह उस Function की अपनी Implementation लिखे।
 
 
 short English ->
-
 A Pure Virtual Function is a function that has no body in the Base Class and must be overridden in the Derived Class.
+
 Pure Virtual Function वह Function है जिसकी Base Class में कोई Body नहीं होती और जिसे Derived Class में अवश्य (Must) Define करना पड़ता है।
 
 Syntax
